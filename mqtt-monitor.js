@@ -91,7 +91,7 @@ client.on('message', (topic, payload) => {
 let devices = new Array();
 const MQTT_JSON_API_VERSION = '2.0.0';
 let mqttMsgID = 1;
-var masterAttr = new Array("010201");
+var masterAttr = new Array("010201"); //010501/0100601
 var gatewayAttr = new Array("010401");
 var slaveAttr = new Array("010301");
 
@@ -470,11 +470,12 @@ webServer.get('/device/base', (req, res, next) => {
     }
 });
 
-function initDevice(id, isFlag) {
+function initDevice(id, isFlag, num) {
     device = {
         device_id: id,
+        switchNum: [num],
         isSlaveDevice: isFlag,//是否从设备装置
-        voltage: [], // 电压
+        voltage: [], // 电压   //voltage[0]=220
         current: [], // 电流
         frequency: [], // 频率
         leak_current: [], // 漏电电流
@@ -504,7 +505,7 @@ webServer.post('/device/base', (req, res, next) => {
         });
         console.log("index:" + index);
         if (index == -1) {
-            devices.push(initDevice(id, "否"));
+
             var ids = id.substr(0, 6);
 
             var masterId = masterAttr.findIndex((ele) => {
@@ -517,6 +518,7 @@ webServer.post('/device/base', (req, res, next) => {
             console.log("id前六位：" + ids + "masterId:" + masterId + "slaveId:" + gatewayId);
             if (masterId != -1) {
                 console.log("主设备===================");
+                devices.push(initDevice(id, "否", 1));
                 mqttSub(id, (ret, err) => {
                     if (ret == 0) {
                         res.status(201).send('success');
@@ -659,7 +661,7 @@ webServer.put('/device/tag', (req, res, next) => {
             let mqttReq = {
                 version: MQTT_JSON_API_VERSION,
                 msgid: `${mqttMsgID++}`,
-                method: tag == 'all' ? 'tag.get.all' : 'tag.get.part',
+                method: tag.get,
                 data: tag == 'all' ? {} : { 'tags': [`${tag}`] },
                 time: `${(new Date()).Format("yyyyMMddhhmmss")}`
             }
@@ -810,6 +812,58 @@ webServer.put('/device/cfg', (req, res, next) => {
     }
 });
 
+/**
+ * ota
+ */
+webServer.post('/device/ota', (req, res, next) => {
+    //console.log(req.body);
+    let id = req.body.id;
+    let cfg = req.body.cfg;
+    if (id != undefined && cfg != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            if (masterId != -1) {
+                mqttPubWaitResp(`/device/${id}/sys`, '>>ota,version', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1) {
+                mqttPubWaitResp(`/gateway/${id}/sys`, '>>ota,version', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
 
 // // SSE(Server-sent Events) 推送
 // let sseRes;
@@ -837,7 +891,8 @@ function mqttSub(id, callback) {
         let topics = [
             `/device/${id}/cmd_resp`,
             `/device/${id}/report`,
-            `/device/online`,
+            `/device/${id}/sys_resp`
+                `/device/online`,
             `/device/willmsg`,
         ];
         client.subscribe(topics, { qos: 1 }, (error) => {
@@ -871,6 +926,7 @@ function mqttSlaveSub(id, callback) {
             `/gateway/${id}/report`,
             `/gateway/${id}/+/cmd_resp`,
             `/gateway/${id}/+/report`,
+            `/gateway/${id}/sys_resp`,
             `/gateway/online`,
             `/gateway/willmsg`,
         ];
@@ -1000,6 +1056,9 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
     }
 
 }
+
+var idMap = new Map();
+
 /**
  * 查询从设备信息
  * @param {*} id 
@@ -1023,13 +1082,16 @@ function slaveList(id, callback) {
             var slavesAttr = [];
             slavesStr = slavesStr.slice(1, slavesStr.length - 1);
             slavesAttr = slavesStr.split(',');
-
+            console.log(slavesAttr + "======================================")
             for (let i = 0; i < slavesAttr.length; i++) {
                 var element = slavesAttr[i];
                 var deviceId = element.substr(1, element.length - 2);
 
-                devices.push(initDevice(deviceId, "是"));
+                // idMap.set(element, id);
+                devices.push(initDevice(deviceId, "是", 4));
             }
+            // console.log(slavesAttr + "======================================"+JSON.stringify(devices))
+            // console.log("map:" + JSON.stringify(idMap));
         });
         callback(0, "从设备数据查询成功");
 

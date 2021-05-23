@@ -62,6 +62,25 @@
                                         <el-tab-pane label="动作" name="action">
                                             <el-form label-position="top" :model="formDeviceAction"
                                                 ref="formDeviceAction">
+
+                                                <el-drvider></el-drvider>
+                                                <el-form-item label="开关">
+                                                    <el-button type="primary" size="small" plain @click="onSwitchAdd">新增
+                                                    </el-button>
+
+                                                    <div v-show="isShow" v-for="(item,index) in num">
+                                                        <label></label>开关{{item.indexs}}</label>
+                                                        <el-radio v-model="item.status" :label="1">开</el-radio>
+                                                        <el-radio v-model="item.status" :label="0">关</el-radio>
+                                                        <el-button type="primary" plain size="small"
+                                                            @click="del(index)">删除</el-button>
+                                                    </div>
+                                                    <el-button type="primary" plain size="small" @click="onDeviceAction"
+                                                        data-action="switchInfo">
+                                                        发送</el-button>
+
+                                                </el-form-item>
+
                                                 <el-form-item label="继电器">
                                                     <el-button type="primary" plain data-action="relay_on"
                                                         @click="onDeviceAction">开
@@ -101,7 +120,7 @@
 
                                         <el-tab-pane label="数据" name="data">
                                             <el-form label-position="top" :model="formDeviceTag" ref="formDeviceTag">
-                                                <el-form-item label="TAG" class="button-list">
+                                                <!-- <el-form-item label="TAG" class="button-list">
                                                     <el-button type="primary" plain data-tag="all" @click="onDeviceTag">
                                                         获取所有
                                                     </el-button>
@@ -142,7 +161,8 @@
                                                         @click="onDeviceTag">
                                                         获取信号强度
                                                     </el-button>
-                                                </el-form-item>
+                                                </el-form-item> -->
+
                                             </el-form>
                                         </el-tab-pane>
 
@@ -641,7 +661,12 @@
                                                 </el-tooltip>
                                             </div>
                                             <div style="padding: 1rem;">
-                                                <table width="100%" cellpadding="2">
+                                                <table width="100%" cellpadding="2" id="table">
+                                                    <tr>
+                                                        <th>开关1</th>
+                                                        <th>开关2</th>
+                                                        <th>开关3</th>
+                                                    </tr>
                                                     <tr>
                                                         <td>开关状态</td>
                                                         <td colspan="2" align="center">
@@ -650,6 +675,10 @@
                                                                 disabled>
                                                             </el-switch>
                                                         </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>开关数量</td>
+                                                        <td align="right">{{device.switchNum}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>是否从设备</td>
@@ -726,6 +755,19 @@
                                                         </td>
                                                     </tr>
                                                 </table>
+                                                <!-- <table>
+                                                   
+                                                    <tr>
+                                                        <td>dd</td>
+                                                        <td>ww</td>
+                                                        <td>33</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ds</td>
+                                                        <td>qw</td>
+                                                        <td>dsa</td>
+                                                    </tr>
+                                                </table> -->
 
                                                 <!-- <ul class="elec-list">
                                                     <li>开关状态：<el-switch v-model="device.switch_state"
@@ -744,152 +786,6 @@
                                                     <li>pwm：{{device.pwm_state}}%</li>
                                                     <li>0~10V：{{device.v0_10_state}}%</li>
                                                 </ul> -->
-                                            </div>
-                                            <div>
-
-                                            </div>
-                                        </el-card>
-                                    </el-col>
-                                </el-row>
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :md="24" :lg="12" class="card-list">
-                        <el-card class="box-card">
-                            <div slot="header" class="clearfix">
-                                <span>开关列表</span>
-                            </div>
-                            <div class="device-list" v-loading="deviceTabLoading">
-                                <el-row>
-                                    <el-col :md="24" :lg="12" v-for="(device, index) in devices"
-                                        v-bind:key="device.device_id">
-                                        <el-card class="box-card" :body-style="{ padding: '0px' }">
-                                            <div slot="header" class="clearfix">
-                                                <span>{{device.device_id}}</span>
-                                                <el-tooltip class="item" effect="dark" content="删除设备" placement="top">
-                                                    <el-button
-                                                        style="float: right; margin-top: -0.95rem;font-size: 1.5rem;"
-                                                        type="text" :data-deviceid="device.device_id"
-                                                        @click="onDeviceDelete"><i class="el-icon-circle-close"></i>
-                                                    </el-button>
-                                                </el-tooltip>
-                                            </div>
-                                            <div style="padding: 1rem;">
-                                                <table width="100%" cellpadding="2">
-                                                    <tr>
-                                                        <td>开关状态</td>
-                                                        <td colspan="2" align="center">
-                                                            <el-switch v-model="device.switch_state"
-                                                                active-color="#13ce66" inactive-color="#ff4949"
-                                                                disabled>
-                                                            </el-switch>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>电压</td>
-                                                        <td align="right">{{device.voltage}}</td>
-                                                        <td>V</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>电流</td>
-                                                        <td align="right">{{device.current}}</td>
-                                                        <td>mA</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>漏电电流</td>
-                                                        <td align="right">{{device.leak_current}}</td>
-                                                        <td>mA</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>频率</td>
-                                                        <td align="right">{{device.frequency}}</td>
-                                                        <td>Hz</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>有功功率</td>
-                                                        <td align="right">{{device.power_p}}</td>
-                                                        <td>W</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>无功功率</td>
-                                                        <td align="right">{{device.power_q}}</td>
-                                                        <td>Var</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>视在功率</td>
-                                                        <td align="right">{{device.power_s}}</td>
-                                                        <td>VA</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>有功电能</td>
-                                                        <td align="right">{{device.energy_p}}</td>
-                                                        <td>kWh</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>无功电能</td>
-                                                        <td align="right">{{device.energy_q}}</td>
-                                                        <td>kVarh</td>
-                                                    </tr>
-
-                                                </table>
-                                                <table width="100%" cellpadding="2">
-                                                    <tr>
-                                                        <td>开关状态</td>
-                                                        <td colspan="2" align="center">
-                                                            <el-switch v-model="device.switch_state"
-                                                                active-color="#13ce66" inactive-color="#ff4949"
-                                                                disabled>
-                                                            </el-switch>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>电压</td>
-                                                        <td align="right">{{device.voltage}}</td>
-                                                        <td>V</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>电流</td>
-                                                        <td align="right">{{device.current}}</td>
-                                                        <td>mA</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>漏电电流</td>
-                                                        <td align="right">{{device.leak_current}}</td>
-                                                        <td>mA</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>频率</td>
-                                                        <td align="right">{{device.frequency}}</td>
-                                                        <td>Hz</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>有功功率</td>
-                                                        <td align="right">{{device.power_p}}</td>
-                                                        <td>W</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>无功功率</td>
-                                                        <td align="right">{{device.power_q}}</td>
-                                                        <td>Var</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>视在功率</td>
-                                                        <td align="right">{{device.power_s}}</td>
-                                                        <td>VA</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>有功电能</td>
-                                                        <td align="right">{{device.energy_p}}</td>
-                                                        <td>kWh</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>无功电能</td>
-                                                        <td align="right">{{device.energy_q}}</td>
-                                                        <td>kVarh</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div>
                                             </div>
                                         </el-card>
                                     </el-col>
@@ -938,6 +834,8 @@
         el: '#app',
         data: function () {
             return {
+                i: 0,
+                isShow: false,
                 visible: false,
                 funTabActiveName: 'action',
                 cfgTabActiveName: 'cfg_mqtt',
@@ -955,6 +853,10 @@
                 formDeviceAction: {
 
                 },
+                radio: {
+                    status: 1
+                },
+                num: [],//开关个数
                 formDeviceTag: {
 
                 },
@@ -1055,6 +957,8 @@
                 devices: [],
                 deviceDataTemplate: {
                     device_id: '0',
+                    switchNum: '0',
+                    isSlaveDevice: '否',
                     voltage: '0',
                     current: '0',
                     frequency: '0',
@@ -1148,6 +1052,8 @@
                     let idx = this.devices.findIndex((local_ele) => {
                         return local_ele.device_id === ele.device_id;
                     });
+                    console.log(JSON.stringify(ele) + "====================================")
+
                     if (idx != -1) {
                         if (ele.voltage.length != 0)
                             this.devices[idx].voltage = ele.voltage[0].value;
@@ -1169,6 +1075,9 @@
                             this.devices[idx].energy_q = ele.energy_q[0].value;
                         if (ele.switch_state.length != 0)
                             this.devices[idx].switch_state = ele.switch_state[0].value == 'on' ? true : false;
+                        if (ele.switchNum.length != 0)
+                            this.devices[idx].switchNum = ele.switchNum[0];
+
                         this.devices[idx].isSlaveDevice = ele.isSlaveDevice;
                         this.devices[idx].pwm_state = ele.pwm_state;
                         this.devices[idx].v0_10_state = ele.v0_10_state;
@@ -1203,11 +1112,11 @@
                         id: 'all'
                     }
                 }).then((res) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     this.handleDeviceData(res.data);
                     this.deviceTabLoading = false;
                 }).catch((err) => {
-                    console.log(err.response.data);
+                    // console.log(err.response.data);
                     this.deviceTabLoading = false;
                 })
                 //});
@@ -1225,27 +1134,28 @@
                         message: `成功添加设备：${device_id}`
                     });
                     console.log(res.status);
-                    var html = "";
-                    // if (res.status == 200) {
-                    //     var deviceId = device_id.substr(0, 6);
-                    //     //获取从设备列表
-                    //     axios.post('/slave/list', {
-                    //         id: device_id
-                    //     }).then((res) => {
-                    //         this.$notify.success({
-                    //             title: '成功',
-                    //             message: `成功添加从设备：${device_id}`
-                    //         });
-                    //     }).catch(
-                    //         (err) => {
-                    //             console.log(err.response.data);
-                    //             this.$notify.error({
-                    //                 title: '错误',
-                    //                 message: err.response.data
-                    //             });
+
+                    // var Categories = [];
+                    // var Data = [];
+
+                    // //获取table标签内容
+                    // var table = document.getElementById("table");
+                    // var rows = table.rows;
+                    // console.log("======:" + JSON.stringify(rows));
+
+                    // for (var i = 0; i < rows.length; i++) {    //--循环所有的行
+                    //     var cells = rows[i].cells;　　// cells 集合返回表格中所有 <td> 或 <th> 元素。
+                    //     for (var j = 1; j < cells.length; j++) {   //--循环所有的列，从第一列取数据，因为一般第一列都是标识，数据毫无意义。
+                    //         // alert(cells[j].innerHTML);
+                    //         if (j % 2 == 0) {
+                    //             Categories.push(cells[j].innerHTML)
+                    //         } else {
+                    //             Data.push(parseInt(cells[j].innerHTML))
                     //         }
-                    //     )
+                    //     }
                     // }
+                    // console.log("categories:" + Categories);
+                    // console.log("Data:" + Data);
 
                     let template = Object.assign({}, this.deviceDataTemplate);
                     template.device_id = device_id;
@@ -1278,11 +1188,42 @@
                     });
                 });
             },
+            //新增开关
+            onSwitchAdd() {
+                this.isShow = true
+                // let i = 1;
+                // let obj = {status:(i+1)}
+                // console.log(obj,'obj')
+                this.num.push({
+                    status: 1,
+                    indexs: this.i
+                });
+                this.i = this.i + 1;
+                console.log(this.num, "num")
+                // var html = '';
+                // var arr = new Array();
+                // var switchAddHtml = document.getElementById("switchAdd");
+                // var innerHtml = ' <label>开关' + arr.length+1 + '：</label>' +
+                //     ' <el-radio v-model="radio.status" :label="1">开</el-radio>' +
+                //     '<el-radio v-model="radio.status" :label="0">关</el-radio>' +
+                //     '<el-button type="primary" plain size="small" @click="">删除</el-button>';
+                // arr.push(innerHtml);
+                // console.log(JSON.stringify(arr));
+                // switchAddHtml.innerHTML(innerHtml)=html;
+
+            },
+            //删除一行开关
+            del(index) {
+                console.log(index, "index")
+                this.num.splice(index, 1)
+                console.log(this.num, "num")
+            },
+            //发送信息动作
             onDeviceAction(ele) {
                 let actionDataset = ele.currentTarget.dataset.action;
                 let device_id = this.formDeviceSelect.device_id;
                 let postData;
-
+                console.log(actionDataset, "发送信息")
                 switch (actionDataset) {
                     case 'relay_on':
                         postData = {
@@ -1315,12 +1256,24 @@
                             action_id: '0',
                             action: 'off'
                         }
+                    case 'switchInfo':
+                        let swtichAct = this.num.status;
+                        let indexs = this.num.indexs;
+                        console.log(swtichAct + "=========》swtichAct")
+                        console.log(indexs + "=========》index")
+
+                        // postData = {
+                        //     id: device_id,
+                        //     action_type: 'switch',
+                        //     action_id: indexs,
+                        //     action: swtichAct
+                        // }
                         break;
                     default:
                         break;
                 }
 
-                if (postData != undefined) {
+                if (postData != undefined && actionDataset != 'switchInfo') {
                     axios.post('/device/action', postData)
                         .then((res) => {
                             //console.log(res.data);
@@ -1388,6 +1341,7 @@
                         });
                     });
             },
+            //tag
             onDeviceTag(ele) {
                 let tagDataset = ele.currentTarget.dataset.tag;
                 let device_id = this.formDeviceSelect.device_id;
@@ -1577,8 +1531,10 @@
                     });
                 }
             },
+            //ota
             onDeviceOta(ele) {
                 let ota = ele.currentTarget.dataset.ota;
+                // axios.post('/device/ota')
                 console.log(ota);
             },
             handleGetDeviceCfg(data) {
