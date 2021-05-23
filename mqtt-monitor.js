@@ -93,12 +93,14 @@ const MQTT_JSON_API_VERSION = '2.0.0';
 let mqttMsgID = 1;
 var masterAttr = new Array("010201"); //010501/0100601
 var gatewayAttr = new Array("010401");
-var slaveAttr = new Array("010301");
+var slaveAttr = new Array("010301", "FFFFFF");
 
 
 function handleReceivedMqttMsg(topic, payload) {
     let topicArr = topic.split('/');
     let id = topicArr[2];
+    // var subStrPayload = payload.substr(0,2);
+    console.log(payload + "payload=============");
     let jsonPayload = JSON.parse(payload);
 
     let srcmsgid = Number(jsonPayload.srcmsgid)
@@ -469,6 +471,8 @@ webServer.get('/device/base', (req, res, next) => {
         res.status(500).send('wrong param');
     }
 });
+
+
 
 function initDevice(id, isFlag, num) {
     device = {
@@ -863,6 +867,107 @@ webServer.post('/device/ota', (req, res, next) => {
         res.status(500).send('wrong param');
     }
 })
+webServer.post('/device/linuxStart', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==linux.start")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,start', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==linux.start")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,start', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
+webServer.post('/device/linuxStop', (req, res, next) => {
+    //console.log(req.body);
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            if (masterId != -1) {
+                mqttPubWaitResp(`/device/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1) {
+                mqttPubWaitResp(`/gateway/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
 
 
 // // SSE(Server-sent Events) 推送
@@ -1012,6 +1117,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
     }
     let topicArr = topic.split('/');
     let id = topicArr[2];
+    console.log("payload:linux====="+payload)
     let jsonPayload = JSON.parse(payload);
 
     let isCallCallback = false;
@@ -1056,6 +1162,63 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
     }
 
 }
+
+
+// MQTT 发布消息
+function mqttPubOrderResp(topic, payload, qos, callback) {
+    if (!(callback instanceof Function)) {
+        let e = new Error();
+        e.number = 1;
+        e.message = 'invalid param type';
+        throw e;
+    }
+    let topicArr = topic.split('/');
+    let id = topicArr[2];
+    console.log("payload:linux====="+payload)
+
+    let isCallCallback = false;
+    // 判断是否已成功连接
+    if (client.connected) {
+        client.publish(topic, payload, { qos: qos }, (error) => {
+            if (error) {
+                console.log(error)
+                callback(-1, error);
+                isCallCallback = true;
+            }
+            else {
+                console.log(`Publish [${payload}] on [${topic}] successful.`);
+                // eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, (ret) => {
+                //     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => { });
+                //     if (isCallCallback == false) {
+                //         isCallCallback = true;
+
+                //         if (ret.status == 'ok') {
+                //             callback(0, ret.data);
+                //         }
+                //         else {
+                //             callback(-3, ret.data);
+                //         }
+                //     }
+                // });
+                // eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => {
+                //     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, () => { });
+                //     if (isCallCallback == false) {
+                //         isCallCallback = true;
+                //         callback(-4, 'timeout');
+                //     }
+                // });
+                // setTimeout(() => {
+                //     eventMqttResp.emit(`${Number(id)}.${jsonPayload.msgid}.timeout`);
+                // }, 5000);
+            }
+        });
+    } else {
+        console.log('Client has NOT connected!');
+        callback(-2, 'Client has NOT connected!');
+    }
+
+}
+
 
 var idMap = new Map();
 

@@ -628,13 +628,40 @@
                                         <el-tab-pane label="OTA" name="ota">
                                             <el-form label-position="right" label-width="4.5rem" :model="formDeviceOta"
                                                 ref="formDeviceOta">
-                                                <el-form-item label="OTA">
+                                                <el-form-item label="固件更新">
                                                     <el-button type="primary" plain data-ota="getversion"
-                                                        @click="onDeviceOta">获取版本
+                                                        @click="onDeviceOta">版本查询
+                                                    </el-button>
+                                                </el-form-item>
+                                                <el-form-item label="固件：">
+
+                                                </el-form-item>
+                                                <el-form-item label="版本号：">
+                                                    <br>
+                                                    <el-button type="primary" plain data-ota="getversion" @click="">推送
+                                                        <!-- onDeviceOtaSend -->
                                                     </el-button>
                                                 </el-form-item>
                                             </el-form>
                                         </el-tab-pane>
+                                        <el-tab-pane label="虚拟机" name="linux">
+                                            <el-form label-position="right" label-width="4.5rem"
+                                                :model="formDeviceLinux" ref="formDeviceLinux">
+                                                <el-form-item label="虚拟机状态:">
+                                                    <el-button type="primary" plain size="small" @click="">查询
+                                                    </el-button>
+                                                    <el-button type="primary" plain size="small" @click="">错误信息
+                                                    </el-button>
+                                                </el-form-item>
+                                                <el-form-item label="控制:">
+                                                    <el-button type="primary" plain size="small" @click="linuxStart">启动
+                                                    </el-button>
+                                                    <el-button type="primary" plain size="small" @click="linuxStop">停止
+                                                    </el-button>
+                                                </el-form-item>
+                                            </el-form>
+                                        </el-tab-pane>
+
                                     </el-tabs>
                                 </template>
                             </div>
@@ -842,7 +869,8 @@
                 msgid: 1,
                 deviceCfgLoading: false,
                 deviceTabLoading: true,
-                json_api_version: "1.0.0",
+                // json_api_version: "1.0.0",
+                json_api_version: "2.0.0",
 
                 formDeviceAdd: {
                     device_id: ''
@@ -933,6 +961,8 @@
                     },
                 },
                 formDeviceOta: {},
+                formDeviceLinux: {
+                },
 
                 formSub: {
                     deviceSN: ''
@@ -1187,6 +1217,27 @@
                         message: err.response.data
                     });
                 });
+            },
+            linuxStart() {
+                let device_id = this.formDeviceSelect.device_id;
+                axios.post('/device/linuxStart', {
+                    data: { id: device_id }
+                }).then((res) => {
+                    this.$notify.success({
+                        title: '成功',
+                        message: `成功启动虚拟机`
+                    })
+                })
+            }, linuxStop() {
+                let device_id = this.formDeviceSelect.device_id;
+                axios.post('/device/linuxStop', {
+                    data: { id: device_id }
+                }).then((res) => {
+                    this.$notify.success({
+                        title: '成功',
+                        message: `成功启动虚拟机`
+                    })
+                })
             },
             //新增开关
             onSwitchAdd() {
