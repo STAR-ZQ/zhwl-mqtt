@@ -83,7 +83,7 @@ client.on('message', (topic, payload) => {
         }
     });
 
-
+    // console.log("topic", topic, "payload", JSON.stringify(payload))
     handleReceivedMqttMsg(topic, payload);
 });
 
@@ -95,12 +95,11 @@ var masterAttr = new Array("010201"); //010501/0100601
 var gatewayAttr = new Array("010401");
 var slaveAttr = new Array("010301", "FFFFFF");
 
-
 function handleReceivedMqttMsg(topic, payload) {
     let topicArr = topic.split('/');
     let id = topicArr[2];
     // var subStrPayload = payload.substr(0,2);
-    console.log(payload + "payload=============");
+    console.log(payload + "payload=============", topicArr, "topic");
     let jsonPayload = JSON.parse(payload);
 
     let srcmsgid = Number(jsonPayload.srcmsgid)
@@ -110,8 +109,9 @@ function handleReceivedMqttMsg(topic, payload) {
     if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
         eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
     }
-
-    eventMqttResp.emit(`device_report`, id, data);
+    if (lastWord == 'report') {
+        eventMqttResp.emit(`device_report`, id, data);
+    }
 }
 
 eventMqttResp.on('device_report', (id, data) => {
@@ -123,265 +123,265 @@ eventMqttResp.on('device_report', (id, data) => {
         if (idx != -1) {
             device = devices[idx];
 
-            if (data.tags != undefined) {
-                console.log(data.tags);
-                data.tags.forEach(element => {
-                    switch (element.tag) {
-                        case "voltage":
-                            {
-                                let obj;
-                                let tagObj = device.voltage;
+            // if (data.tags != undefined) {
+            //     console.log(data.tags);
+            //     data.tags.forEach(element => {
+            //         switch (element.tag) {
+            //             case "voltage":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.voltage;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "current":
-                            {
-                                let obj;
-                                let tagObj = device.current;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "current":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.current;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "frequency":
-                            {
-                                let obj;
-                                let tagObj = device.frequency;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "frequency":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.frequency;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "leak_current":
-                            {
-                                let obj;
-                                let tagObj = device.leak_current;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "leak_current":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.leak_current;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "power_p":
-                            {
-                                let obj;
-                                let tagObj = device.power_p;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "power_p":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.power_p;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "power_q":
-                            {
-                                let obj;
-                                let tagObj = device.power_q;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "power_q":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.power_q;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "power_s":
-                            {
-                                let obj;
-                                let tagObj = device.power_s;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "power_s":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.power_s;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "energy_p":
-                            {
-                                let obj;
-                                let tagObj = device.energy_p;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "energy_p":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.energy_p;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "energy_q":
-                            {
-                                let obj;
-                                let tagObj = device.energy_q;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "energy_q":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.energy_q;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "switch_state":
-                            {
-                                let obj;
-                                let tagObj = device.switch_state;
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = Number(element.value);
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "switch_state":
+            //                 {
+            //                     let obj;
+            //                     let tagObj = device.switch_state;
 
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = element.value;
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = element.value;
-                                    tagObj.push(obj);
-                                }
-                            }
-                            break;
-                        case "pwm_state":
-                            device.pwm_state = Number(element.value);
-                            break;
-                        case "v0_10_state":
-                            device.v0_10_state = Number(element.value);
-                            break;
-                        case "tilt":
-                            device.tilt = Number(element.value);
-                            break;
-                        case "signal":
-                            device.signal = Number(element.value);
-                            break;
-                    }
-                });
-            }
+            //                     let tIndex = tagObj.findIndex((ele) => {
+            //                         return ele.line_id == Number(element.line_id);
+            //                     });
+            //                     if (tIndex != -1) {
+            //                         obj = tagObj[tIndex];
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = element.value;
+            //                     }
+            //                     else {
+            //                         obj = {
+            //                             line_id: 0,
+            //                             value: 0
+            //                         }
+            //                         obj.line_id = Number(element.line_id);
+            //                         obj.value = element.value;
+            //                         tagObj.push(obj);
+            //                     }
+            //                 }
+            //                 break;
+            //             case "pwm_state":
+            //                 device.pwm_state = Number(element.value);
+            //                 break;
+            //             case "v0_10_state":
+            //                 device.v0_10_state = Number(element.value);
+            //                 break;
+            //             case "tilt":
+            //                 device.tilt = Number(element.value);
+            //                 break;
+            //             case "signal":
+            //                 device.signal = Number(element.value);
+            //                 break;
+            //         }
+            //     });
+            // }
             //console.log(device);
         }
     }
@@ -450,6 +450,7 @@ webServer.get('/device/base', (req, res, next) => {
             res.send(response);
         }
         else if (id.length == 12) {
+            console.log("devices", JSON.stringify(devices))
             let index = devices.findIndex((ele) => {
                 return ele.device_id == id;
             });
@@ -533,6 +534,7 @@ webServer.post('/device/base', (req, res, next) => {
                 });
             } else if (gatewayId != -1) {
                 console.log("从设备===================");
+                devices.push(initDevice(id, "否", 0));
                 mqttSlaveSub(id, (ret, err) => {
                     if (ret == 0) {
                         res.status(200).send('success');
@@ -597,9 +599,26 @@ webServer.post('/device/action', (req, res, next) => {
     //console.log(req.body);
     let id = req.body.id;
     let action_type = req.body.action_type;
-    let action_id = req.body.action_id;
-    let action = req.body.action;
-    if (id != undefined && action_type != undefined && action_id != undefined && action != undefined) {
+    // let action_id = req.body.action_id;//key
+    // let action = req.body.action;//value
+    let num = req.body.num;
+
+    let obj = {};
+    for (let i in num) {
+
+        if (num[i].status == 0) {
+            num[i].status = 'off'
+        } else if (num[i].status == 1) {
+            num[i].status = 'on'
+        }
+        // num[i].status == 0 ? 'off' : 'on';
+        obj[num[i].indexs] = num[i].status
+
+    }
+    console.log(obj, "obj2", id, "id", num, "num")
+
+
+    if (id != undefined) {
         let index = devices.findIndex((ele) => {
             return ele.device_id == id;
         });
@@ -608,7 +627,8 @@ webServer.post('/device/action', (req, res, next) => {
                 version: MQTT_JSON_API_VERSION,
                 msgid: `${mqttMsgID++}`,
                 method: 'act.do',
-                data: { [action_type]: { [`${action_id}`]: `${action}` } },
+                data: { [action_type]: obj },
+                // { [`${action_id}`]: `${action}` }
                 time: `${(new Date()).Format("yyyyMMddhhmmss")}`
             }
             console.log("action:" + JSON.stringify(mqttReq));
@@ -620,8 +640,9 @@ webServer.post('/device/action', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
-
-            console.log("id前六位：" + ids);
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
             if (masterId != -1) {
                 console.log("主设备===================");
                 mqttPub(`/device/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
@@ -632,10 +653,11 @@ webServer.post('/device/action', (req, res, next) => {
                         res.status(500).send(err);
                     }
                 });
-            } else if (gatewayId != -1) {
+            } else if (gatewayId != -1 || slaveId != -1) {
                 console.log("从设备===================");
-                mqttPub(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                mqttPub(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
                     if (ret == 0) {
+                        // console.log("chenggong=============")
                         res.status(200).send('success');
                     }
                     else {
@@ -1117,7 +1139,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
     }
     let topicArr = topic.split('/');
     let id = topicArr[2];
-    console.log("payload:linux====="+payload)
+    console.log("payload:linux=====" + payload)
     let jsonPayload = JSON.parse(payload);
 
     let isCallCallback = false;
@@ -1133,6 +1155,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                 console.log(`Publish [${payload}] on [${topic}] successful.`);
                 eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, (ret) => {
                     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => { });
+                    console.log("响应方法异步1：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
 
@@ -1146,12 +1169,14 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                 });
                 eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => {
                     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, () => { });
+                    console.log("响应方法异步2：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         callback(-4, 'timeout');
                     }
                 });
                 setTimeout(() => {
+                    console.log("响应方法异步3：========================")
                     eventMqttResp.emit(`${Number(id)}.${jsonPayload.msgid}.timeout`);
                 }, 5000);
             }
@@ -1174,7 +1199,7 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
     }
     let topicArr = topic.split('/');
     let id = topicArr[2];
-    console.log("payload:linux====="+payload)
+    console.log("payload:linux=====" + payload)
 
     let isCallCallback = false;
     // 判断是否已成功连接
@@ -1220,7 +1245,7 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
 }
 
 
-var idMap = new Map();
+var idMap = new Map();//从设备id:网关id   关系 key:value
 
 /**
  * 查询从设备信息
@@ -1245,16 +1270,20 @@ function slaveList(id, callback) {
             var slavesAttr = [];
             slavesStr = slavesStr.slice(1, slavesStr.length - 1);
             slavesAttr = slavesStr.split(',');
-            console.log(slavesAttr + "======================================")
+            // console.log(slavesAttr + "======================================")
             for (let i = 0; i < slavesAttr.length; i++) {
                 var element = slavesAttr[i];
                 var deviceId = element.substr(1, element.length - 2);
 
-                // idMap.set(element, id);
+                idMap.set(deviceId, id);
                 devices.push(initDevice(deviceId, "是", 4));
             }
             // console.log(slavesAttr + "======================================"+JSON.stringify(devices))
-            // console.log("map:" + JSON.stringify(idMap));
+            // for (var [key, value] of idMap) {
+            //     console.log(key + " = " + value);
+            // }
+            
+            // console.log(idMap.get("FFFFFFFFFFFF"),"id",idMap.get("d"));
         });
         callback(0, "从设备数据查询成功");
 
