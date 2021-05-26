@@ -2454,3 +2454,27 @@ Payload: {"time":"20210526175718","device":"FFFFFFFFFFFF","data":[{"voltage":"0"
 Topic: /gateway/010401000001/010301000001/report
 Payload: {"time":"20210526175719","device":"010301000001","data":[{"switch":"on","line_id":"1"}],"version":"2.0.0","msgid":"C32"}
 
+2021/05/26 18:06:56 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"time":"20210526180655","device":"010301000001","data":[{"frequency":"inf","current":"0","voltage":"0","line_id":"0"}],"version":"2.0.0","msgid":"C33"}
+
+2021/05/26 18:06:58 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"time":"20210526180656","device":"010301000001","data":[{"power_p":"0","energy_p":"0","line_id":"0"},{"voltage":"0","line_id":"1","power_p":"0","energy_p":"0","current":"0","frequency":"inf"},{"voltage":"0","line_id":"2","power_p":"0","energy_p":"0","current":"0","frequency":"inf"},{"voltage":"0","line_id":"3","power_p":"0","energy_p":"0","current":"0","frequency":"inf"}],"version":"2.0.0","msgid":"C34"}
+
+2021/05/26 18:07:13 - [Recved]
+Topic: /gateway/010401000001/FFFFFFFFFFFF/report
+Payload: {"time":"20210526180711","device":"FFFFFFFFFFFF","data":[{"energy_p":"0","line_id":"0"},{"energy_p":"0","line_id":"1"}],"version":"2.0.0","msgid":"C27"}
+
+2021/05/26 18:07:14 - [Recved]
+Topic: /gateway/010401000001/FFFFFFFFFFFF/report
+Payload: {"time":"20210526180713","device":"FFFFFFFFFFFF","data":[{"energy_p":"0","line_id":"2"},{"energy_p":"0","line_id":"3"}],"version":"2.0.0","msgid":"C28"}
+
+2021/05/26 18:07:20 - [Recved]
+Topic: /gateway/010401000001/FFFFFFFFFFFF/report
+Payload: {"time":"20210526180719","device":"FFFFFFFFFFFF","data":[{"voltage":"0","line_id":"0","power_p":"0","current":"0","frequency":"inf"}],"version":"2.0.0","msgid":"C29"}
+
+2021/05/26 18:07:22 - [Recved]
+Topic: /gateway/010401000001/FFFFFFFFFFFF/report
+Payload: {"time":"20210526180720","device":"FFFFFFFFFFFF","data":[{"voltage":"0","line_id":"1","power_p":"0","current":"0","frequency":"inf"},{"voltage":"0","line_id":"2","power_p":"0","current":"0","frequency":"inf"},{"voltage":"0","line_id":"3","power_p":"0","current":"0","frequency":"inf"}],"version":"2.0.0","msgid":"C30"}
+
