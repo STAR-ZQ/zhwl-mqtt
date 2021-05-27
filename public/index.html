@@ -125,7 +125,7 @@
 
                                         <el-tab-pane label="数据" name="data">
                                             <el-form label-position="top" :model="formDeviceTag" ref="formDeviceTag">
-                                                <el-form-item label="TAG" class="button-list">
+                                                <!-- <el-form-item label="TAG" class="button-list">
                                                     <el-button type="primary" plain data-tag="all" @click="onDeviceTag">
                                                         获取所有
                                                     </el-button>
@@ -166,8 +166,12 @@
                                                         @click="onDeviceTag">
                                                         获取信号强度
                                                     </el-button>
-                                                </el-form-item>
-
+                                                </el-form-item> -->
+                                                <div>
+                                                    <el-checkbox-group v-model="checkboxTag">
+                                                      <el-checkbox-button v-for="tag in tags" :label="tag" :key="tag">{{tag}}</el-checkbox-button>
+                                                    </el-checkbox-group>
+                                                  </div>
                                             </el-form>
                                         </el-tab-pane>
 
@@ -717,51 +721,57 @@
                                                         <td align="right">{{device.isSlaveDevice}}</td>
                                                     </tr>
                                                     <tr>
-
                                                         <td>电压</td>
-                    
-                                                            <td v-for="i in device.switchNum" align="right">{{device.voltage[i]}}</td>
-                                                       
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.voltage[i]}}</td>
                                                         <td>V</td>
                                                     </tr>
                                                     <tr>
                                                         <td>电流</td>
-                                                        <td align="right">{{device.current}}</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.current[i]}}</td>
                                                         <td>mA</td>
                                                     </tr>
                                                     <tr>
                                                         <td>漏电电流</td>
-                                                        <td align="right">{{device.leak_current}}</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.leak_current[i]}}</td>
                                                         <td>mA</td>
                                                     </tr>
                                                     <tr>
                                                         <td>频率</td>
-                                                        <td align="right">{{device.frequency}}</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.frequency[i]}}</td>
                                                         <td>Hz</td>
                                                     </tr>
                                                     <tr>
                                                         <td>有功功率</td>
-                                                        <td align="right">{{device.power_p}}</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.power_p[i]}}</td>
                                                         <td>W</td>
                                                     </tr>
                                                     <tr>
                                                         <td>无功功率</td>
-                                                        <td align="right">{{device.power_q}}</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.power_q[i]}}</td>
                                                         <td>Var</td>
                                                     </tr>
                                                     <tr>
                                                         <td>视在功率</td>
-                                                        <td align="right">{{device.power_s}}</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.power_s[i]}}</td>
                                                         <td>VA</td>
                                                     </tr>
                                                     <tr>
                                                         <td>有功电能</td>
-                                                        <td align="right">{{device.energy_p}}</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.energy_p[i]}}</td>
                                                         <td>kWh</td>
                                                     </tr>
                                                     <tr>
                                                         <td>无功电能</td>
-                                                        <td align="right">{{device.energy_q}}</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            {{device.energy_q[i]}}</td>
                                                         <td>kVarh</td>
                                                     </tr>
 
@@ -866,10 +876,13 @@
 
 </script>
 <script>
+    const tagOptions = ['获取所有','获取电流','获取电压','获取漏电电流'];
     let app = new Vue({
         el: '#app',
         data: function () {
             return {
+                checkboxTag:[],
+                tags:tagOptions,
                 fileList: {
                     name: '',
                     url: ''
@@ -1078,12 +1091,11 @@
                     return '#67c23a';
                 }
             },
-
             handleDeviceData(data) {
+                console.log("handleDeviceData.data:",data)
                 data.device.forEach(ele => {
                     let index = this.devices.findIndex((local_ele) => {
                         return local_ele.device_id === ele.device_id;
-
                     });
                     if (index == -1) {
                         let template = Object.assign({}, this.deviceDataTemplate);
@@ -1095,7 +1107,7 @@
                     let idx = this.devices.findIndex((local_ele) => {
                         return local_ele.device_id === ele.device_id;
                     });
-                    console.log(JSON.stringify(ele) + "====================================")
+                    // console.log(JSON.stringify(ele) + "====================================")
 
                     if (idx != -1) {
                         if (ele.voltage.length != 0)
@@ -1147,7 +1159,6 @@
                     }
                 });
             },
-
             refreshData() {
                 // this.devices.forEach(element => {
                 axios.get('/device/base', {

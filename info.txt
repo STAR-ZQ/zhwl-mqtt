@@ -13,3 +13,8 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 
 钟业清 5-26 18:09:16
 https://blog.csdn.net/hxy199421/article/details/88040351
+
+
+{"time":"20210526180720","device":"FFFFFFFFFFFF",
+"data":[{"voltage":"0","line_id":"1","power_p":"0","current":"0","frequency":"inf"},{"voltage":"0","line_id":"2","power_p":"0","current":"0","frequency":"inf"},{"voltage":"0","line_id":"3","power_p":"0","current"line_id":"3","power_p":"0","current":"0","frequency":"inf"}],"version":"2.0.0","msgid":"C30"}
+payload============= [ '', 'gateway', '010401000001', 'FFFFFFFFFFFF', 'report' ] topic

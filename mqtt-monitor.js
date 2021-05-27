@@ -97,15 +97,16 @@ var slaveAttr = new Array("010301", "FFFFFF");
 
 function handleReceivedMqttMsg(topic, payload) {
     let topicArr = topic.split('/');
-    let id = topicArr[2];
+    let id = topicArr[topicArr.length - 2];
     // var subStrPayload = payload.substr(0,2);
-    console.log(payload + "payload=============", topicArr, "topic");
+    console.log(payload + "payload==》", topicArr, "topic", id, "id");
     let jsonPayload = JSON.parse(payload);
 
     let srcmsgid = Number(jsonPayload.srcmsgid)
     let data = jsonPayload.data;
     console.log("测试是否进入响应方法");
     var lastWord = topicArr[topicArr.length - 1];
+    console.log("lastWord:", lastWord)
     if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
         eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
     }
@@ -122,266 +123,82 @@ eventMqttResp.on('device_report', (id, data) => {
         });
         if (idx != -1) {
             device = devices[idx];
+            console.log("id", id, "==>", data, "report内部:==>", device, "device")
 
-            // if (data.tags != undefined) {
-            //     console.log(data.tags);
-            //     data.tags.forEach(element => {
-            //         switch (element.tag) {
-            //             case "voltage":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.voltage;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "current":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.current;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "frequency":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.frequency;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "leak_current":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.leak_current;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "power_p":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.power_p;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "power_q":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.power_q;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "power_s":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.power_s;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "energy_p":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.energy_p;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "energy_q":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.energy_q;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = Number(element.value);
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "switch_state":
-            //                 {
-            //                     let obj;
-            //                     let tagObj = device.switch_state;
-
-            //                     let tIndex = tagObj.findIndex((ele) => {
-            //                         return ele.line_id == Number(element.line_id);
-            //                     });
-            //                     if (tIndex != -1) {
-            //                         obj = tagObj[tIndex];
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = element.value;
-            //                     }
-            //                     else {
-            //                         obj = {
-            //                             line_id: 0,
-            //                             value: 0
-            //                         }
-            //                         obj.line_id = Number(element.line_id);
-            //                         obj.value = element.value;
-            //                         tagObj.push(obj);
-            //                     }
-            //                 }
-            //                 break;
-            //             case "pwm_state":
-            //                 device.pwm_state = Number(element.value);
-            //                 break;
-            //             case "v0_10_state":
-            //                 device.v0_10_state = Number(element.value);
-            //                 break;
-            //             case "tilt":
-            //                 device.tilt = Number(element.value);
-            //                 break;
-            //             case "signal":
-            //                 device.signal = Number(element.value);
-            //                 break;
-            //         }
-            //     });
+            // var keys = new Map();
+            // // console.log(Object.keys(data[0]), "测试")
+            // for (let i = 0; i < data.length; i++) {
+            //     const arr = data[i];
+            //     for (var key in data[i]) {
+            //         if (data.hasOwnProperty(key))
+            //             keys.set(key, value)
+            //     }
+            //     console.log(JSON.stringify(keys), "keys")
             // }
+            data = JSON.stringify(data).replace(" ", "");
+            // console.log(data, "data")
+            var objs = JSON.parse(data);
+            // var keys = Object.keys(objs);
+
+            console.log(objs, "objs")
+
+
+            // console.log("测试拿data信息:", objs[0].line_id)
+
+            for (let index = 0; index < objs.length; index++) {
+                const payloadInfo = objs[index];//拿到响应数据的对象
+
+                for (const key in payloadInfo) {
+                    console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
+                    switch (key) {
+                        case "voltage":
+                            device.voltage[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "current":
+                            device.current[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "frequency":
+                            device.frequency[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "leak_current":
+                            device.leak_current[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_p":
+                            device.power_p[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_q":
+                            device.power_q[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_s":
+                            device.power_s[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "energy_p":
+                            device.energy_p[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "energy_q":
+                            device.energy_q[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "switch_state":
+                            device.switch_state[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "pwm_state":
+                            device.pwm_state = payloadInfo[key];
+                            break;
+                        case "v0_10_state":
+                            device.v0_10_state = payloadInfo[key];
+                            break;
+                        case "tilt":
+                            device.tilt = payloadInfo[key];
+                            break;
+                        case "signal":
+                            device.signal = payloadInfo[key];
+                            break;
+                    }
+
+                }
+                console.log(device, "device")
+
+            }
             //console.log(device);
         }
     }
@@ -392,6 +209,7 @@ eventMqttResp.on('device_report', (id, data) => {
  */
 const path = require('path');
 const express = require('express');
+const { json } = require('express');
 const webServer = express();
 const webHost = {
     name: '0.0.0.0',
@@ -544,7 +362,7 @@ webServer.post('/device/base', (req, res, next) => {
                     }
                 });
                 slaveList(id, (ret, err) => {
-                    console.log("end info ============" + ret);
+                    console.log("slaveList end info ============" + ret);
                     // if (ret == 0) {
                     //     res.status(200).send('success');
                     // }
@@ -944,12 +762,12 @@ webServer.post('/device/linuxStart', (req, res, next) => {
 })
 
 webServer.post('/device/linuxStop', (req, res, next) => {
-    //console.log(req.body);
     let id = req.body.data.id;
     if (id != undefined) {
         let index = devices.findIndex((ele) => {
             return ele.device_id == id;
         });
+        console.log(index)
         if (index != -1) {
 
             var ids = id.substr(0, 6);
@@ -959,8 +777,13 @@ webServer.post('/device/linuxStop', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
             if (masterId != -1) {
-                mqttPubWaitResp(`/device/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
+                console.log("master==linux.stop")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
                         res.status(200).send(msg);
@@ -970,8 +793,9 @@ webServer.post('/device/linuxStop', (req, res, next) => {
                     }
                 });
             }
-            if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==linux.stop")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
                         res.status(200).send(msg);
@@ -1139,7 +963,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
     }
     let topicArr = topic.split('/');
     let id = topicArr[2];
-    console.log("payload:linux=====" + payload)
+    // console.log("payload:linux=====" + payload)
     let jsonPayload = JSON.parse(payload);
 
     let isCallCallback = false;
@@ -1189,7 +1013,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
 }
 
 
-// MQTT 发布消息
+// MQTT 发布消息 linux
 function mqttPubOrderResp(topic, payload, qos, callback) {
     if (!(callback instanceof Function)) {
         let e = new Error();
@@ -1282,7 +1106,7 @@ function slaveList(id, callback) {
             // for (var [key, value] of idMap) {
             //     console.log(key + " = " + value);
             // }
-            
+
             // console.log(idMap.get("FFFFFFFFFFFF"),"id",idMap.get("d"));
         });
         callback(0, "从设备数据查询成功");
