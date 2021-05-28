@@ -49,7 +49,7 @@
                                 <el-form :model="formDeviceSelect" ref="formDeviceSelect">
                                     <el-form-item label="设备">
                                         <el-select v-model="formDeviceSelect.device_id" filterable allow-create
-                                            default-first-option placeholder="选择或输入">
+                                            default-first-option placeholder="选择或输入" @change="selectChange">
                                             <el-option v-for="item in devices" :key="item.device_id"
                                                 :label="item.device_id" :value="item.device_id">
                                             </el-option>
@@ -85,7 +85,7 @@
                                                         发送</el-button>
 
                                                 </el-form-item>
-
+<!-- 
                                                 <el-form-item label="继电器">
                                                     <el-button type="primary" plain data-action="relay_on"
                                                         @click="onDeviceAction">开
@@ -104,7 +104,7 @@
                                                     <el-button type="primary" plain data-action="rs485_off"
                                                         @click="onDeviceAction">关
                                                     </el-button>
-                                                </el-form-item>
+                                                </el-form-item> -->
 
                                                 <el-divider></el-divider>
 
@@ -167,11 +167,35 @@
                                                         获取信号强度
                                                     </el-button>
                                                 </el-form-item> -->
-                                                <div>
+                                                <!-- <div>
                                                     <el-checkbox-group v-model="checkboxTag">
                                                       <el-checkbox-button v-for="tag in tags" :label="tag" :key="tag">{{tag}}</el-checkbox-button>
                                                     </el-checkbox-group>
-                                                  </div>
+                                                  </div> -->
+
+                                                <label>数据</label><br>
+                                                <label>线路：</label>
+                                                <el-form-item>
+                                                    <el-select v-model="formDeviceTag.line_id" filterable allow-create
+                                                        default-first-option placeholder="选择或输入">
+                                                        <el-option v-for="(lineId, index) in device.switchNum"
+                                                            :key="index" :label="index" :value="index">
+                                                        </el-option>
+                                                    </el-select>
+                                                </el-form-item>
+
+                                                <br>
+                                                <div style="width: 70%;margin-left: 30px;margin-top: 0;">
+                                                    <el-checkbox-group v-model="checkboxTag" @change="getCheckTagValue">
+                                                        <!-- <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll">全选</el-checkbox> -->
+                                                        <el-checkbox v-for="tag in tags" :key="tag.key" :label="tag.key"
+                                                            :value="tag.key">{{tag.value}}</el-checkbox>
+                                                    </el-checkbox-group>
+                                                </div>
+                                                <br>
+                                                <el-button type="primary" plain size="small" @click="onDeviceTag">获取
+                                                </el-button>
+
                                             </el-form>
                                         </el-tab-pane>
 
@@ -704,15 +728,6 @@
                                             <div style="padding: 1rem;">
                                                 <table width="100%" cellpadding="2" id="table">
                                                     <tr>
-                                                        <td>开关状态</td>
-                                                        <td colspan="2" align="center">
-                                                            <el-switch v-model="device.switch_state"
-                                                                active-color="#13ce66" inactive-color="#ff4949"
-                                                                disabled>
-                                                            </el-switch>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
                                                         <td>开关数量</td>
                                                         <td align="right">{{device.switchNum}}</td>
                                                     </tr>
@@ -721,63 +736,73 @@
                                                         <td align="right">{{device.isSlaveDevice}}</td>
                                                     </tr>
                                                     <tr>
+                                                        <td>开关状态</td>
+                                                        <td v-for="i in device.switchNum" align="right">
+                                                            <el-switch v-model="device.switch_state[i - 1]"
+                                                                active-color="#13ce66" inactive-color="#ff4949"
+                                                                disabled>
+                                                            </el-switch>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>电压</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.voltage[i]}}</td>
+                                                            {{device.voltage[i - 1]}}</td>
                                                         <td>V</td>
                                                     </tr>
                                                     <tr>
                                                         <td>电流</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.current[i]}}</td>
+                                                            {{device.current[i - 1]}}</td>
                                                         <td>mA</td>
                                                     </tr>
                                                     <tr>
                                                         <td>漏电电流</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.leak_current[i]}}</td>
+                                                            {{device.leak_current[i - 1]}}</td>
                                                         <td>mA</td>
                                                     </tr>
                                                     <tr>
                                                         <td>频率</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.frequency[i]}}</td>
+                                                            {{device.frequency[i - 1]}}</td>
                                                         <td>Hz</td>
                                                     </tr>
                                                     <tr>
                                                         <td>有功功率</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.power_p[i]}}</td>
+                                                            {{device.power_p[i - 1]}}</td>
                                                         <td>W</td>
                                                     </tr>
                                                     <tr>
                                                         <td>无功功率</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.power_q[i]}}</td>
+                                                            {{device.power_q[i - 1]}}</td>
                                                         <td>Var</td>
                                                     </tr>
                                                     <tr>
                                                         <td>视在功率</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.power_s[i]}}</td>
+                                                            {{device.power_s[i - 1]}}</td>
                                                         <td>VA</td>
                                                     </tr>
                                                     <tr>
                                                         <td>有功电能</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.energy_p[i]}}</td>
+                                                            {{device.energy_p[i - 1]}}</td>
                                                         <td>kWh</td>
                                                     </tr>
                                                     <tr>
                                                         <td>无功电能</td>
                                                         <td v-for="i in device.switchNum" align="right">
-                                                            {{device.energy_q[i]}}</td>
+                                                            {{device.energy_q[i - 1]}}</td>
                                                         <td>kVarh</td>
                                                     </tr>
 
                                                     <tr>
                                                         <td>pwm</td>
-                                                        <td align="right">{{device.pwm_state}}</td>
+                                                        <td align="right">
+                                                            {{device.pwm_state}}</td>
                                                         <td>%</td>
                                                     </tr>
                                                     <tr>
@@ -876,13 +901,43 @@
 
 </script>
 <script>
-    const tagOptions = ['获取所有','获取电流','获取电压','获取漏电电流'];
+    const tagOptions = ['获取所有', '获取电流', '获取电压', '获取漏电电流'];
     let app = new Vue({
         el: '#app',
         data: function () {
             return {
-                checkboxTag:[],
-                tags:tagOptions,
+                device: [],
+                // isIndeterminate:false,
+                // checkAll:false,
+                checkboxTag: [],
+                tags: [{
+                    key: "voltage",
+                    value: "电压"
+                }, {
+                    key: "power_q",
+                    value: "无功功率"
+                }, {
+                    key: "current",
+                    value: "电流"
+                }, {
+                    key: "power_s",
+                    value: "视在功率"
+                }, {
+                    key: "frequency",
+                    value: "频率"
+                }, {
+                    key: "energy_p",
+                    value: "有功电能"
+                }, {
+                    key: "leak_current",
+                    value: "漏电电流"
+                }, {
+                    key: "energy_q",
+                    value: "无功电能"
+                }, {
+                    key: "power_p",
+                    value: "有功功率"
+                }],
                 fileList: {
                     name: '',
                     url: ''
@@ -912,7 +967,7 @@
                 },
                 num: [],//开关个数
                 formDeviceTag: {
-
+                    line_id: ''
                 },
                 formDeviceCfg: {
                     mqtt: {
@@ -1013,24 +1068,25 @@
                 devices: [],
                 deviceDataTemplate: {
                     device_id: '0',
-                    switchNum: '0',
+                    switchNum: 0,
                     isSlaveDevice: '否',
-                    voltage: '0',
-                    current: '0',
-                    frequency: '0',
-                    power_p: '0',
-                    power_q: '0',
-                    power_s: '0',
-                    energy_p: '0',
-                    energy_q: '0',
-                    leak_current: '0',
-                    switch_state: false,
+                    voltage: [],
+                    current: [],
+                    frequency: [],
+                    power_p: [],
+                    power_q: [],
+                    power_s: [],
+                    energy_p: [],
+                    energy_q: [],
+                    leak_current: [],
+                    switch_state: [],
                     pwm_state: '0',
                     v0_10_state: '0',
                     tilt: '0',
                     signal: '0',
                     sig_percentage: '0'
-                }
+                },
+                tagList: []
             }
         },
         created: function () {
@@ -1061,6 +1117,56 @@
         //     this.debouncedSetV0_10 = _.debounce(function() {this.setBrightness(1);}, 1000);
         // },
         methods: {
+            initDevice(id, isFlag, num) {
+                let d = {
+                    device_id: id,
+                    switchNum: num,
+                    isSlaveDevice: isFlag,//是否从设备装置
+                    voltage: [], // 电压   //voltage[0]=220
+                    current: [], // 电流
+                    frequency: [], // 频率
+                    leak_current: [], // 漏电电流
+                    power_p: [], // 有功功率
+                    power_q: [], // 无功功率
+                    power_s: [], // 视在功率
+                    energy_p: [], // 有功电能
+                    energy_q: [], // 武功电能
+                    switch_state: [], // 开关状态
+                    pwm_state: 0, // PWM 值
+                    v0_10_state: 0, // 0-10V 值
+                    tilt: 0, // 倾斜度
+                    sig_percentage: 0 // 信号强度
+                }
+
+                for (let i = 0; i < num; i++) {
+                    d.voltage[i] = 0;
+                    d.current[i] = 0;
+                    d.frequency[i] = 0;
+                    d.leak_current[i] = 0;
+                    d.power_p[i] = 0;
+                    d.power_q[i] = 0;
+                    d.power_s[i] = 0;
+                    d.energy_p[i] = 0;
+                    d.energy_q[i] = 0;
+                    d.switch_state[i] = false;
+                }
+
+                return d;
+            },
+            //设备id下拉框触发事件
+            selectChange() {
+                let device_id = this.formDeviceSelect.device_id;
+                let index = this.devices.findIndex((ele => {
+                    return ele.device_id === device_id
+                })
+                )
+                this.device = this.devices[index];
+                console.log(this.device, "selectChange.device")
+            },
+            getCheckTagValue(e) {
+                console.log(this.checkboxTag, "getCheckTagValue")
+                this.tagList = this.checkboxTag
+            },
             unique: function (arr) {
                 const res = new Map();
                 return arr.filter((arr) => !res.has(arr.device_id) && res.set(arr.device_id, 1));
@@ -1092,14 +1198,31 @@
                 }
             },
             handleDeviceData(data) {
-                console.log("handleDeviceData.data:",data)
+                // console.log("handleDeviceData.data:", data)
+                let iii = 0;
                 data.device.forEach(ele => {
                     let index = this.devices.findIndex((local_ele) => {
                         return local_ele.device_id === ele.device_id;
                     });
                     if (index == -1) {
-                        let template = Object.assign({}, this.deviceDataTemplate);
-                        template.device_id = ele.device_id;
+                        // let template = Object.assign({}, this.deviceDataTemplate);
+                        // template.device_id = ele.device_id;
+                        // if (ele.switchNum.length != 0) {
+                        //     template.switchNum = ele.switchNum[0];
+
+                        //     template.voltage
+                        // }
+
+                        // this.devices.push(template);
+                        // this.devices = this.unique(this.devices);
+
+                        let sw_num = 0;
+                        if (ele.switchNum.length != 0) {
+                            sw_num = ele.switchNum[0];
+                        }
+
+                        let template = Object.assign({}, this.initDevice(ele.device_id, ele.isSlaveDevice, sw_num));
+
                         this.devices.push(template);
                         this.devices = this.unique(this.devices);
                     }
@@ -1110,30 +1233,45 @@
                     // console.log(JSON.stringify(ele) + "====================================")
 
                     if (idx != -1) {
-                        if (ele.voltage.length != 0)
-                            this.devices[idx].voltage = ele.voltage[0].value;
-                        if (ele.current.length != 0)
-                            this.devices[idx].current = ele.current[0].value;
-                        if (ele.frequency.length != 0)
-                            this.devices[idx].frequency = ele.frequency[0].value;
-                        if (ele.leak_current.length != 0)
-                            this.devices[idx].leak_current = ele.leak_current[0].value;
-                        if (ele.power_p.length != 0)
-                            this.devices[idx].power_p = ele.power_p[0].value;
-                        if (ele.power_q.length != 0)
-                            this.devices[idx].power_q = ele.power_q[0].value;
-                        if (ele.power_s.length != 0)
-                            this.devices[idx].power_s = ele.power_s[0].value;
-                        if (ele.energy_p.length != 0)
-                            this.devices[idx].energy_p = ele.energy_p[0].value;
-                        if (ele.energy_q.length != 0)
-                            this.devices[idx].energy_q = ele.energy_q[0].value;
-                        if (ele.switch_state.length != 0)
-                            this.devices[idx].switch_state = ele.switch_state[0].value == 'on' ? true : false;
-                        if (ele.switchNum.length != 0)
-                            this.devices[idx].switchNum = ele.switchNum[0];
+                        // console.log(ele);
+                        // if (ele.voltage.length != 0)
+                        //     this.devices[idx].voltage[0] = ele.voltage[0].value;
+                        // if (ele.current.length != 0)
+                        //     this.devices[idx].current[0] = ele.current[0].value;
+                        // if (ele.frequency.length != 0)
+                        //     this.devices[idx].frequency[0] = ele.frequency[0].value;
+                        // if (ele.leak_current.length != 0)
+                        //     this.devices[idx].leak_current[0] = ele.leak_current[0].value;
+                        // if (ele.power_p.length != 0)
+                        //     this.devices[idx].power_p[0] = ele.power_p[0].value;
+                        // if (ele.power_q.length != 0)
+                        //     this.devices[idx].power_q[0] = ele.power_q[0].value;
+                        // if (ele.power_s.length != 0)
+                        //     this.devices[idx].power_s[0] = ele.power_s[0].value;
+                        // if (ele.energy_p.length != 0)
+                        //     this.devices[idx].energy_p[0] = ele.energy_p[0].value;
+                        // if (ele.energy_q.length != 0)
+                        //     this.devices[idx].energy_q[0] = ele.energy_q[0].value;
+                        // if (ele.switch_state.length != 0)
+                        // {
+                        //     this.devices[idx].switch_state[0] = ele.switch_state[0].value == 'on' ? true : false;
+                        //     console.log(this.devices[idx].switch_state[0]);
+                        // }
 
-                        this.devices[idx].isSlaveDevice = ele.isSlaveDevice;
+                        for (let i = 0; i < ele.switchNum[0]; i++) {
+                            this.devices[idx].voltage[i] = ele.voltage[i] == null ? 0 : ele.voltage[i];
+                            this.devices[idx].current[i] = ele.current[i] == null ? 0 : ele.current[i];
+                            this.devices[idx].frequency[i] = ele.frequency[i] == null ? 0 : ele.frequency[i];
+                            this.devices[idx].leak_current[i] = ele.leak_current[i] == null ? 0 : ele.leak_current[i];
+                            this.devices[idx].power_p[i] = ele.power_p[i] == null ? 0 : ele.power_p[i];
+                            this.devices[idx].power_q[i] = ele.power_q[i] == null ? 0 : ele.power_q[i];
+                            this.devices[idx].power_s[i] = ele.power_s[i] == null ? 0 : ele.power_s[i];
+                            this.devices[idx].energy_p[i] = ele.energy_p[i] == null ? 0 : ele.energy_p[i];
+                            this.devices[idx].energy_q[i] = ele.energy_q[i] == null ? 0 : ele.energy_q[i];
+                            this.devices[idx].switch_state[i] = ele.switch_state[i] == 'on' ? true : false;
+
+                        }
+
                         this.devices[idx].pwm_state = ele.pwm_state;
                         this.devices[idx].v0_10_state = ele.v0_10_state;
                         this.devices[idx].tilt = ele.tilt;
@@ -1157,6 +1295,8 @@
                         }
                         this.devices[index].sig_percentage = perc;
                     }
+
+                    this.$forceUpdate()
                 });
             },
             refreshData() {
@@ -1427,13 +1567,17 @@
             },
             //tag
             onDeviceTag(ele) {
-                let tagDataset = ele.currentTarget.dataset.tag;
+                let tagDataset = this.tagList;
                 let device_id = this.formDeviceSelect.device_id;
-                //console.log(tagDataset);
+                let line_id = this.formDeviceTag.line_id;
+
+
                 let postData = {
                     id: device_id,
-                    tag: [tagDataset]
+                    tag: tagDataset,
+                    lineId: line_id
                 }
+                console.log(tagDataset, "tagDataSet", line_id, "line_id", postData, "postData");
 
                 axios.put('/device/tag', postData)
                     .then((res) => {

@@ -178,7 +178,7 @@ eventMqttResp.on('device_report', (id, data) => {
                         case "energy_q":
                             device.energy_q[payloadInfo.line_id] = payloadInfo[key];
                             break;
-                        case "switch_state":
+                        case "switch":
                             device.switch_state[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "pwm_state":
@@ -313,6 +313,7 @@ function initDevice(id, isFlag, num) {
         tilt: 0, // 倾斜度
         signal: 0 // 信号强度
     }
+
     return device;
 }
 
@@ -497,18 +498,21 @@ webServer.put('/device/tag', (req, res, next) => {
     //console.log(req.body);
     let id = req.body.id;
     let tag = req.body.tag;
+    let lineId = req.body.lineId;
     if (id != undefined && tag != undefined) {
         let index = devices.findIndex((ele) => {
             return ele.device_id == id;
         });
+
         if (index != -1) {
             let mqttReq = {
                 version: MQTT_JSON_API_VERSION,
                 msgid: `${mqttMsgID++}`,
-                method: tag.get,
-                data: tag == 'all' ? {} : { 'tags': [`${tag}`] },
+                method: "tag.get",
+                data: { 'line_id': `${lineId}`, 'tags': tag },
                 time: `${(new Date()).Format("yyyyMMddhhmmss")}`
             }
+            console.log(JSON.stringify(mqttReq),"device.tag")
             var ids = id.substr(0, 6);
             var masterId = masterAttr.findIndex((ele) => {
                 return ele == ids;
@@ -527,8 +531,9 @@ webServer.put('/device/tag', (req, res, next) => {
                 });
             }
             if (gatewayId != -1) {
-                mqttPub(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                mqttPub(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
                     if (ret == 0) {
+                        console.log("成功tag")
                         res.status(201).send('success');
                     }
                     else {
@@ -581,7 +586,7 @@ webServer.get('/device/cfg', (req, res, next) => {
                 });
             }
             if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
                         res.status(200).send(msg);
@@ -636,7 +641,7 @@ webServer.put('/device/cfg', (req, res, next) => {
                 });
             }
             if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
                         res.status(200).send(msg);
