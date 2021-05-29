@@ -85,7 +85,7 @@
                                                         发送</el-button>
 
                                                 </el-form-item>
-<!-- 
+                                                <!-- 
                                                 <el-form-item label="继电器">
                                                     <el-button type="primary" plain data-action="relay_on"
                                                         @click="onDeviceAction">开
@@ -175,15 +175,15 @@
 
                                                 <label>数据</label><br>
                                                 <label>线路：</label>
-                                                <el-form-item>
-                                                    <el-select v-model="formDeviceTag.line_id" filterable allow-create
-                                                        default-first-option placeholder="选择或输入">
-                                                        <el-option v-for="(lineId, index) in device.switchNum"
-                                                            :key="index" :label="index" :value="index">
-                                                        </el-option>
-                                                    </el-select>
-                                                </el-form-item>
-
+                                                <!-- <el-form-item> -->
+                                                <el-select v-model="formDeviceTag.line_id" filterable allow-create
+                                                    default-first-option placeholder="选择或输入">
+                                                    <el-option v-for="(lineId, index) in device.switchNum" :key="index"
+                                                        :label="index" :value="index">
+                                                    </el-option>
+                                                </el-select>
+                                                <!-- </el-form-item> -->
+                                                <br>
                                                 <br>
                                                 <div style="width: 70%;margin-left: 30px;margin-top: 0;">
                                                     <el-checkbox-group v-model="checkboxTag" @change="getCheckTagValue">
@@ -537,29 +537,29 @@
                                                     <el-form label-position="right" label-width="5rem"
                                                         :model="formDeviceCfg" ref="formDeviceCfg">
                                                         <el-form-item label="配置项">
-                                                            <el-select v-model="formDeviceCfg.report.file"
+                                                            <el-select v-model="formDeviceCfg.report.config"
                                                                 placeholder="请选择配置项">
-                                                                <el-option label="电压" value="rpt_voltage.json">
+                                                                <el-option label="电压" value="rpt_voltage">
                                                                 </el-option>
-                                                                <el-option label="电流" value="rpt_current.json">
+                                                                <el-option label="电流" value="rpt_current">
                                                                 </el-option>
-                                                                <el-option label="漏电电流" value="rpt_leakcurrent.json">
+                                                                <el-option label="漏电电流" value="rpt_leakcurrent">
                                                                 </el-option>
-                                                                <el-option label="频率" value="rpt_frequency.json">
+                                                                <el-option label="频率" value="rpt_frequency">
                                                                 </el-option>
-                                                                <el-option label="有功功率" value="rpt_power_p.json">
+                                                                <el-option label="有功功率" value="rpt_power_p">
                                                                 </el-option>
-                                                                <el-option label="无功功率" value="rpt_power_q.json">
+                                                                <el-option label="无功功率" value="rpt_power_q">
                                                                 </el-option>
-                                                                <el-option label="视在功率" value="rpt_power_s.json">
+                                                                <el-option label="视在功率" value="rpt_power_s">
                                                                 </el-option>
-                                                                <el-option label="有功电能" value="rpt_energy_p.json">
+                                                                <el-option label="有功电能" value="rpt_energy_p">
                                                                 </el-option>
-                                                                <el-option label="无功电能" value="rpt_energy_q.json">
+                                                                <el-option label="无功电能" value="rpt_energy_q">
                                                                 </el-option>
-                                                                <el-option label="倾斜度" value="rpt_tilt.json">
+                                                                <el-option label="倾斜度" value="rpt_tilt">
                                                                 </el-option>
-                                                                <el-option label="信号强度" value="rpt_signal.json">
+                                                                <el-option label="信号强度" value="rpt_signal">
                                                                 </el-option>
                                                             </el-select>
                                                         </el-form-item>
@@ -668,7 +668,7 @@
                                                 </el-form-item>
                                                 <el-form-item label="固件：">
                                                     <el-upload class="upload-ota" :action="uploadUrl"
-                                                        :on-change="handleChange" :file-list="fileList">
+                                                        :on-change="handleChange" :config-list="configList">
                                                         <el-button size="small" plain type="primary">上传固件</el-button>
                                                         <div slot="tip" class="el-upload__tip">
                                                             固件路径示例：http://example.com/firmware.bin</div>
@@ -682,19 +682,19 @@
                                                 </el-form-item>
                                             </el-form>
                                         </el-tab-pane>
-                                        <el-tab-pane label="虚拟机" name="linux">
-                                            <el-form label-position="right" label-width="4.5rem"
-                                                :model="formDeviceLinux" ref="formDeviceLinux">
+                                        <el-tab-pane label="虚拟机" name="lua">
+                                            <el-form label-position="right" label-width="4.5rem" :model="formDeviceLua"
+                                                ref="formDeviceLua">
                                                 <el-form-item label="虚拟机状态:">
-                                                    <el-button type="primary" plain size="small" @click="">查询
+                                                    <el-button type="primary" plain size="small" @click="luaSearch">查询
                                                     </el-button>
-                                                    <el-button type="primary" plain size="small" @click="">错误信息
+                                                    <el-button type="primary" plain size="small" @click="luaError">错误信息
                                                     </el-button>
                                                 </el-form-item>
                                                 <el-form-item label="控制:">
-                                                    <el-button type="primary" plain size="small" @click="linuxStart">启动
+                                                    <el-button type="primary" plain size="small" @click="luaStart">启动
                                                     </el-button>
-                                                    <el-button type="primary" plain size="small" @click="linuxStop">停止
+                                                    <el-button type="primary" plain size="small" @click="luaStop">停止
                                                     </el-button>
                                                 </el-form-item>
                                             </el-form>
@@ -938,7 +938,7 @@
                     key: "power_p",
                     value: "有功功率"
                 }],
-                fileList: {
+                configList: {
                     name: '',
                     url: ''
                 },
@@ -1034,7 +1034,7 @@
                         z_offset: ''
                     },
                     report: {
-                        file: '',
+                        config: '',
                         interval: '',
                         upper_threshold: '',
                         lower_threshold: '',
@@ -1042,7 +1042,7 @@
                     },
                 },
                 formDeviceOta: {},
-                formDeviceLinux: {
+                formDeviceLua: {
                 },
 
                 formSub: {
@@ -1382,9 +1382,9 @@
                     });
                 });
             },
-            linuxStart() {
+            luaStart() {
                 let device_id = this.formDeviceSelect.device_id;
-                axios.post('/device/linuxStart', {
+                axios.post('/device/luaStart', {
                     data: { id: device_id }
                 }).then((res) => {
                     this.$notify.success({
@@ -1392,14 +1392,34 @@
                         message: `成功启动虚拟机`
                     })
                 })
-            }, linuxStop() {
+            }, luaStop() {
                 let device_id = this.formDeviceSelect.device_id;
-                axios.post('/device/linuxStop', {
+                axios.post('/device/luaStop', {
                     data: { id: device_id }
                 }).then((res) => {
                     this.$notify.success({
                         title: '成功',
-                        message: `成功启动虚拟机`
+                        message: `成功停止虚拟机`
+                    })
+                })
+            }, luaSearch() {
+                let device_id = this.formDeviceSelect.device_id;
+                axios.post('/device/luaSearch', {
+                    data: { id: device_id }
+                }).then((res) => {
+                    this.$notify.success({
+                        title: '成功',
+                        message: `成功查询虚拟机信息`
+                    })
+                })
+            }, luaError() {
+                let device_id = this.formDeviceSelect.device_id;
+                axios.post('/device/luaError', {
+                    data: { id: device_id }
+                }).then((res) => {
+                    this.$notify.success({
+                        title: '成功',
+                        message: `成功获取虚拟机错误信息`
                     })
                 })
             },
@@ -1605,7 +1625,7 @@
                 switch (cfgDataset) {
                     case 'mqtt':
                         cfg = {
-                            file: 'mqttaccount.json',
+                            config: 'mqttaccount',
                             content: {
                                 address: this.formDeviceCfg.mqtt.address,
                                 port: String(this.formDeviceCfg.mqtt.port),
@@ -1617,13 +1637,13 @@
                         break;
                     case 'topic':
                         cfg = {
-                            file: 'topics.json',
+                            config: 'topics',
                             content: this.formDeviceCfg.topic
                         };
                         break;
                     case 'location':
                         cfg = {
-                            file: 'location.json',
+                            config: 'location',
                             content: {
                                 longitude: String(this.formDeviceCfg.location.longitude),
                                 latitude: String(this.formDeviceCfg.location.latitude)
@@ -1632,7 +1652,7 @@
                         break;
                     case 'offline':
                         cfg = {
-                            file: 'offline_strategy.json',
+                            config: 'offline_strategy',
                             content: {
                                 switch: this.formDeviceCfg.offline.switch
                             }
@@ -1640,25 +1660,25 @@
                         break;
                     case 'schedule':
                         cfg = {
-                            file: 'light_schedule.json',
+                            config: 'light_schedule',
                             content: this.formDeviceCfg.schedule
                         };
                         break;
                     case 'elec_ofs':
                         cfg = {
-                            file: 'elec_ofs.json',
+                            config: 'elec_ofs',
                             content: this.formDeviceCfg.elec_ofs
                         };
                         break;
                     case 'tilt_ofs':
                         cfg = {
-                            file: 'tilt_ofs.json',
+                            config: 'tilt_ofs',
                             content: this.formDeviceCfg.tilt_ofs
                         };
                         break;
                     case 'report':
                         cfg = {
-                            file: this.formDeviceCfg.report.file,
+                            config: this.formDeviceCfg.report.config,
                             content: {
                                 interval: String(this.formDeviceCfg.report.interval),
                                 upper_threshold: String(this.formDeviceCfg.report.upper_threshold),
@@ -1706,28 +1726,28 @@
 
                 switch (cfgDataset) {
                     case 'mqtt':
-                        cfg = 'mqttaccount.json';
+                        cfg = 'mqttaccount';
                         break;
                     case 'topics':
-                        cfg = 'topics.json';
+                        cfg = 'topics';
                         break;
                     case 'location':
-                        cfg = 'location.json';
+                        cfg = 'location';
                         break;
                     case 'offline':
-                        cfg = 'offline_strategy.json';
+                        cfg = 'offline_strategy';
                         break;
                     case 'schedule':
-                        cfg = 'light_schedule.json';
+                        cfg = 'light_schedule';
                         break;
                     case 'elec_ofs':
-                        cfg = 'elec_ofs.json';
+                        cfg = 'elec_ofs';
                         break;
                     case 'tilt_ofs':
-                        cfg = 'tilt_ofs.json';
+                        cfg = 'tilt_ofs';
                         break;
                     case 'report':
-                        cfg = this.formDeviceCfg.report.file;
+                        cfg = this.formDeviceCfg.report.config;
                         break;
                     default:
                         break;
@@ -1750,7 +1770,7 @@
                         });
                         this.deviceCfgLoading = false;
                     }).catch((err) => {
-                        console.log(err.response.data);
+                        // console.log(JSON.stringify(err));
                         this.$notify.error({
                             title: '错误',
                             message: err.response.data
@@ -1765,8 +1785,8 @@
                 // axios.post('/device/ota')
                 console.log(ota);
             },
-            handleChange(file, fileList) {
-                this.fileList = fileList.slice(-3);
+            handleChange(config, configList) {
+                this.configList = configList.slice(-3);
             },
             uploadUrl() {
                 return "localhost:18082/public/fw"
@@ -1774,31 +1794,31 @@
             handleGetDeviceCfg(data) {
                 let formCfg = this.formDeviceCfg;
                 let content = data.content;
-                switch (data.file) {
-                    case 'mqttaccount.json':
+                switch (data.config) {
+                    case 'mqttaccount':
                         formCfg.mqtt = content;
                         break;
-                    case 'topics.json':
+                    case 'topics':
                         formCfg.topic = content;
                         break;
-                    case 'location.json':
+                    case 'location':
                         formCfg.location = content;
                         break;
-                    case 'offline_strategy.json':
+                    case 'offline_strategy':
                         formCfg.offline = content;
                         break;
-                    case 'light_schedule.json':
+                    case 'light_schedule':
                         formCfg.schedule = content;
                         break;
-                    case 'elec_ofs.json':
+                    case 'elec_ofs':
                         formCfg.elec_ofs = content;
                         break;
-                    case 'tilt_ofs.json':
+                    case 'tilt_ofs':
                         formCfg.tilt_ofs = content;
                         break;
-                    case (String(data.file).match(/rpt_/) || {}).input:
+                    case (String(data.config).match(/rpt_/) || {}).input:
                         formCfg.report = content;
-                        formCfg.report.file = data.file;
+                        formCfg.report.config = data.config;
                         break;
                     default:
                         break;

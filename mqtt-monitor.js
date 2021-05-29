@@ -91,27 +91,59 @@ client.on('message', (topic, payload) => {
 let devices = new Array();
 const MQTT_JSON_API_VERSION = '2.0.0';
 let mqttMsgID = 1;
-var masterAttr = new Array("010201"); //010501/0100601
-var gatewayAttr = new Array("010401");
-var slaveAttr = new Array("010301", "FFFFFF");
+// var masterAttr = new Array("010201"); //010501/0100601
+// var gatewayAttr = new Array("010401");
+// var slaveAttr = new Array("010301", "FFFFFF");
+var masterDeviceInfo = new Array({ "010201": 1 }); //010501/0100601
+var gatewayInfo = new Array({ "010401": 0 });
+var slaveDeviceInfo = new Array({ "010301": 4 }, { "FFFFFF": 4 });
+
+var masterAttr = new Array();
+var slaveAttr = new Array();
+var gatewayAttr = new Array();
+/**
+ * 初始化设备id数组信息（为了不重新改之前的代码）
+ */
+function initDeviceInfo() {
+    for (let i = 0; i < masterDeviceInfo.length; i++) {
+        for (const key in masterDeviceInfo[i]) {
+            masterAttr.push(key)
+        }
+    }
+    // console.log("initDeviceInfo.masterDeviceInfo:",masterDeviceInfo,"取值：",masterDeviceInfo[0]['010201'])
+    for (let i = 0; i < gatewayInfo.length; i++) {
+        for (const key in gatewayInfo[i]) {
+            gatewayAttr.push(key)
+        }
+    }
+    for (let i = 0; i < slaveDeviceInfo.length; i++) {
+        for (const key in slaveDeviceInfo[i]) {
+            slaveAttr.push(key)
+        }
+    }
+}
 
 function handleReceivedMqttMsg(topic, payload) {
     let topicArr = topic.split('/');
     let id = topicArr[topicArr.length - 2];
     // var subStrPayload = payload.substr(0,2);
-    console.log(payload + "payload==》", topicArr, "topic", id, "id");
-    let jsonPayload = JSON.parse(payload);
-
-    let srcmsgid = Number(jsonPayload.srcmsgid)
-    let data = jsonPayload.data;
-    console.log("测试是否进入响应方法");
+    // console.log(payload + "payload==》", topicArr, "topic", id, "id");
     var lastWord = topicArr[topicArr.length - 1];
     console.log("lastWord:", lastWord)
-    if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
-        eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
-    }
-    if (lastWord == 'report') {
-        eventMqttResp.emit(`device_report`, id, data);
+    if (lastWord != 'sys_resp') {
+        let jsonPayload = JSON.parse(payload);
+
+        let srcmsgid = Number(jsonPayload.srcmsgid)
+        let data = jsonPayload.data;
+        console.log("测试是否进入响应方法");
+        if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
+            eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
+        }
+        if (lastWord == 'report') {
+            eventMqttResp.emit(`device_report`, id, data);
+        }
+    } else {
+        eventMqttResp.emit(`${Number(id)}`, payload);
     }
 }
 
@@ -123,7 +155,7 @@ eventMqttResp.on('device_report', (id, data) => {
         });
         if (idx != -1) {
             device = devices[idx];
-            console.log("id", id, "==>", data, "report内部:==>", device, "device")
+            // console.log("id", id, "==>", data, "report内部:==>", device, "device")
 
             // var keys = new Map();
             // // console.log(Object.keys(data[0]), "测试")
@@ -149,7 +181,7 @@ eventMqttResp.on('device_report', (id, data) => {
                 const payloadInfo = objs[index];//拿到响应数据的对象
 
                 for (const key in payloadInfo) {
-                    console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
+                    // console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
                     switch (key) {
                         case "voltage":
                             device.voltage[payloadInfo.line_id] = payloadInfo[key];
@@ -316,12 +348,16 @@ function initDevice(id, isFlag, num) {
 
     return device;
 }
+let swtichNum;//开关数量
 
 /**
  * @brief 新增设备
  */
 webServer.post('/device/base', (req, res, next) => {
     //console.log(req.body);
+
+    initDeviceInfo();
+
     let id = req.body.id;
     if (id != undefined) {
         let index = devices.findIndex((ele) => {
@@ -338,11 +374,17 @@ webServer.post('/device/base', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
-
+            console.log("初始化数组信息：masterAttr:", masterAttr, "gatewayAttr:", gatewayAttr, "slaveAttr:", slaveAttr)
             console.log("id前六位：" + ids + "masterId:" + masterId + "slaveId:" + gatewayId);
             if (masterId != -1) {
                 console.log("主设备===================");
-                devices.push(initDevice(id, "否", 1));
+                // for (const key in masterDeviceInfo) {
+                let indexs = masterAttr.findIndex((ele) => {
+                    return ele = ids;
+                })
+                switchNum = masterDeviceInfo[indexs][ids];
+                // }
+                devices.push(initDevice(id, "否", switchNum));
                 mqttSub(id, (ret, err) => {
                     if (ret == 0) {
                         res.status(201).send('success');
@@ -352,8 +394,12 @@ webServer.post('/device/base', (req, res, next) => {
                     }
                 });
             } else if (gatewayId != -1) {
-                console.log("从设备===================");
-                devices.push(initDevice(id, "否", 0));
+                let indexs = masterAttr.findIndex((ele) => {
+                    return ele = ids;
+                })
+                switchNum = gatewayInfo[indexs][ids];
+                console.log("从设备===================", switchNum);
+                devices.push(initDevice(id, "否", switchNum));
                 mqttSlaveSub(id, (ret, err) => {
                     if (ret == 0) {
                         res.status(200).send('success');
@@ -473,16 +519,28 @@ webServer.post('/device/action', (req, res, next) => {
                     }
                 });
             } else if (gatewayId != -1 || slaveId != -1) {
-                console.log("从设备===================");
-                mqttPub(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
-                    if (ret == 0) {
-                        // console.log("chenggong=============")
-                        res.status(200).send('success');
-                    }
-                    else {
-                        res.status(500).send(err);
-                    }
-                });
+                console.log("从设备===================idMap.get(id):", idMap.get(id));
+                if (idMap.get(id) != undefined) {
+                    mqttPub(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                        if (ret == 0) {
+                            // console.log("chenggong=============")
+                            res.status(200).send('success');
+                        }
+                        else {
+                            res.status(500).send(err);
+                        }
+                    });
+                } else {
+                    mqttPub(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                        if (ret == 0) {
+                            // console.log("chenggong=============")
+                            res.status(200).send('success');
+                        }
+                        else {
+                            res.status(500).send(err);
+                        }
+                    });
+                }
             }
         }
         else {
@@ -512,7 +570,7 @@ webServer.put('/device/tag', (req, res, next) => {
                 data: { 'line_id': `${lineId}`, 'tags': tag },
                 time: `${(new Date()).Format("yyyyMMddhhmmss")}`
             }
-            console.log(JSON.stringify(mqttReq),"device.tag")
+            console.log(JSON.stringify(mqttReq), "device.tag===>id:", id)
             var ids = id.substr(0, 6);
             var masterId = masterAttr.findIndex((ele) => {
                 return ele == ids;
@@ -520,6 +578,11 @@ webServer.put('/device/tag', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
+
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("masterId:", masterId, "slaveId:", slaveId, "gatewayId:", gatewayId)
             if (masterId != -1) {
                 mqttPub(`/device/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
                     if (ret == 0) {
@@ -530,16 +593,31 @@ webServer.put('/device/tag', (req, res, next) => {
                     }
                 });
             }
-            if (gatewayId != -1) {
-                mqttPub(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
-                    if (ret == 0) {
-                        console.log("成功tag")
-                        res.status(201).send('success');
-                    }
-                    else {
-                        res.status(500).send(err);
-                    }
-                });
+            if (gatewayId != -1 || slaveId != -1) {
+
+                if (idMap.get(id) != undefined) {
+                    mqttPub(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                        if (ret == 0) {
+                            console.log("成功tag")
+                            res.status(201).send('success');
+                        }
+                        else {
+                            res.status(500).send(err);
+                        }
+                    });
+                } else {
+                    mqttPub(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                        if (ret == 0) {
+                            console.log("成功tag")
+                            res.status(201).send('success');
+                        }
+                        else {
+                            res.status(500).send(err);
+                        }
+                    });
+                }
+
+
             }
         }
         else {
@@ -564,7 +642,7 @@ webServer.get('/device/cfg', (req, res, next) => {
                 version: MQTT_JSON_API_VERSION,
                 msgid: `${mqttMsgID++}`,
                 method: 'cfg.get',
-                data: { file: `${cfg}` },
+                data: { config: `${cfg}` },
                 time: `${(new Date()).Format("yyyyMMddhhmmss")}`
             }
             var ids = id.substr(0, 6);
@@ -572,6 +650,9 @@ webServer.get('/device/cfg', (req, res, next) => {
                 return ele == ids;
             })
             var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
                 return ele == ids;
             })
             if (masterId != -1) {
@@ -585,16 +666,28 @@ webServer.get('/device/cfg', (req, res, next) => {
                     }
                 });
             }
-            if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
-                    if (ret == 0) {
-                        console.log(msg);
-                        res.status(200).send(msg);
-                    }
-                    else {
-                        res.status(500).send(msg);
-                    }
-                });
+            if (gatewayId != -1 || slaveId != -1) {
+                if (idMap.get(id) != undefined) {
+                    mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                        if (ret == 0) {
+                            console.log("cfg.get:", msg);
+                            res.status(200).send(msg);
+                        }
+                        else {
+                            res.status(500).send(msg);
+                        }
+                    });
+                } else {
+                    mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                        if (ret == 0) {
+                            console.log("cfg.get:", msg);
+                            res.status(200).send(msg);
+                        }
+                        else {
+                            res.status(500).send(msg);
+                        }
+                    });
+                }
             }
         }
         else {
@@ -629,6 +722,9 @@ webServer.put('/device/cfg', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
             if (masterId != -1) {
                 mqttPubWaitResp(`/device/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
                     if (ret == 0) {
@@ -640,16 +736,28 @@ webServer.put('/device/cfg', (req, res, next) => {
                     }
                 });
             }
-            if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
-                    if (ret == 0) {
-                        console.log(msg);
-                        res.status(200).send(msg);
-                    }
-                    else {
-                        res.status(500).send(msg);
-                    }
-                });
+            if (gatewayId != -1 || slaveId != -1) {
+                if (idMap.get(id) != undefined) {
+                    mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                        if (ret == 0) {
+                            console.log(msg);
+                            res.status(200).send(msg);
+                        }
+                        else {
+                            res.status(500).send(msg);
+                        }
+                    });
+                } else {
+                    mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                        if (ret == 0) {
+                            console.log(msg);
+                            res.status(200).send(msg);
+                        }
+                        else {
+                            res.status(500).send(msg);
+                        }
+                    });
+                }
             }
         }
         else {
@@ -712,7 +820,7 @@ webServer.post('/device/ota', (req, res, next) => {
         res.status(500).send('wrong param');
     }
 })
-webServer.post('/device/linuxStart', (req, res, next) => {
+webServer.post('/device/luaStart', (req, res, next) => {
     let id = req.body.data.id;
     if (id != undefined) {
         let index = devices.findIndex((ele) => {
@@ -733,7 +841,7 @@ webServer.post('/device/linuxStart', (req, res, next) => {
             })
             console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
             if (masterId != -1) {
-                console.log("master==linux.start")
+                console.log("master==lua.start")
                 mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,start', 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
@@ -745,7 +853,7 @@ webServer.post('/device/linuxStart', (req, res, next) => {
                 });
             }
             if (gatewayId != -1 || slaveId != -1) {
-                console.log("gateway==linux.start")
+                console.log("gateway==lua.start")
                 mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,start', 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
@@ -766,7 +874,7 @@ webServer.post('/device/linuxStart', (req, res, next) => {
     }
 })
 
-webServer.post('/device/linuxStop', (req, res, next) => {
+webServer.post('/device/luaStop', (req, res, next) => {
     let id = req.body.data.id;
     if (id != undefined) {
         let index = devices.findIndex((ele) => {
@@ -787,7 +895,7 @@ webServer.post('/device/linuxStop', (req, res, next) => {
             })
             console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
             if (masterId != -1) {
-                console.log("master==linux.stop")
+                console.log("master==lua.stop")
                 mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
@@ -799,7 +907,7 @@ webServer.post('/device/linuxStop', (req, res, next) => {
                 });
             }
             if (gatewayId != -1 || slaveId != -1) {
-                console.log("gateway==linux.stop")
+                console.log("gateway==lua.stop")
                 mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
@@ -819,6 +927,116 @@ webServer.post('/device/linuxStop', (req, res, next) => {
         res.status(500).send('wrong param');
     }
 })
+
+webServer.post('/device/luaSearch', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==lua.search")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,state', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.search")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,state', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
+
+webServer.post('/device/luaError', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==lua.error")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,error', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.error")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,error', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
 
 
 // // SSE(Server-sent Events) 推送
@@ -968,7 +1186,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
     }
     let topicArr = topic.split('/');
     let id = topicArr[2];
-    // console.log("payload:linux=====" + payload)
+    // console.log("payload:lua=====" + payload)
     let jsonPayload = JSON.parse(payload);
 
     let isCallCallback = false;
@@ -981,7 +1199,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                 isCallCallback = true;
             }
             else {
-                console.log(`Publish [${payload}] on [${topic}] successful.`);
+                console.log(`mqttPubWaitResp:Publish [${payload}] on [${topic}] successful.`);
                 eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, (ret) => {
                     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => { });
                     console.log("响应方法异步1：========================")
@@ -1018,7 +1236,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
 }
 
 
-// MQTT 发布消息 linux
+// MQTT 发布消息 lua
 function mqttPubOrderResp(topic, payload, qos, callback) {
     if (!(callback instanceof Function)) {
         let e = new Error();
@@ -1028,7 +1246,7 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
     }
     let topicArr = topic.split('/');
     let id = topicArr[2];
-    console.log("payload:linux=====" + payload)
+    console.log("payload:lua=====" + payload)
 
     let isCallCallback = false;
     // 判断是否已成功连接
@@ -1040,30 +1258,33 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
                 isCallCallback = true;
             }
             else {
-                console.log(`Publish [${payload}] on [${topic}] successful.`);
-                // eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, (ret) => {
-                //     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => { });
-                //     if (isCallCallback == false) {
-                //         isCallCallback = true;
-
-                //         if (ret.status == 'ok') {
-                //             callback(0, ret.data);
-                //         }
-                //         else {
-                //             callback(-3, ret.data);
-                //         }
-                //     }
-                // });
-                // eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => {
-                //     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, () => { });
-                //     if (isCallCallback == false) {
-                //         isCallCallback = true;
-                //         callback(-4, 'timeout');
-                //     }
-                // });
-                // setTimeout(() => {
-                //     eventMqttResp.emit(`${Number(id)}.${jsonPayload.msgid}.timeout`);
-                // }, 5000);
+                console.log(`mqttPubOrderResp：Publish [${payload}] on [${topic}] successful.`);
+                eventMqttResp.once(`${Number(id)}`, (ret) => {
+                    eventMqttResp.removeListener(`${Number(id)}.timeout`, () => { });
+                    console.log("命令once=========")
+                    if (isCallCallback == false) {
+                        isCallCallback = true;
+                        console.log("命令发布消息：", JSON.stringify(ret))
+                        if (ret.status == 'ok') {
+                            callback(0, ret.data);
+                        }
+                        else {
+                            callback(-3, ret.data);
+                        }
+                    }
+                });
+                eventMqttResp.once(`${Number(id)}.timeout`, () => {
+                    eventMqttResp.removeListener(`${Number(id)}`, () => { });
+                    console.log("命令once.timeout=========")
+                    if (isCallCallback == false) {
+                        isCallCallback = true;
+                        callback(-4, 'timeout');
+                    }
+                });
+                setTimeout(() => {
+                    console.log("命令setTimeout==============")
+                    eventMqttResp.emit(`${Number(id)}.timeout`);
+                }, 5000);
             }
         });
     } else {
@@ -1094,18 +1315,28 @@ function slaveList(id, callback) {
         }
         mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
             var slaves = JSON.stringify(msg).split(":");
+            console.log("slaveList:", slaves)
             var slavesStr = slaves[1].substr(0, slaves[1].length - 1);
 
             var slavesAttr = [];
             slavesStr = slavesStr.slice(1, slavesStr.length - 1);
             slavesAttr = slavesStr.split(',');
+
             // console.log(slavesAttr + "======================================")
             for (let i = 0; i < slavesAttr.length; i++) {
                 var element = slavesAttr[i];
                 var deviceId = element.substr(1, element.length - 2);
 
                 idMap.set(deviceId, id);
-                devices.push(initDevice(deviceId, "是", 4));
+                let idx = deviceId.substr(0, 6);
+
+                let indexs = slaveAttr.findIndex((ele) => {
+                    return idx == ele;
+                })
+                // console.log(index,"idx:",idx)
+                switchNum = slaveDeviceInfo[indexs][idx];
+                // console.log("slaveList:num:", switchNum)
+                devices.push(initDevice(deviceId, "是", switchNum));
             }
             // console.log(slavesAttr + "======================================"+JSON.stringify(devices))
             // for (var [key, value] of idMap) {
