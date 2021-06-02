@@ -49,6 +49,8 @@ const mqttHost = 'mqtt://192.168.101.200:1883';
 const client = mqtt.connect(mqttHost, mqttOptions);
 
 client.on('connect', () => {
+    initDeviceInfo();
+    console.log("初始化数组信息：masterAttr:", masterAttr, "gatewayAttr:", gatewayAttr, "slaveAttr:", slaveAttr)
     console.log('MQTT Broker Connected!');
 
     // client.subscribe('hello', (error) => {
@@ -122,7 +124,7 @@ function initDeviceInfo() {
         }
     }
 }
-
+let randomId;//随机数
 function handleReceivedMqttMsg(topic, payload) {
     let topicArr = topic.split('/');
     let id = topicArr[topicArr.length - 2];
@@ -138,16 +140,20 @@ function handleReceivedMqttMsg(topic, payload) {
         console.log("测试是否进入响应方法");
         if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
             eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
+            eventMqttResp.emit(`cmd_report`, id, data);
         }
         if (lastWord == 'report') {
             eventMqttResp.emit(`device_report`, id, data);
         }
+        // eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
+        // eventMqttResp.emit(`device_report`, id, data);
     } else {
-        eventMqttResp.emit(`${Number(id)}`, payload);
+        console.log("handleReceivedMqttMsg随机数：", randomId)
+        eventMqttResp.emit(`${Number(id)}.${randomId}`, payload);
     }
 }
 
-eventMqttResp.on('device_report', (id, data) => {
+eventMqttResp.on('cmd_report', (id, data) => {
     if (data != undefined) {
         let device;
         let idx = devices.findIndex((ele) => {
@@ -172,13 +178,15 @@ eventMqttResp.on('device_report', (id, data) => {
             var objs = JSON.parse(data);
             // var keys = Object.keys(objs);
 
-            console.log(objs, "objs")
+            let objsAttr = [];
+            objsAttr.push(objs);
+            console.log(objs, "objs",objsAttr,"objAttr")
 
 
             // console.log("测试拿data信息:", objs[0].line_id)
 
-            for (let index = 0; index < objs.length; index++) {
-                const payloadInfo = objs[index];//拿到响应数据的对象
+            for (let index = 0; index < objsAttr.length; index++) {
+                const payloadInfo = objsAttr[index];//拿到响应数据的对象
 
                 for (const key in payloadInfo) {
                     // console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
@@ -228,7 +236,97 @@ eventMqttResp.on('device_report', (id, data) => {
                     }
 
                 }
-                console.log(device, "device")
+                // console.log(device, "device")
+
+            }
+            //console.log(device);
+        }
+    }
+})
+
+
+eventMqttResp.on('device_report', (id, data) => {
+    if (data != undefined) {
+        let device;
+        let idx = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        if (idx != -1) {
+            device = devices[idx];
+            // console.log("id", id, "==>", data, "report内部:==>", device, "device")
+
+            // var keys = new Map();
+            // // console.log(Object.keys(data[0]), "测试")
+            // for (let i = 0; i < data.length; i++) {
+            //     const arr = data[i];
+            //     for (var key in data[i]) {
+            //         if (data.hasOwnProperty(key))
+            //             keys.set(key, value)
+            //     }
+            //     console.log(JSON.stringify(keys), "keys")
+            // }
+            data = JSON.stringify(data).replace(" ", "");
+            // console.log(data, "data")
+            var objs = JSON.parse(data);
+            // var keys = Object.keys(objs);
+
+            console.log(objs, "objs")
+
+
+            // console.log("测试拿data信息:", objs[0].line_id)
+
+            for (let index = 0; index < objs.length; index++) {
+                const payloadInfo = objs[index];//拿到响应数据的对象
+
+                for (const key in payloadInfo) {
+                    console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
+                    switch (key) {
+                        case "voltage":
+                            device.voltage[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "current":
+                            device.current[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "frequency":
+                            device.frequency[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "leak_current":
+                            device.leak_current[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_p":
+                            device.power_p[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_q":
+                            device.power_q[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_s":
+                            device.power_s[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "energy_p":
+                            device.energy_p[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "energy_q":
+                            device.energy_q[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "switch":
+                            device.switch_state[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "pwm_state":
+                            device.pwm_state = payloadInfo[key];
+                            break;
+                        case "v0_10_state":
+                            device.v0_10_state = payloadInfo[key];
+                            break;
+                        case "tilt":
+                            device.tilt = payloadInfo[key];
+                            break;
+                        case "signal":
+                            device.signal = payloadInfo[key];
+                            break;
+                    }
+
+                }
+                // console.log(device, "device")
 
             }
             //console.log(device);
@@ -356,7 +454,6 @@ let swtichNum;//开关数量
 webServer.post('/device/base', (req, res, next) => {
     //console.log(req.body);
 
-    initDeviceInfo();
 
     let id = req.body.id;
     if (id != undefined) {
@@ -374,7 +471,7 @@ webServer.post('/device/base', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
-            console.log("初始化数组信息：masterAttr:", masterAttr, "gatewayAttr:", gatewayAttr, "slaveAttr:", slaveAttr)
+
             console.log("id前六位：" + ids + "masterId:" + masterId + "slaveId:" + gatewayId);
             if (masterId != -1) {
                 console.log("主设备===================");
@@ -670,7 +767,7 @@ webServer.get('/device/cfg', (req, res, next) => {
                 if (idMap.get(id) != undefined) {
                     mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
                         if (ret == 0) {
-                            console.log("cfg.get:", msg);
+                            console.log("/device/cfg==>cfg.get==>slave:", msg);
                             res.status(200).send(msg);
                         }
                         else {
@@ -680,7 +777,7 @@ webServer.get('/device/cfg', (req, res, next) => {
                 } else {
                     mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
                         if (ret == 0) {
-                            console.log("cfg.get:", msg);
+                            console.log("/device/cfg==>cfg.get==>gateway:", msg);
                             res.status(200).send(msg);
                         }
                         else {
@@ -1246,7 +1343,9 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
     }
     let topicArr = topic.split('/');
     let id = topicArr[2];
-    console.log("payload:lua=====" + payload)
+    randomId = Math.random().toString(36).substr(2);
+    // let randomId = Math.random().toString(36).substr(2);
+    console.log("payload:lua=====" + payload, "mqttPubOrderResp随机数：", randomId)
 
     let isCallCallback = false;
     // 判断是否已成功连接
@@ -1259,9 +1358,9 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
             }
             else {
                 console.log(`mqttPubOrderResp：Publish [${payload}] on [${topic}] successful.`);
-                eventMqttResp.once(`${Number(id)}`, (ret) => {
-                    eventMqttResp.removeListener(`${Number(id)}.timeout`, () => { });
-                    console.log("命令once=========")
+                eventMqttResp.once(`${Number(id)}.${randomId}`, (ret) => {
+                    eventMqttResp.removeListener(`${Number(id)}.${randomId}.timeout`, () => { });
+                    // console.log("命令once=========")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         console.log("命令发布消息：", JSON.stringify(ret))
@@ -1273,17 +1372,17 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
                         }
                     }
                 });
-                eventMqttResp.once(`${Number(id)}.timeout`, () => {
-                    eventMqttResp.removeListener(`${Number(id)}`, () => { });
-                    console.log("命令once.timeout=========")
+                eventMqttResp.once(`${Number(id)}.${randomId}.timeout`, () => {
+                    eventMqttResp.removeListener(`${Number(id)}.${randomId}`, () => { });
+                    // console.log("命令once.timeout=========")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         callback(-4, 'timeout');
                     }
                 });
                 setTimeout(() => {
-                    console.log("命令setTimeout==============")
-                    eventMqttResp.emit(`${Number(id)}.timeout`);
+                    // console.log("命令setTimeout==============")
+                    eventMqttResp.emit(`${Number(id)}.${randomId}.timeout`);
                 }, 5000);
             }
         });

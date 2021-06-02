@@ -4,17 +4,6 @@ http://192.168.101.200:18081/ 线上页面
 
 const mqttHost = 'mqtt://mqtt.kcode.cc:1883'; 互联网ip
 
-
-钟业清 5-26 18:08:11
-https://www.cnblogs.com/angle-happy/p/5935720.html
-
-钟业清 5-26 18:08:41
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
-
-钟业清 5-26 18:09:16
-https://blog.csdn.net/hxy199421/article/details/88040351
-
-
-{"time":"20210526180720","device":"FFFFFFFFFFFF",
-"data":[{"voltage":"0","line_id":"1","power_p":"0","current":"0","frequency":"inf"},{"voltage":"0","line_id":"2","power_p":"0","current":"0","frequency":"inf"},{"voltage":"0","line_id":"3","power_p":"0","current"line_id":"3","power_p":"0","current":"0","frequency":"inf"}],"version":"2.0.0","msgid":"C30"}
-payload============= [ '', 'gateway', '010401000001', 'FFFFFFFFFFFF', 'report' ] topic
+服务器web控制台：192.168.101.201
+用户名：zhangqing
+初始密码：0Kr9OY2edy4w

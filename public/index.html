@@ -173,7 +173,7 @@
                                                     </el-checkbox-group>
                                                   </div> -->
 
-                                                <label>数据</label><br>
+                                                <!-- <label>数据</label><br> -->
                                                 <label>线路：</label>
                                                 <!-- <el-form-item> -->
                                                 <el-select v-model="formDeviceTag.line_id" filterable allow-create
@@ -234,7 +234,7 @@
                                                     </el-form>
                                                 </el-tab-pane>
 
-                                                <el-tab-pane label="订阅" name="cfg_topic">
+                                                <!-- <el-tab-pane label="订阅" name="cfg_topic">
                                                     <el-form label-position="right" label-width="4.5rem"
                                                         :model="formDeviceCfg" ref="formDeviceCfg">
                                                         <el-form-item label="主题">
@@ -251,7 +251,7 @@
                                                             </el-button>
                                                         </el-form-item>
                                                     </el-form>
-                                                </el-tab-pane>
+                                                </el-tab-pane> -->
 
                                                 <el-tab-pane label="位置" name="cfg_location">
                                                     <el-form label-position="right" label-width="4.5rem"
@@ -277,7 +277,81 @@
                                                     </el-form>
                                                 </el-tab-pane>
 
-                                                <el-tab-pane label="离线策略" name="cfg_offline">
+                                                <el-tab-pane label="离线设定" name="cfg_offline">
+                                                    <el-form label-position="right" label-width="4.5rem"
+                                                        :model="formDeviceCfg" ref="formDeviceCfg">
+                                                        <el-form-item label="模式">
+                                                            <el-select v-model="formDeviceCfg.mode" placeholder="请选择策略"
+                                                                @change="timeChange">
+                                                                <el-option label="无" value="none"></el-option>
+                                                                <el-option label="天文时钟" value="geography"></el-option>
+                                                                <el-option label="时间表" value="schedule"></el-option>
+                                                            </el-select>
+                                                        </el-form-item>
+                                                        <el-form-item label="时间表：">
+                                                            <el-button type="primary" size="small" plain
+                                                                @click="onTimeAdd" :disabled="formDeviceCfg.disabled">新增
+                                                            </el-button>
+                                                            <el-button type="primary" size="small" plain
+                                                                @click="onTimeReset" :disabled="formDeviceCfg.disabled">
+                                                                重置
+                                                            </el-button>
+                                                            <div v-show="isShowTime" v-for="(time,index) in timeList">
+                                                                <label>时间：</label>
+
+                                                                <!-- <el-time-picker v-model="value" size="small" arrow-control
+                                                                :picker-options="{
+                                                                    selectableRange: '00:00 - 23:00'
+                                                                }"
+                                                                placeholder="任意时间点">
+                                                            </el-time-picker> -->
+                                                                <!-- <el-time-select v-model="time.indexs" :picker-options="{
+                                                              start: '00:00',
+                                                              step: '00:01',
+                                                              end: '23:59'
+                                                            }" placeholder="选择时间">
+                                                                </el-time-select> -->
+
+                                                                <el-time-picker v-model="time.customItem" format="HH:mm"
+                                                                    value-format="HH:mm" style="width: 20%;">
+                                                                </el-time-picker>
+
+                                                                <el-radio v-model="time.status" :label="1">开
+                                                                </el-radio>
+                                                                <el-radio v-model="time.status" :label="0">关
+                                                                </el-radio>
+                                                                <el-button type="primary" plain size="small"
+                                                                    @click="onDelTime(index)">删除</el-button>
+
+                                                                <!-- <div v-for="(item,index) in num">
+                                                                    <label></label>开关{{item.indexs}}</label>
+                                                                    <el-radio v-model="item.status" :label="1">开
+                                                                    </el-radio>
+                                                                    <el-radio v-model="item.status" :label="0">关
+                                                                    </el-radio>
+                                                                    <el-button type="primary" plain size="small"
+                                                                        @click="del(index)">删除</el-button>
+                                                                </div>
+                                                                <el-button type="primary" plain size="small"
+                                                                    @click="onDeviceAction" data-action="switchInfo">
+                                                                    发送</el-button> -->
+                                                            </div>
+                                                        </el-form-item>
+
+                                                        <el-form-item>
+                                                            <el-button type="primary" data-cfg="timetable"
+                                                                @click="onDeviceCfg" :loading="deviceCfgLoading">
+                                                                更新
+                                                            </el-button>
+                                                            <el-button type="primary" plain data-cfg="timetable"
+                                                                @click="getDeviceCfg" :loading="deviceCfgLoading">
+                                                                获取
+                                                            </el-button>
+                                                        </el-form-item>
+                                                    </el-form>
+                                                </el-tab-pane>
+
+                                                <!-- <el-tab-pane label="离线策略" name="cfg_offline">
                                                     <el-form label-position="right" label-width="4.5rem"
                                                         :model="formDeviceCfg" ref="formDeviceCfg">
                                                         <el-form-item label="开关策略">
@@ -447,150 +521,148 @@
                                                             </el-button>
                                                         </el-form-item>
                                                     </el-form>
-                                                </el-tab-pane>
+                                                </el-tab-pane> -->
 
-                                                <el-tab-pane label="电量校准" name="cfg_elec">
-                                                    <el-form label-position="right" label-width="8.5rem"
-                                                        :model="formDeviceCfg" ref="formDeviceCfg">
-                                                        <el-form-item label="有功功率校准">
-                                                            <el-input v-model="formDeviceCfg.elec_ofs.power_p1_gain">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="无功功率校准">
-                                                            <el-input v-model="formDeviceCfg.elec_ofs.power_q1_gain">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="视在功率校准">
-                                                            <el-input v-model="formDeviceCfg.elec_ofs.power_s1_gain">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="相位校准">
-                                                            <el-input v-model="formDeviceCfg.elec_ofs.phase1_gain">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="EC常数校准">
-                                                            <el-input v-model="formDeviceCfg.elec_ofs.hf_const">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="电流1有效值校准">
-                                                            <el-input v-model="formDeviceCfg.elec_ofs.i1_rms_ofs">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="电流2有效值校准">
-                                                            <el-input v-model="formDeviceCfg.elec_ofs.i2_rms_ofs">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="电压有效值校准">
-                                                            <el-input v-model="formDeviceCfg.elec_ofs.u_rms_ofs">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item>
-                                                            <el-button type="primary" data-cfg="elec_ofs"
-                                                                @click="onDeviceCfg" :loading="deviceCfgLoading">
-                                                                更新
-                                                            </el-button>
-                                                            <el-button type="primary" plain data-cfg="elec_ofs"
-                                                                @click="getDeviceCfg" :loading="deviceCfgLoading">
-                                                                获取
-                                                            </el-button>
-                                                        </el-form-item>
-                                                    </el-form>
-                                                </el-tab-pane>
+                                                <!-- <el-tab-pane label="电量校准" name="cfg_elec">
+                                <el-form label-position="right" label-width="8.5rem" :model="formDeviceCfg"
+                                    ref="formDeviceCfg">
+                                    <el-form-item label="有功功率校准">
+                                        <el-input v-model="formDeviceCfg.elec_ofs.power_p1_gain">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="无功功率校准">
+                                        <el-input v-model="formDeviceCfg.elec_ofs.power_q1_gain">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="视在功率校准">
+                                        <el-input v-model="formDeviceCfg.elec_ofs.power_s1_gain">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="相位校准">
+                                        <el-input v-model="formDeviceCfg.elec_ofs.phase1_gain">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="EC常数校准">
+                                        <el-input v-model="formDeviceCfg.elec_ofs.hf_const">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="电流1有效值校准">
+                                        <el-input v-model="formDeviceCfg.elec_ofs.i1_rms_ofs">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="电流2有效值校准">
+                                        <el-input v-model="formDeviceCfg.elec_ofs.i2_rms_ofs">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="电压有效值校准">
+                                        <el-input v-model="formDeviceCfg.elec_ofs.u_rms_ofs">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" data-cfg="elec_ofs" @click="onDeviceCfg"
+                                            :loading="deviceCfgLoading">
+                                            更新
+                                        </el-button>
+                                        <el-button type="primary" plain data-cfg="elec_ofs" @click="getDeviceCfg"
+                                            :loading="deviceCfgLoading">
+                                            获取
+                                        </el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </el-tab-pane>
 
-                                                <el-tab-pane label="加速度校准" name="cfg_tilt">
-                                                    <el-form label-position="right" label-width="6.5rem"
-                                                        :model="formDeviceCfg" ref="formDeviceCfg">
-                                                        <el-form-item label="参考轴">
-                                                            <el-select v-model="formDeviceCfg.tilt_ofs.axis_refrence"
-                                                                placeholder="请选择参考轴">
-                                                                <el-option label="X 轴" value="x"></el-option>
-                                                                <el-option label="Y 轴" value="y"></el-option>
-                                                                <el-option label="Z 轴" value="z"></el-option>
-                                                            </el-select>
-                                                        </el-form-item>
-                                                        <el-form-item label="X 轴偏移校准">
-                                                            <el-input v-model="formDeviceCfg.tilt_ofs.x_offset">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="Y 轴偏移校准">
-                                                            <el-input v-model="formDeviceCfg.tilt_ofs.y_offset">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="Z 轴偏移校准">
-                                                            <el-input v-model="formDeviceCfg.tilt_ofs.z_offset">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item>
-                                                            <el-button type="primary" data-cfg="tilt_ofs"
-                                                                @click="onDeviceCfg" :loading="deviceCfgLoading">
-                                                                更新
-                                                            </el-button>
-                                                            <el-button type="primary" plain data-cfg="tilt_ofs"
-                                                                @click="getDeviceCfg" :loading="deviceCfgLoading">
-                                                                获取
-                                                            </el-button>
-                                                        </el-form-item>
-                                                    </el-form>
-                                                </el-tab-pane>
+                            <el-tab-pane label="加速度校准" name="cfg_tilt">
+                                <el-form label-position="right" label-width="6.5rem" :model="formDeviceCfg"
+                                    ref="formDeviceCfg">
+                                    <el-form-item label="参考轴">
+                                        <el-select v-model="formDeviceCfg.tilt_ofs.axis_refrence" placeholder="请选择参考轴">
+                                            <el-option label="X 轴" value="x"></el-option>
+                                            <el-option label="Y 轴" value="y"></el-option>
+                                            <el-option label="Z 轴" value="z"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                    <el-form-item label="X 轴偏移校准">
+                                        <el-input v-model="formDeviceCfg.tilt_ofs.x_offset">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Y 轴偏移校准">
+                                        <el-input v-model="formDeviceCfg.tilt_ofs.y_offset">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Z 轴偏移校准">
+                                        <el-input v-model="formDeviceCfg.tilt_ofs.z_offset">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" data-cfg="tilt_ofs" @click="onDeviceCfg"
+                                            :loading="deviceCfgLoading">
+                                            更新
+                                        </el-button>
+                                        <el-button type="primary" plain data-cfg="tilt_ofs" @click="getDeviceCfg"
+                                            :loading="deviceCfgLoading">
+                                            获取
+                                        </el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </el-tab-pane>
 
-                                                <el-tab-pane label="上报配置" name="cfg_rpt">
-                                                    <el-form label-position="right" label-width="5rem"
-                                                        :model="formDeviceCfg" ref="formDeviceCfg">
-                                                        <el-form-item label="配置项">
-                                                            <el-select v-model="formDeviceCfg.report.config"
-                                                                placeholder="请选择配置项">
-                                                                <el-option label="电压" value="rpt_voltage">
-                                                                </el-option>
-                                                                <el-option label="电流" value="rpt_current">
-                                                                </el-option>
-                                                                <el-option label="漏电电流" value="rpt_leakcurrent">
-                                                                </el-option>
-                                                                <el-option label="频率" value="rpt_frequency">
-                                                                </el-option>
-                                                                <el-option label="有功功率" value="rpt_power_p">
-                                                                </el-option>
-                                                                <el-option label="无功功率" value="rpt_power_q">
-                                                                </el-option>
-                                                                <el-option label="视在功率" value="rpt_power_s">
-                                                                </el-option>
-                                                                <el-option label="有功电能" value="rpt_energy_p">
-                                                                </el-option>
-                                                                <el-option label="无功电能" value="rpt_energy_q">
-                                                                </el-option>
-                                                                <el-option label="倾斜度" value="rpt_tilt">
-                                                                </el-option>
-                                                                <el-option label="信号强度" value="rpt_signal">
-                                                                </el-option>
-                                                            </el-select>
-                                                        </el-form-item>
-                                                        <el-form-item label="上报间隔">
-                                                            <el-input v-model="formDeviceCfg.report.interval">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="阈值上限">
-                                                            <el-input v-model="formDeviceCfg.report.upper_threshold">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="阈值下限">
-                                                            <el-input v-model="formDeviceCfg.report.lower_threshold">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="幅度容限">
-                                                            <el-input v-model="formDeviceCfg.report.mutation">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item>
-                                                            <el-button type="primary" data-cfg="report"
-                                                                @click="onDeviceCfg" :loading="deviceCfgLoading">
-                                                                更新
-                                                            </el-button>
-                                                            <el-button type="primary" plain data-cfg="report"
-                                                                @click="getDeviceCfg" :loading="deviceCfgLoading">
-                                                                获取
-                                                            </el-button>
-                                                        </el-form-item>
-                                                    </el-form>
-                                                </el-tab-pane>
+                            <el-tab-pane label="上报配置" name="cfg_rpt">
+                                <el-form label-position="right" label-width="5rem" :model="formDeviceCfg"
+                                    ref="formDeviceCfg">
+                                    <el-form-item label="配置项">
+                                        <el-select v-model="formDeviceCfg.report.config" placeholder="请选择配置项">
+                                            <el-option label="电压" value="rpt_voltage">
+                                            </el-option>
+                                            <el-option label="电流" value="rpt_current">
+                                            </el-option>
+                                            <el-option label="漏电电流" value="rpt_leakcurrent">
+                                            </el-option>
+                                            <el-option label="频率" value="rpt_frequency">
+                                            </el-option>
+                                            <el-option label="有功功率" value="rpt_power_p">
+                                            </el-option>
+                                            <el-option label="无功功率" value="rpt_power_q">
+                                            </el-option>
+                                            <el-option label="视在功率" value="rpt_power_s">
+                                            </el-option>
+                                            <el-option label="有功电能" value="rpt_energy_p">
+                                            </el-option>
+                                            <el-option label="无功电能" value="rpt_energy_q">
+                                            </el-option>
+                                            <el-option label="倾斜度" value="rpt_tilt">
+                                            </el-option>
+                                            <el-option label="信号强度" value="rpt_signal">
+                                            </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                    <el-form-item label="上报间隔">
+                                        <el-input v-model="formDeviceCfg.report.interval">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="阈值上限">
+                                        <el-input v-model="formDeviceCfg.report.upper_threshold">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="阈值下限">
+                                        <el-input v-model="formDeviceCfg.report.lower_threshold">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item label="幅度容限">
+                                        <el-input v-model="formDeviceCfg.report.mutation">
+                                        </el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" data-cfg="report" @click="onDeviceCfg"
+                                            :loading="deviceCfgLoading">
+                                            更新
+                                        </el-button>
+                                        <el-button type="primary" plain data-cfg="report" @click="getDeviceCfg"
+                                            :loading="deviceCfgLoading">
+                                            获取
+                                        </el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </el-tab-pane> -->
 
                                                 <!-- <el-tab-pane label="RS485命令" name="cfg_rs485">
                                                     <el-form label-position="right" label-width="4.5rem"
@@ -668,7 +740,7 @@
                                                 </el-form-item>
                                                 <el-form-item label="固件：">
                                                     <el-upload class="upload-ota" :action="uploadUrl"
-                                                        :on-change="handleChange" :config-list="configList">
+                                                        :on-change="handleChange" :file-list="fileList">
                                                         <el-button size="small" plain type="primary">上传固件</el-button>
                                                         <div slot="tip" class="el-upload__tip">
                                                             固件路径示例：http://example.com/firmware.bin</div>
@@ -683,7 +755,7 @@
                                             </el-form>
                                         </el-tab-pane>
                                         <el-tab-pane label="虚拟机" name="lua">
-                                            <el-form label-position="right" label-width="4.5rem" :model="formDeviceLua"
+                                            <el-form label-position="right" label-width="6rem" :model="formDeviceLua"
                                                 ref="formDeviceLua">
                                                 <el-form-item label="虚拟机状态:">
                                                     <el-button type="primary" plain size="small" @click="luaSearch">查询
@@ -906,6 +978,8 @@
         el: '#app',
         data: function () {
             return {
+                arrs: [{ 'value': 1, 'customItem': '' }],
+                timeIndexs: 0,
                 device: [],
                 // isIndeterminate:false,
                 // checkAll:false,
@@ -938,12 +1012,13 @@
                     key: "power_p",
                     value: "有功功率"
                 }],
-                configList: {
+                fileList: {
                     name: '',
                     url: ''
                 },
                 i: 0,
-                isShow: false,
+                isShow: false,//控制开关展示
+                isShowTime: false,//控制时间表展示
                 visible: false,
                 funTabActiveName: 'action',
                 cfgTabActiveName: 'cfg_mqtt',
@@ -966,10 +1041,13 @@
                     status: 1
                 },
                 num: [],//开关个数
+                timeList: [],//时间表个数
                 formDeviceTag: {
                     line_id: ''
                 },
                 formDeviceCfg: {
+                    disabled: true,
+                    mode: '',
                     mqtt: {
                         address: '',
                         port: '',
@@ -988,34 +1066,36 @@
                         switch: ''
                     },
                     schedule: {
-                        mon: {
-                            on: '',
-                            off: ''
-                        },
-                        tue: {
-                            on: '',
-                            off: ''
-                        },
-                        wed: {
-                            on: '',
-                            off: ''
-                        },
-                        thu: {
-                            on: '',
-                            off: ''
-                        },
-                        fri: {
-                            on: '',
-                            off: ''
-                        },
-                        sat: {
-                            on: '',
-                            off: ''
-                        },
-                        sun: {
-                            on: '',
-                            off: ''
-                        },
+                        day: '',
+                        switch: ''
+                        // mon: {
+                        //     on: '',
+                        //     off: ''
+                        // },
+                        // tue: {
+                        //     on: '',
+                        //     off: ''
+                        // },
+                        // wed: {
+                        //     on: '',
+                        //     off: ''
+                        // },
+                        // thu: {
+                        //     on: '',
+                        //     off: ''
+                        // },
+                        // fri: {
+                        //     on: '',
+                        //     off: ''
+                        // },
+                        // sat: {
+                        //     on: '',
+                        //     off: ''
+                        // },
+                        // sun: {
+                        //     on: '',
+                        //     off: ''
+                        // },
                     },
                     elec_ofs: {
                         power_p1_gain: '',
@@ -1163,6 +1243,16 @@
                 this.device = this.devices[index];
                 console.log(this.device, "selectChange.device")
             },
+            timeChange() {
+                let mode = this.formDeviceCfg.mode;
+                if (mode == 'schedule') {
+                    this.formDeviceCfg.disabled = false;
+                } else {
+                    this.onTimeReset();
+                    this.formDeviceCfg.disabled = true;
+                }
+            },
+            //获取线路复选框的value值
             getCheckTagValue(e) {
                 console.log(this.checkboxTag, "getCheckTagValue")
                 this.tagList = this.checkboxTag
@@ -1614,11 +1704,34 @@
                             message: err.response.data
                         });
                     });
+            },//新增时间表
+            onTimeAdd() {
+                this.isShowTime = true
+                this.timeList.push({
+                    status: 1,
+                    customItem: '',
+                    value: this.timeIndexs
+                });
+                this.timeIndexs++;
+                // this.timeIndexs = this.timeIndexs + 1;
+                // this.formDeviceCfg.schedule.day = this.timeIndexs + 1;
+                console.log(this.timeList, "timeList", this.timeIndexs, "value")
+            },
+            onTimeReset() {
+                this.isShowTime = false
+                this.timeList = [];
+                this.timeIndexs = 0;
+            },
+            //删除一行开关
+            onDelTime(index) {
+                console.log(index, "index")
+                this.timeList.splice(index, 1)
+                console.log(this.timeList, "timeList")
             },
             onDeviceCfg(ele) {
                 let cfgDataset = ele.currentTarget.dataset.cfg;
                 let device_id = this.formDeviceSelect.device_id;
-                //console.log(cfgDataset);
+                console.log(cfgDataset, "cfgDatasSet", this.timeList.customItem, "customItem", this.num);
 
                 let cfg = undefined;
 
@@ -1650,20 +1763,45 @@
                             }
                         };
                         break;
-                    case 'offline':
-                        cfg = {
-                            config: 'offline_strategy',
-                            content: {
-                                switch: this.formDeviceCfg.offline.switch
+                    case 'timetable':
+                        console.log(this.timeList, "timetable.timeList")
+                        let switchTime = [];
+                        let switchStatus;
+                        for (let i = 0; i < this.timeList.length; i++) {
+                            const element = this.timeList[i];
+                            if (element.status == 0) {
+                                switchStatus = 'off'
+                            } else if (element.status == 1) {
+                                switchStatus = 'on'
                             }
-                        };
-                        break;
-                    case 'schedule':
+                            switchTime.push({
+                                time: element.customItem,
+                                switch: switchStatus
+                            });
+                        }
+                        console.log(switchTime, "switchTime")
                         cfg = {
-                            config: 'light_schedule',
-                            content: this.formDeviceCfg.schedule
-                        };
+                            config: 'timetable',
+                            content: {
+                                mode: this.formDeviceCfg.mode,
+                                schedule: switchTime
+                            }
+                        }
                         break;
+                    // case 'offline':
+                    //     cfg = {
+                    //         config: 'offline_strategy',
+                    //         content: {
+                    //             switch: this.formDeviceCfg.offline.switch
+                    //         }
+                    //     };
+                    //     break;
+                    // case 'schedule':
+                    //     cfg = {
+                    //         config: 'light_schedule',
+                    //         content: this.formDeviceCfg.schedule
+                    //     };
+                    //     break;
                     case 'elec_ofs':
                         cfg = {
                             config: 'elec_ofs',
@@ -1718,9 +1856,10 @@
 
             },
             getDeviceCfg(ele) {
+                console.log(this.formDeviceCfg.mode, "getDeviceCfg.mode")
                 let cfgDataset = ele.currentTarget.dataset.cfg;
                 let device_id = this.formDeviceSelect.device_id;
-                //console.log(cfgDataset);
+                console.log(cfgDataset);
 
                 let cfg = undefined;
 
@@ -1734,12 +1873,15 @@
                     case 'location':
                         cfg = 'location';
                         break;
-                    case 'offline':
-                        cfg = 'offline_strategy';
+                    case 'timetable':
+                        cfg = 'timetable';
                         break;
-                    case 'schedule':
-                        cfg = 'light_schedule';
-                        break;
+                    // case 'offline':
+                    //     cfg = 'offline_strategy';
+                    //     break;
+                    // case 'schedule':
+                    //     cfg = 'light_schedule';
+                    //     break;
                     case 'elec_ofs':
                         cfg = 'elec_ofs';
                         break;
@@ -1785,8 +1927,8 @@
                 // axios.post('/device/ota')
                 console.log(ota);
             },
-            handleChange(config, configList) {
-                this.configList = configList.slice(-3);
+            handleChange(file, fileList) {
+                this.fileList = fileList.slice(-3);
             },
             uploadUrl() {
                 return "localhost:18082/public/fw"
@@ -1794,7 +1936,8 @@
             handleGetDeviceCfg(data) {
                 let formCfg = this.formDeviceCfg;
                 let content = data.content;
-                switch (data.config) {
+                console.log("handleGetDeviceCfg.data:", data)
+                switch (data) {
                     case 'mqttaccount':
                         formCfg.mqtt = content;
                         break;
