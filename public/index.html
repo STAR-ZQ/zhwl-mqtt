@@ -299,19 +299,6 @@
                                                             <div v-show="isShowTime" v-for="(time,index) in timeList">
                                                                 <label>时间：</label>
 
-                                                                <!-- <el-time-picker v-model="value" size="small" arrow-control
-                                                                :picker-options="{
-                                                                    selectableRange: '00:00 - 23:00'
-                                                                }"
-                                                                placeholder="任意时间点">
-                                                            </el-time-picker> -->
-                                                                <!-- <el-time-select v-model="time.indexs" :picker-options="{
-                                                              start: '00:00',
-                                                              step: '00:01',
-                                                              end: '23:59'
-                                                            }" placeholder="选择时间">
-                                                                </el-time-select> -->
-
                                                                 <el-time-picker v-model="time.customItem" format="HH:mm"
                                                                     value-format="HH:mm" style="width: 20%;">
                                                                 </el-time-picker>
@@ -734,13 +721,13 @@
                                             <el-form label-position="right" label-width="4.5rem" :model="formDeviceOta"
                                                 ref="formDeviceOta">
                                                 <el-form-item label="固件更新">
-                                                    <el-button type="primary" plain data-ota="getversion"
+                                                    <el-button type="primary" plain data-ota="version"
                                                         @click="onDeviceOta">版本查询
                                                     </el-button>
                                                 </el-form-item>
                                                 <el-form-item label="固件：">
-                                                    <el-upload class="upload-ota" :action="uploadUrl"
-                                                        :on-change="handleChange" :file-list="fileList">
+                                                    <el-upload class="upload-ota" :action="actionUrl"
+                                                        :file-list="fileList" :on-success="uploadSuccess" accept=".bin">
                                                         <el-button size="small" plain type="primary">上传固件</el-button>
                                                         <div slot="tip" class="el-upload__tip">
                                                             固件路径示例：http://example.com/firmware.bin</div>
@@ -748,7 +735,8 @@
                                                 </el-form-item>
                                                 <el-form-item label="版本号：">
                                                     <br>
-                                                    <el-button type="primary" plain data-ota="getversion" @click="">推送
+                                                    <el-button type="primary" plain data-ota="sendVersion"
+                                                        @click="onDeviceOta">推送
                                                         <!-- onDeviceOtaSend -->
                                                     </el-button>
                                                 </el-form-item>
@@ -758,10 +746,18 @@
                                             <el-form label-position="right" label-width="6rem" :model="formDeviceLua"
                                                 ref="formDeviceLua">
                                                 <el-form-item label="虚拟机状态:">
-                                                    <el-button type="primary" plain size="small" @click="luaSearch">查询
-                                                    </el-button>
-                                                    <el-button type="primary" plain size="small" @click="luaError">错误信息
-                                                    </el-button>
+                                                    <div>
+                                                        <el-button type="primary" plain size="small" @click="luaSearch">
+                                                            查询
+                                                        </el-button>
+                                                        <label>{{luaStatus}}</label>
+                                                    </div>
+                                                    <div>
+                                                        <el-button type="primary" plain size="small" @click="luaError">
+                                                            错误信息
+                                                        </el-button>
+                                                        <label>{{luaErrorInfo}}</label>
+                                                    </div>
                                                 </el-form-item>
                                                 <el-form-item label="控制:">
                                                     <el-button type="primary" plain size="small" @click="luaStart">启动
@@ -978,6 +974,9 @@
         el: '#app',
         data: function () {
             return {
+                luaStatus: '',
+                luaErrorInfo: '',
+                actionUrl: window.location.origin,
                 arrs: [{ 'value': 1, 'customItem': '' }],
                 timeIndexs: 0,
                 device: [],
@@ -1012,10 +1011,7 @@
                     key: "power_p",
                     value: "有功功率"
                 }],
-                fileList: {
-                    name: '',
-                    url: ''
-                },
+                fileList: [],
                 i: 0,
                 isShow: false,//控制开关展示
                 isShowTime: false,//控制时间表展示
@@ -1048,6 +1044,10 @@
                 formDeviceCfg: {
                     disabled: true,
                     mode: '',
+                    timetable: {
+                        mode: '',
+                        schedule: []
+                    },
                     mqtt: {
                         address: '',
                         port: '',
@@ -1408,7 +1408,11 @@
 
             onDeviceAdd() {
                 let device_id = this.formDeviceAdd.device_id;
-
+                //test
+                // let testInfo = '{"config":"timetable","content":{"mode":"schedule","schedule":[{"time":"15:37","switch":"on"}]}}';
+                // let tests = JSON.parse(testInfo);
+                // console.log(tests,"tests",tests.config,"dsad",tests.content)
+                //
                 axios.post('/device/base', {
                     id: device_id
                 }).then((res) => {
@@ -1497,6 +1501,7 @@
                 axios.post('/device/luaSearch', {
                     data: { id: device_id }
                 }).then((res) => {
+                    this.luaStatus = res.data;
                     this.$notify.success({
                         title: '成功',
                         message: `成功查询虚拟机信息`
@@ -1507,6 +1512,7 @@
                 axios.post('/device/luaError', {
                     data: { id: device_id }
                 }).then((res) => {
+                    this.luaErrorInfo = res.data;
                     this.$notify.success({
                         title: '成功',
                         message: `成功获取虚拟机错误信息`
@@ -1738,9 +1744,9 @@
                 switch (cfgDataset) {
                     case 'mqtt':
                         cfg = {
-                            config: 'mqttaccount',
+                            config: 'mqtt',
                             content: {
-                                address: this.formDeviceCfg.mqtt.address,
+                                server: this.formDeviceCfg.mqtt.address,
                                 port: String(this.formDeviceCfg.mqtt.port),
                                 username: this.formDeviceCfg.mqtt.username,
                                 password: this.formDeviceCfg.mqtt.password,
@@ -1865,7 +1871,7 @@
 
                 switch (cfgDataset) {
                     case 'mqtt':
-                        cfg = 'mqttaccount';
+                        cfg = 'mqtt';
                         break;
                     case 'topics':
                         cfg = 'topics';
@@ -1904,7 +1910,7 @@
                     axios.get('/device/cfg', {
                         params: postData
                     }).then((res) => {
-                        //console.log(res.data);
+                        // console.log(res.data);
                         this.handleGetDeviceCfg(res.data);
                         this.$notify.success({
                             title: '成功',
@@ -1927,18 +1933,20 @@
                 // axios.post('/device/ota')
                 console.log(ota);
             },
-            handleChange(file, fileList) {
-                this.fileList = fileList.slice(-3);
+            uploadSuccess(file, fileList) {
+                console.log("upload success")
             },
-            uploadUrl() {
-                return "localhost:18082/public/fw"
-            },
+            /**
+             * 将获取到的信息渲染到页面
+             **/
             handleGetDeviceCfg(data) {
                 let formCfg = this.formDeviceCfg;
+                // let dataInfo = JSON.parse(data);
                 let content = data.content;
+                // let testInfo = '{"config":"timetable","content":{"mode":"schedule","schedule":[{"time":"15:37","switch":"on"}]}}';
                 console.log("handleGetDeviceCfg.data:", data)
-                switch (data) {
-                    case 'mqttaccount':
+                switch (data.config) {
+                    case 'mqtt':
                         formCfg.mqtt = content;
                         break;
                     case 'topics':
@@ -1947,11 +1955,37 @@
                     case 'location':
                         formCfg.location = content;
                         break;
-                    case 'offline_strategy':
-                        formCfg.offline = content;
-                        break;
-                    case 'light_schedule':
-                        formCfg.schedule = content;
+                    // case 'offline_strategy':
+                    //     formCfg.offline = content;
+                    //     break;
+                    // case 'light_schedule':
+                    //     formCfg.schedule = content;
+                    //     break;
+                    case 'timetable':
+                        formCfg.timetable = content;
+                        // console.log("mode.show",formCfg.mode)
+                        formCfg.mode = data.content.mode;//模式选中值设置
+
+                        if (this.formDeviceCfg.mode == 'schedule') {
+                            this.isShowTime = true;//时间表信息展示
+                            this.formDeviceCfg.disabled = false;
+                            let switchInfo;//开关信息转换
+                            //循环往时间表信息数组赋值
+                            for (let i = 0; i < data.content.schedule.length; i++) {
+                                const element = data.content.schedule[i];
+                                if (element.switch == "on") {
+                                    switchInfo = 1
+                                }
+                                if (element.switch == "off") {
+                                    switchInfo = 0
+                                }
+                                this.timeList.push({
+                                    status: switchInfo,
+                                    customItem: element.time,
+                                    value: i
+                                })
+                            }
+                        }
                         break;
                     case 'elec_ofs':
                         formCfg.elec_ofs = content;

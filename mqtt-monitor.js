@@ -75,7 +75,6 @@ client.on('message', (topic, payload) => {
     // if (sseRes != undefined) {
     //     sseRes.write('data: ' + JSON.stringify({ topic: topic, payload: payload.toString(), timestamp: new Date().Format('yyyy-MM-dd hh:mm:ss') }) + '\n\n');
     // }
-
     let logs = new Date().Format('yyyy/MM/dd hh:mm:ss') + " - " + "[Recved]\n" + "Topic: " + topic + "\n" + "Payload: " + payload.toString() + "\n\n";
     console.log(logs);
 
@@ -148,8 +147,8 @@ function handleReceivedMqttMsg(topic, payload) {
         // eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
         // eventMqttResp.emit(`device_report`, id, data);
     } else {
-        console.log("handleReceivedMqttMsg随机数：", randomId)
-        eventMqttResp.emit(`${Number(id)}.${randomId}`, payload);
+        console.log("handleReceivedMqttMsg随机数：", randomId, "payload:", payload.toString())
+        eventMqttResp.emit(`${Number(id)}.${randomId}`, payload.toString());
     }
 }
 
@@ -180,7 +179,7 @@ eventMqttResp.on('cmd_report', (id, data) => {
 
             let objsAttr = [];
             objsAttr.push(objs);
-            console.log(objs, "objs",objsAttr,"objAttr")
+            // console.log(objs, "objs",objsAttr,"objAttr")
 
 
             // console.log("测试拿data信息:", objs[0].line_id)
@@ -279,7 +278,7 @@ eventMqttResp.on('device_report', (id, data) => {
                 const payloadInfo = objs[index];//拿到响应数据的对象
 
                 for (const key in payloadInfo) {
-                    console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
+                    // console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
                     switch (key) {
                         case "voltage":
                             device.voltage[payloadInfo.line_id] = payloadInfo[key];
@@ -1044,7 +1043,7 @@ webServer.post('/device/luaSearch', (req, res, next) => {
             var slaveId = slaveAttr.findIndex((ele) => {
                 return ele == ids;
             })
-            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            // console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
             if (masterId != -1) {
                 console.log("master==lua.search")
                 mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,state', 1, (ret, msg) => {
@@ -1060,8 +1059,8 @@ webServer.post('/device/luaSearch', (req, res, next) => {
             if (gatewayId != -1 || slaveId != -1) {
                 console.log("gateway==lua.search")
                 mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,state', 1, (ret, msg) => {
+                    console.log(ret, "ret", msg, "search=====================================");
                     if (ret == 0) {
-                        console.log(msg);
                         res.status(200).send(msg);
                     }
                     else {
@@ -1116,7 +1115,7 @@ webServer.post('/device/luaError', (req, res, next) => {
                 console.log("gateway==lua.error")
                 mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,error', 1, (ret, msg) => {
                     if (ret == 0) {
-                        console.log(msg);
+                        console.log(msg, "error====================");
                         res.status(200).send(msg);
                     }
                     else {
@@ -1345,7 +1344,7 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
     let id = topicArr[2];
     randomId = Math.random().toString(36).substr(2);
     // let randomId = Math.random().toString(36).substr(2);
-    console.log("payload:lua=====" + payload, "mqttPubOrderResp随机数：", randomId)
+    console.log("payload:lua=====" + payload.toString(), "mqttPubOrderResp随机数：", randomId)
 
     let isCallCallback = false;
     // 判断是否已成功连接
@@ -1357,19 +1356,27 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
                 isCallCallback = true;
             }
             else {
-                console.log(`mqttPubOrderResp：Publish [${payload}] on [${topic}] successful.`);
+                // console.log(`mqttPubOrderResp：Publish [${payload}] on [${topic}] successful.`);
                 eventMqttResp.once(`${Number(id)}.${randomId}`, (ret) => {
                     eventMqttResp.removeListener(`${Number(id)}.${randomId}.timeout`, () => { });
-                    // console.log("命令once=========")
+                    // console.log("命令once=========",payload)
                     if (isCallCallback == false) {
                         isCallCallback = true;
-                        console.log("命令发布消息：", JSON.stringify(ret))
-                        if (ret.status == 'ok') {
-                            callback(0, ret.data);
+                        let retAttr = ret.split(",");
+                        console.log("命令发布消息：", ret, "retAttr", retAttr, "retAttr[0]", retAttr[0])
+                        if (retAttr[0] == '<<0') {
+                            console.log('success')
+                            callback(0, retAttr[1])
+                        } else {
+                            console.log('error')
+                            callback(0, retAttr[1])
                         }
-                        else {
-                            callback(-3, ret.data);
-                        }
+                        // if (ret.type == 'Buffer') {
+                        //     callback(0, ret.data);
+                        // }
+                        // else {
+                        //     callback(-3, ret.data);
+                        // }
                     }
                 });
                 eventMqttResp.once(`${Number(id)}.${randomId}.timeout`, () => {
