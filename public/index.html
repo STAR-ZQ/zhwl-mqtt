@@ -717,6 +717,37 @@
                                                 </el-tab-pane> -->
                                             </el-tabs>
                                         </el-tab-pane>
+                                        <el-tab-pane label="文件传输" name="file">
+                                            <el-form label-position="right" label-width="4.5rem" :model="formDeviceFile"
+                                                ref="formDeviceFile">
+                                                <label>文件传输</label>
+                                                <el-form-item label="文件">
+                                                    <el-upload class="upload-ota" :action="actionUrl"
+                                                        :file-list="fileList" :on-success="uploadSuccess">
+                                                        <el-button size="small" plain type="primary">上传文件</el-button>
+                                                        <div slot="tip" class="el-upload__tip">
+                                                            上传文件路径示例：http://example.com/firmware.bin</div>
+                                                    </el-upload>
+                                                    <!-- 自定义上传方式 -->
+                                                    <el-upload class="upload-demo" :limit="1" ref="upload"
+                                                        :http-request="uploadFile" multiple>
+                                                        <!-- :http-request="upload" -->
+                                                        <el-button size="small" type="primary">点击上传</el-button>
+                                                        <div slot="tip" class="el-upload__tip">只能上传pdf文件</div>
+                                                    </el-upload>
+
+                                                </el-form-item>
+                                                <el-form-item label="远程路径">
+                                                    <el-input v-model="fileUrl" placeholder="远程路径" size="small"
+                                                        width="20%" clearable></el-input>
+                                                    <br>
+                                                    <el-button type="primary" plain data-ota="sendFile"
+                                                        @click="onDeviceFile">推送
+                                                        <!-- onDeviceOtaSend -->
+                                                    </el-button>
+                                                </el-form-item>
+                                            </el-form>
+                                        </el-tab-pane>
                                         <el-tab-pane label="OTA" name="ota">
                                             <el-form label-position="right" label-width="4.5rem" :model="formDeviceOta"
                                                 ref="formDeviceOta">
@@ -724,6 +755,7 @@
                                                     <el-button type="primary" plain data-ota="version"
                                                         @click="onDeviceOta">版本查询
                                                     </el-button>
+                                                    <label>{{version}}</label>
                                                 </el-form-item>
                                                 <el-form-item label="固件：">
                                                     <el-upload class="upload-ota" :action="actionUrl"
@@ -732,8 +764,20 @@
                                                         <div slot="tip" class="el-upload__tip">
                                                             固件路径示例：http://example.com/firmware.bin</div>
                                                     </el-upload>
+
+
+                                                    <!-- <el-upload class="upload-demo" ref="upload" limit=1
+                                                        :http-request="uploadSectionFile" :auto-upload="false">
+                                                        <el-button slot="trigger" size="small" type="primary">上传固件
+                                                        </el-button>
+                                                        <div slot="tip" class="el-upload__tip">固件路径示例：http://example.com/firmware.bin</div>
+                                                    </el-upload> -->
+
+
                                                 </el-form-item>
                                                 <el-form-item label="版本号：">
+                                                    <el-input v-model="otaVersion" placeholder="版本号" size="small"
+                                                        width="20%" clearable></el-input>
                                                     <br>
                                                     <el-button type="primary" plain data-ota="sendVersion"
                                                         @click="onDeviceOta">推送
@@ -969,14 +1013,18 @@
 
 </script>
 <script>
-    const tagOptions = ['获取所有', '获取电流', '获取电压', '获取漏电电流'];
+    // const tagOptions = ['获取所有', '获取电流', '获取电压', '获取漏电电流'];
     let app = new Vue({
         el: '#app',
         data: function () {
             return {
+                version: '',
+                operation: '',
+                otaVersion: '',
+                fileUrl: '',
                 luaStatus: '',
                 luaErrorInfo: '',
-                actionUrl: window.location.origin,
+                actionUrl: window.location.origin + "/device/upload",
                 arrs: [{ 'value': 1, 'customItem': '' }],
                 timeIndexs: 0,
                 device: [],
@@ -984,6 +1032,9 @@
                 // checkAll:false,
                 checkboxTag: [],
                 tags: [{
+                    key: "all",
+                    value: "全部"
+                }, {
                     key: "voltage",
                     value: "电压"
                 }, {
@@ -1010,6 +1061,9 @@
                 }, {
                     key: "power_p",
                     value: "有功功率"
+                }, {
+                    key: "switch",
+                    value: "开关"
                 }],
                 fileList: [],
                 i: 0,
@@ -1121,6 +1175,7 @@
                         mutation: ''
                     },
                 },
+                formDeviceFile: {},
                 formDeviceOta: {},
                 formDeviceLua: {
                 },
@@ -1197,6 +1252,18 @@
         //     this.debouncedSetV0_10 = _.debounce(function() {this.setBrightness(1);}, 1000);
         // },
         methods: {
+            // uploadSectionFile(param) {
+            //     console.log(params, "c================")
+            //     //file就是当前添加的文件
+            //     var fileObj = param.file;
+            //     // FormData 对象
+            //     var form = new FormData();
+            //     // 文件对象,key是后台接受的参数名称
+            //     form.append("uploadFile", fileObj);
+            //     this.net.upload_carIllegalBehavior_info(form).then((res) => {
+            //         // 这里做上传后的操作
+            //     });
+            // },
             initDevice(id, isFlag, num) {
                 let d = {
                     device_id: id,
@@ -1255,7 +1322,11 @@
             //获取线路复选框的value值
             getCheckTagValue(e) {
                 console.log(this.checkboxTag, "getCheckTagValue")
-                this.tagList = this.checkboxTag
+                if (this.checkboxTag == 'all') {
+                    this.tagList = ["switch", "voltage", "energy_p", "power_q", "leak_current", "current", "energy_q", "power_s", "power_p", "frequency"]
+                } else {
+                    this.tagList = this.checkboxTag
+                }
             },
             unique: function (arr) {
                 const res = new Map();
@@ -1687,7 +1758,6 @@
                 let device_id = this.formDeviceSelect.device_id;
                 let line_id = this.formDeviceTag.line_id;
 
-
                 let postData = {
                     id: device_id,
                     tag: tagDataset,
@@ -1927,14 +1997,100 @@
                     });
                 }
             },
+            //file
+            onDeviceFile(ele) {
+                let postData = {
+                    id: this.formDeviceSelect.device_id,
+                    fileOperation: this.fileUrl + "," + this.operation
+                }
+                axios.post('/device/file', postData).then((res) => {
+                    //console.log(res.data);
+                    this.$notify.success({
+                        title: '推送成功',
+                        message: ''
+                    });
+                    this.deviceCfgLoading = false;
+                }).catch((err) => {
+                    console.log(err.response.data);
+                    this.$notify.error({
+                        title: '错误',
+                        message: err.response.data
+                    });
+                    this.deviceCfgLoading = false;
+                });
+            },
             //ota
             onDeviceOta(ele) {
                 let ota = ele.currentTarget.dataset.ota;
                 // axios.post('/device/ota')
-                console.log(ota);
+                let operations;
+                switch (ota) {
+                    case 'version':
+                        operations = "version"
+                        break;
+                    case 'sendVersion':
+                        //版本号+路径
+                        operations = this.otaVersion + "," + this.operation
+                        break;
+                    default:
+                        break;
+                }
+                let postData = {
+                    id: this.formDeviceSelect.device_id,
+                    otaOperation: operations
+                }
+                axios.post('/device/ota', postData).then((res) => {
+                    this.version = res.data;
+                    //console.log(res.data);
+                    this.$notify.success({
+                        title: '成功',
+                        message: ''
+                    });
+                    this.deviceCfgLoading = false;
+                }).catch((err) => {
+                    console.log(err.response.data);
+                    this.$notify.error({
+                        title: '错误',
+                        message: err.response.data
+                    });
+                    this.deviceCfgLoading = false;
+                });
+                console.log(ota, "ele", ele);
             },
             uploadSuccess(file, fileList) {
-                console.log("upload success")
+                this.operation = window.location.origin + "/" + fileList.name;
+                console.log("this.operation", this.operation, "fileList", fileList, "file=>", file)
+            },
+            uploadFile(val) {
+                // let fd = new FormData()
+                // let postData = {
+                //     content:val.file
+                // }
+                // axios.post('/device/file', postData).then(res => {
+                //     console.log(res, "d")
+                // })
+
+                const formData = new FormData();
+                const file = this.$refs.upload.uploadFiles[0];
+                const headerConfig = { headers: { 'Content-Type': 'multipart/form-data' } };
+                if (!file) { // 若未选择文件
+                    alert('请选择文件');
+                    return;
+                }
+                formData.append('file', file.raw);
+
+                let postData = {
+                    file: file.raw,
+                    config: headerConfig
+                }
+                axios.post('/device/upload', postData).then(res => {
+                    console.log(res, "d")
+                })
+
+                // this.$http.post('/device/file', formData, headerConfig).then(res => {
+                //     console.log(res);
+                // })
+
             },
             /**
              * 将获取到的信息渲染到页面

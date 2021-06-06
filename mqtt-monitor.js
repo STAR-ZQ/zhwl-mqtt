@@ -218,7 +218,13 @@ eventMqttResp.on('cmd_report', (id, data) => {
                             device.energy_q[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "switch":
-                            device.switch_state[payloadInfo.line_id] = payloadInfo[key];
+                            let switchInfo;
+                            if (payloadInfo[key] == 1) {
+                                switchInfo = "on"
+                            } else {
+                                switchInfo = "off"
+                            }
+                            device.switch_state[payloadInfo.line_id] = switchInfo;
                             break;
                         case "pwm_state":
                             device.pwm_state = payloadInfo[key];
@@ -269,7 +275,7 @@ eventMqttResp.on('device_report', (id, data) => {
             var objs = JSON.parse(data);
             // var keys = Object.keys(objs);
 
-            console.log(objs, "objs")
+            // console.log(objs, "objs")
 
 
             // console.log("测试拿data信息:", objs[0].line_id)
@@ -554,7 +560,6 @@ webServer.delete('/device/base', (req, res, next) => {
         res.status(500).send('wrong param');
     }
 });
-
 
 webServer.post('/device/action', (req, res, next) => {
     //console.log(req.body);
@@ -871,7 +876,7 @@ webServer.put('/device/cfg', (req, res, next) => {
 webServer.post('/device/ota', (req, res, next) => {
     //console.log(req.body);
     let id = req.body.id;
-    let cfg = req.body.cfg;
+    let cfg = req.body.otaOperation;//命令后缀
     if (id != undefined && cfg != undefined) {
         let index = devices.findIndex((ele) => {
             return ele.device_id == id;
@@ -885,8 +890,9 @@ webServer.post('/device/ota', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
+            let order = ">>ota," + cfg;
             if (masterId != -1) {
-                mqttPubWaitResp(`/device/${id}/sys`, '>>ota,version', 1, (ret, msg) => {
+                mqttPubOrderResp(`/device/${id}/sys`, order, 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
                         res.status(200).send(msg);
@@ -897,7 +903,7 @@ webServer.post('/device/ota', (req, res, next) => {
                 });
             }
             if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${id}/sys`, '>>ota,version', 1, (ret, msg) => {
+                mqttPubOrderResp(`/gateway/${id}/sys`, order, 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
                         res.status(200).send(msg);
@@ -915,6 +921,68 @@ webServer.post('/device/ota', (req, res, next) => {
     else {
         res.status(500).send('wrong param');
     }
+})
+
+webServer.post('/device/upload', (req, res, next) => {
+    console.log(req.body)
+    res.status(200).send(req.body.file)
+})
+
+var multer = require('multer')
+
+const upload = multer({ dest: 'public/uploads/' });
+
+webServer.use(upload.single('file'))
+/**
+ * file
+ */
+webServer.post('/device/file', (req, res) => {
+    // let id = req.body.id;
+    // let cfg = req.body.fileOperation;//命令后缀
+    // if (id != undefined && cfg != undefined) {
+    //     let index = devices.findIndex((ele) => {
+    //         return ele.device_id == id;
+    //     });
+    //     if (index != -1) {
+
+    //         var ids = id.substr(0, 6);
+    //         var masterId = masterAttr.findIndex((ele) => {
+    //             return ele == ids;
+    //         })
+    //         var gatewayId = gatewayAttr.findIndex((ele) => {
+    //             return ele == ids;
+    //         })
+    //         let order = ">>wfile," + cfg;
+    //         if (masterId != -1) {
+    //             mqttPubOrderResp(`/device/${id}/sys`, order, 1, (ret, msg) => {
+    //                 if (ret == 0) {
+    //                     console.log(msg);
+    //                     res.status(200).send(msg);
+    //                 }
+    //                 else {
+    //                     res.status(500).send(msg);
+    //                 }
+    //             });
+    //         }
+    //         if (gatewayId != -1) {
+    //             mqttPubOrderResp(`/gateway/${id}/sys`, order, 1, (ret, msg) => {
+    //                 if (ret == 0) {
+    //                     console.log(msg);
+    //                     res.status(200).send(msg);
+    //                 }
+    //                 else {
+    //                     res.status(500).send(msg);
+    //                 }
+    //             });
+    //         }
+    //     }
+    //     else {
+    //         res.status(404).send('device not exist');
+    //     }
+    // }
+    // else {
+    //     res.status(500).send('wrong param');
+    // }
 })
 webServer.post('/device/luaStart', (req, res, next) => {
     let id = req.body.data.id;
