@@ -33,9 +33,9 @@ const eventMqttResp = new events.EventEmitter();
  */
 const mqtt = require('mqtt');
 const fs = require('fs');
-
+let clientIdRandom = Math.random().toString(36).substr(2);
 const mqttOptions = {
-    clientId: 'test',
+    clientId: "test_" + clientIdRandom,
     protocolVersion: 5,
     connectTimeout: 30 * 1000,
     username: 'emq',
@@ -49,6 +49,8 @@ const mqttHost = 'mqtt://192.168.101.200:1883';
 const client = mqtt.connect(mqttHost, mqttOptions);
 
 client.on('connect', () => {
+    initDeviceInfo();
+    console.log("初始化数组信息：masterAttr:", masterAttr, "gatewayAttr:", gatewayAttr, "slaveAttr:", slaveAttr)
     console.log('MQTT Broker Connected!');
 
     // client.subscribe('hello', (error) => {
@@ -73,7 +75,6 @@ client.on('message', (topic, payload) => {
     // if (sseRes != undefined) {
     //     sseRes.write('data: ' + JSON.stringify({ topic: topic, payload: payload.toString(), timestamp: new Date().Format('yyyy-MM-dd hh:mm:ss') }) + '\n\n');
     // }
-
     let logs = new Date().Format('yyyy/MM/dd hh:mm:ss') + " - " + "[Recved]\n" + "Topic: " + topic + "\n" + "Payload: " + payload.toString() + "\n\n";
     console.log(logs);
 
@@ -83,7 +84,7 @@ client.on('message', (topic, payload) => {
         }
     });
 
-
+    // console.log("topic", topic, "payload", JSON.stringify(payload))
     handleReceivedMqttMsg(topic, payload);
 });
 
@@ -91,26 +92,163 @@ client.on('message', (topic, payload) => {
 let devices = new Array();
 const MQTT_JSON_API_VERSION = '2.0.0';
 let mqttMsgID = 1;
-var masterAttr = new Array("010201"); //010501/0100601
-var gatewayAttr = new Array("010401");
-var slaveAttr = new Array("010301");
+// var masterAttr = new Array("010201"); //010501/0100601
+// var gatewayAttr = new Array("010401");
+// var slaveAttr = new Array("010301", "FFFFFF");
+var masterDeviceInfo = new Array({ "010201": 1 }); //010501/0100601
+var gatewayInfo = new Array({ "010401": 0 });
+var slaveDeviceInfo = new Array({ "010301": 4 }, { "FFFFFF": 4 });
 
-
+var masterAttr = new Array();
+var slaveAttr = new Array();
+var gatewayAttr = new Array();
+/**
+ * 初始化设备id数组信息（为了不重新改之前的代码）
+ */
+function initDeviceInfo() {
+    for (let i = 0; i < masterDeviceInfo.length; i++) {
+        for (const key in masterDeviceInfo[i]) {
+            masterAttr.push(key)
+        }
+    }
+    // console.log("initDeviceInfo.masterDeviceInfo:",masterDeviceInfo,"取值：",masterDeviceInfo[0]['010201'])
+    for (let i = 0; i < gatewayInfo.length; i++) {
+        for (const key in gatewayInfo[i]) {
+            gatewayAttr.push(key)
+        }
+    }
+    for (let i = 0; i < slaveDeviceInfo.length; i++) {
+        for (const key in slaveDeviceInfo[i]) {
+            slaveAttr.push(key)
+        }
+    }
+}
+let randomId;//随机数
 function handleReceivedMqttMsg(topic, payload) {
     let topicArr = topic.split('/');
-    let id = topicArr[2];
-    let jsonPayload = JSON.parse(payload);
-
-    let srcmsgid = Number(jsonPayload.srcmsgid)
-    let data = jsonPayload.data;
-    console.log("测试是否进入响应方法");
+    let id = topicArr[topicArr.length - 2];
+    // var subStrPayload = payload.substr(0,2);
+    // console.log(payload + "payload==》", topicArr, "topic", id, "id");
     var lastWord = topicArr[topicArr.length - 1];
-    if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
-        eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
-    }
+    console.log("lastWord:", lastWord)
+    if (lastWord != 'sys_resp') {
+        let jsonPayload = JSON.parse(payload);
 
-    eventMqttResp.emit(`device_report`, id, data);
+        let srcmsgid = Number(jsonPayload.srcmsgid)
+        let data = jsonPayload.data;
+        console.log("测试是否进入响应方法");
+        if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
+            eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
+            eventMqttResp.emit(`cmd_report`, id, data);
+        }
+        if (lastWord == 'report') {
+            eventMqttResp.emit(`device_report`, id, data);
+        }
+        // eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
+        // eventMqttResp.emit(`device_report`, id, data);
+    } else {
+        console.log("handleReceivedMqttMsg随机数：", randomId, "payload:", payload.toString())
+        eventMqttResp.emit(`${Number(id)}.${randomId}`, payload.toString());
+    }
 }
+
+eventMqttResp.on('cmd_report', (id, data) => {
+    if (data != undefined) {
+        let device;
+        let idx = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        if (idx != -1) {
+            device = devices[idx];
+            // console.log("id", id, "==>", data, "report内部:==>", device, "device")
+
+            // var keys = new Map();
+            // // console.log(Object.keys(data[0]), "测试")
+            // for (let i = 0; i < data.length; i++) {
+            //     const arr = data[i];
+            //     for (var key in data[i]) {
+            //         if (data.hasOwnProperty(key))
+            //             keys.set(key, value)
+            //     }
+            //     console.log(JSON.stringify(keys), "keys")
+            // }
+            data = JSON.stringify(data).replace(" ", "");
+            // console.log(data, "data")
+            var objs = JSON.parse(data);
+            // var keys = Object.keys(objs);
+
+            let objsAttr = [];
+            objsAttr.push(objs);
+            // console.log(objs, "objs",objsAttr,"objAttr")
+
+
+            // console.log("测试拿data信息:", objs[0].line_id)
+
+            for (let index = 0; index < objsAttr.length; index++) {
+                const payloadInfo = objsAttr[index];//拿到响应数据的对象
+
+                for (const key in payloadInfo) {
+                    // console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
+                    switch (key) {
+                        case "voltage":
+                            device.voltage[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "current":
+                            device.current[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "frequency":
+                            device.frequency[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "leak_current":
+                            device.leak_current[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_p":
+                            device.power_p[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_q":
+                            device.power_q[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "power_s":
+                            device.power_s[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "energy_p":
+                            device.energy_p[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "energy_q":
+                            device.energy_q[payloadInfo.line_id] = payloadInfo[key];
+                            break;
+                        case "switch":
+                            let switchInfo;
+                            if (payloadInfo[key] == 1) {
+                                switchInfo = "on"
+                            } else {
+                                switchInfo = "off"
+                            }
+                            device.switch_state[payloadInfo.line_id] = switchInfo;
+                            break;
+                        case "pwm_state":
+                            device.pwm_state = payloadInfo[key];
+                            break;
+                        case "v0_10_state":
+                            device.v0_10_state = payloadInfo[key];
+                            break;
+                        case "tilt":
+                            device.tilt = payloadInfo[key];
+                            break;
+                        case "signal":
+                            device.signal = payloadInfo[key];
+                            break;
+                    }
+
+                }
+                // console.log(device, "device")
+
+            }
+            //console.log(device);
+        }
+    }
+})
+
 
 eventMqttResp.on('device_report', (id, data) => {
     if (data != undefined) {
@@ -120,265 +258,81 @@ eventMqttResp.on('device_report', (id, data) => {
         });
         if (idx != -1) {
             device = devices[idx];
+            // console.log("id", id, "==>", data, "report内部:==>", device, "device")
 
-            if (data.tags != undefined) {
-                console.log(data.tags);
-                data.tags.forEach(element => {
-                    switch (element.tag) {
+            // var keys = new Map();
+            // // console.log(Object.keys(data[0]), "测试")
+            // for (let i = 0; i < data.length; i++) {
+            //     const arr = data[i];
+            //     for (var key in data[i]) {
+            //         if (data.hasOwnProperty(key))
+            //             keys.set(key, value)
+            //     }
+            //     console.log(JSON.stringify(keys), "keys")
+            // }
+            data = JSON.stringify(data).replace(" ", "");
+            // console.log(data, "data")
+            var objs = JSON.parse(data);
+            // var keys = Object.keys(objs);
+
+            // console.log(objs, "objs")
+
+
+            // console.log("测试拿data信息:", objs[0].line_id)
+
+            for (let index = 0; index < objs.length; index++) {
+                const payloadInfo = objs[index];//拿到响应数据的对象
+
+                for (const key in payloadInfo) {
+                    // console.log("key:", key, "value:", payloadInfo[key], "payloadInfo:", payloadInfo.line_id)
+                    switch (key) {
                         case "voltage":
-                            {
-                                let obj;
-                                let tagObj = device.voltage;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.voltage[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "current":
-                            {
-                                let obj;
-                                let tagObj = device.current;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.current[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "frequency":
-                            {
-                                let obj;
-                                let tagObj = device.frequency;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.frequency[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "leak_current":
-                            {
-                                let obj;
-                                let tagObj = device.leak_current;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.leak_current[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "power_p":
-                            {
-                                let obj;
-                                let tagObj = device.power_p;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.power_p[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "power_q":
-                            {
-                                let obj;
-                                let tagObj = device.power_q;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.power_q[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "power_s":
-                            {
-                                let obj;
-                                let tagObj = device.power_s;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.power_s[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "energy_p":
-                            {
-                                let obj;
-                                let tagObj = device.energy_p;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.energy_p[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "energy_q":
-                            {
-                                let obj;
-                                let tagObj = device.energy_q;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = Number(element.value);
-                                    tagObj.push(obj);
-                                }
-                            }
+                            device.energy_q[payloadInfo.line_id] = payloadInfo[key];
                             break;
-                        case "switch_state":
-                            {
-                                let obj;
-                                let tagObj = device.switch_state;
-
-                                let tIndex = tagObj.findIndex((ele) => {
-                                    return ele.line_id == Number(element.line_id);
-                                });
-                                if (tIndex != -1) {
-                                    obj = tagObj[tIndex];
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = element.value;
-                                }
-                                else {
-                                    obj = {
-                                        line_id: 0,
-                                        value: 0
-                                    }
-                                    obj.line_id = Number(element.line_id);
-                                    obj.value = element.value;
-                                    tagObj.push(obj);
-                                }
-                            }
+                        case "switch":
+                            device.switch_state[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "pwm_state":
-                            device.pwm_state = Number(element.value);
+                            device.pwm_state = payloadInfo[key];
                             break;
                         case "v0_10_state":
-                            device.v0_10_state = Number(element.value);
+                            device.v0_10_state = payloadInfo[key];
                             break;
                         case "tilt":
-                            device.tilt = Number(element.value);
+                            device.tilt = payloadInfo[key];
                             break;
                         case "signal":
-                            device.signal = Number(element.value);
+                            device.signal = payloadInfo[key];
                             break;
                     }
-                });
+
+                }
+                // console.log(device, "device")
+
             }
             //console.log(device);
         }
@@ -390,6 +344,7 @@ eventMqttResp.on('device_report', (id, data) => {
  */
 const path = require('path');
 const express = require('express');
+const { json } = require('express');
 const webServer = express();
 const webHost = {
     name: '0.0.0.0',
@@ -448,6 +403,7 @@ webServer.get('/device/base', (req, res, next) => {
             res.send(response);
         }
         else if (id.length == 12) {
+            console.log("devices", JSON.stringify(devices))
             let index = devices.findIndex((ele) => {
                 return ele.device_id == id;
             });
@@ -470,6 +426,8 @@ webServer.get('/device/base', (req, res, next) => {
     }
 });
 
+
+
 function initDevice(id, isFlag, num) {
     device = {
         device_id: id,
@@ -490,14 +448,18 @@ function initDevice(id, isFlag, num) {
         tilt: 0, // 倾斜度
         signal: 0 // 信号强度
     }
+
     return device;
 }
+let swtichNum;//开关数量
 
 /**
  * @brief 新增设备
  */
 webServer.post('/device/base', (req, res, next) => {
     //console.log(req.body);
+
+
     let id = req.body.id;
     if (id != undefined) {
         let index = devices.findIndex((ele) => {
@@ -518,7 +480,13 @@ webServer.post('/device/base', (req, res, next) => {
             console.log("id前六位：" + ids + "masterId:" + masterId + "slaveId:" + gatewayId);
             if (masterId != -1) {
                 console.log("主设备===================");
-                devices.push(initDevice(id, "否", 1));
+                // for (const key in masterDeviceInfo) {
+                let indexs = masterAttr.findIndex((ele) => {
+                    return ele = ids;
+                })
+                switchNum = masterDeviceInfo[indexs][ids];
+                // }
+                devices.push(initDevice(id, "否", switchNum));
                 mqttSub(id, (ret, err) => {
                     if (ret == 0) {
                         res.status(201).send('success');
@@ -528,7 +496,12 @@ webServer.post('/device/base', (req, res, next) => {
                     }
                 });
             } else if (gatewayId != -1) {
-                console.log("从设备===================");
+                let indexs = masterAttr.findIndex((ele) => {
+                    return ele = ids;
+                })
+                switchNum = gatewayInfo[indexs][ids];
+                console.log("从设备===================", switchNum);
+                devices.push(initDevice(id, "否", switchNum));
                 mqttSlaveSub(id, (ret, err) => {
                     if (ret == 0) {
                         res.status(200).send('success');
@@ -538,7 +511,7 @@ webServer.post('/device/base', (req, res, next) => {
                     }
                 });
                 slaveList(id, (ret, err) => {
-                    console.log("end info ============" + ret);
+                    console.log("slaveList end info ============" + ret);
                     // if (ret == 0) {
                     //     res.status(200).send('success');
                     // }
@@ -588,14 +561,30 @@ webServer.delete('/device/base', (req, res, next) => {
     }
 });
 
-
 webServer.post('/device/action', (req, res, next) => {
     //console.log(req.body);
     let id = req.body.id;
     let action_type = req.body.action_type;
-    let action_id = req.body.action_id;
-    let action = req.body.action;
-    if (id != undefined && action_type != undefined && action_id != undefined && action != undefined) {
+    // let action_id = req.body.action_id;//key
+    // let action = req.body.action;//value
+    let num = req.body.num;
+
+    let obj = {};
+    for (let i in num) {
+
+        if (num[i].status == 0) {
+            num[i].status = 'off'
+        } else if (num[i].status == 1) {
+            num[i].status = 'on'
+        }
+        // num[i].status == 0 ? 'off' : 'on';
+        obj[num[i].indexs] = num[i].status
+
+    }
+    console.log(obj, "obj2", id, "id", num, "num")
+
+
+    if (id != undefined) {
         let index = devices.findIndex((ele) => {
             return ele.device_id == id;
         });
@@ -604,7 +593,8 @@ webServer.post('/device/action', (req, res, next) => {
                 version: MQTT_JSON_API_VERSION,
                 msgid: `${mqttMsgID++}`,
                 method: 'act.do',
-                data: { [action_type]: { [`${action_id}`]: `${action}` } },
+                data: { [action_type]: obj },
+                // { [`${action_id}`]: `${action}` }
                 time: `${(new Date()).Format("yyyyMMddhhmmss")}`
             }
             console.log("action:" + JSON.stringify(mqttReq));
@@ -616,8 +606,9 @@ webServer.post('/device/action', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
-
-            console.log("id前六位：" + ids);
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
             if (masterId != -1) {
                 console.log("主设备===================");
                 mqttPub(`/device/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
@@ -628,16 +619,29 @@ webServer.post('/device/action', (req, res, next) => {
                         res.status(500).send(err);
                     }
                 });
-            } else if (gatewayId != -1) {
-                console.log("从设备===================");
-                mqttPub(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
-                    if (ret == 0) {
-                        res.status(200).send('success');
-                    }
-                    else {
-                        res.status(500).send(err);
-                    }
-                });
+            } else if (gatewayId != -1 || slaveId != -1) {
+                console.log("从设备===================idMap.get(id):", idMap.get(id));
+                if (idMap.get(id) != undefined) {
+                    mqttPub(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                        if (ret == 0) {
+                            // console.log("chenggong=============")
+                            res.status(200).send('success');
+                        }
+                        else {
+                            res.status(500).send(err);
+                        }
+                    });
+                } else {
+                    mqttPub(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                        if (ret == 0) {
+                            // console.log("chenggong=============")
+                            res.status(200).send('success');
+                        }
+                        else {
+                            res.status(500).send(err);
+                        }
+                    });
+                }
             }
         }
         else {
@@ -653,18 +657,21 @@ webServer.put('/device/tag', (req, res, next) => {
     //console.log(req.body);
     let id = req.body.id;
     let tag = req.body.tag;
+    let lineId = req.body.lineId;
     if (id != undefined && tag != undefined) {
         let index = devices.findIndex((ele) => {
             return ele.device_id == id;
         });
+
         if (index != -1) {
             let mqttReq = {
                 version: MQTT_JSON_API_VERSION,
                 msgid: `${mqttMsgID++}`,
-                method: tag.get,
-                data: tag == 'all' ? {} : { 'tags': [`${tag}`] },
+                method: "tag.get",
+                data: { 'line_id': `${lineId}`, 'tags': tag },
                 time: `${(new Date()).Format("yyyyMMddhhmmss")}`
             }
+            console.log(JSON.stringify(mqttReq), "device.tag===>id:", id)
             var ids = id.substr(0, 6);
             var masterId = masterAttr.findIndex((ele) => {
                 return ele == ids;
@@ -672,6 +679,11 @@ webServer.put('/device/tag', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
+
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("masterId:", masterId, "slaveId:", slaveId, "gatewayId:", gatewayId)
             if (masterId != -1) {
                 mqttPub(`/device/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
                     if (ret == 0) {
@@ -682,15 +694,31 @@ webServer.put('/device/tag', (req, res, next) => {
                     }
                 });
             }
-            if (gatewayId != -1) {
-                mqttPub(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
-                    if (ret == 0) {
-                        res.status(201).send('success');
-                    }
-                    else {
-                        res.status(500).send(err);
-                    }
-                });
+            if (gatewayId != -1 || slaveId != -1) {
+
+                if (idMap.get(id) != undefined) {
+                    mqttPub(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                        if (ret == 0) {
+                            console.log("成功tag")
+                            res.status(201).send('success');
+                        }
+                        else {
+                            res.status(500).send(err);
+                        }
+                    });
+                } else {
+                    mqttPub(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, err) => {
+                        if (ret == 0) {
+                            console.log("成功tag")
+                            res.status(201).send('success');
+                        }
+                        else {
+                            res.status(500).send(err);
+                        }
+                    });
+                }
+
+
             }
         }
         else {
@@ -715,7 +743,7 @@ webServer.get('/device/cfg', (req, res, next) => {
                 version: MQTT_JSON_API_VERSION,
                 msgid: `${mqttMsgID++}`,
                 method: 'cfg.get',
-                data: { file: `${cfg}` },
+                data: { config: `${cfg}` },
                 time: `${(new Date()).Format("yyyyMMddhhmmss")}`
             }
             var ids = id.substr(0, 6);
@@ -723,6 +751,9 @@ webServer.get('/device/cfg', (req, res, next) => {
                 return ele == ids;
             })
             var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
                 return ele == ids;
             })
             if (masterId != -1) {
@@ -736,16 +767,28 @@ webServer.get('/device/cfg', (req, res, next) => {
                     }
                 });
             }
-            if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
-                    if (ret == 0) {
-                        console.log(msg);
-                        res.status(200).send(msg);
-                    }
-                    else {
-                        res.status(500).send(msg);
-                    }
-                });
+            if (gatewayId != -1 || slaveId != -1) {
+                if (idMap.get(id) != undefined) {
+                    mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                        if (ret == 0) {
+                            console.log("/device/cfg==>cfg.get==>slave:", msg);
+                            res.status(200).send(msg);
+                        }
+                        else {
+                            res.status(500).send(msg);
+                        }
+                    });
+                } else {
+                    mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                        if (ret == 0) {
+                            console.log("/device/cfg==>cfg.get==>gateway:", msg);
+                            res.status(200).send(msg);
+                        }
+                        else {
+                            res.status(500).send(msg);
+                        }
+                    });
+                }
             }
         }
         else {
@@ -780,6 +823,9 @@ webServer.put('/device/cfg', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
             if (masterId != -1) {
                 mqttPubWaitResp(`/device/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
                     if (ret == 0) {
@@ -791,16 +837,28 @@ webServer.put('/device/cfg', (req, res, next) => {
                     }
                 });
             }
-            if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
-                    if (ret == 0) {
-                        console.log(msg);
-                        res.status(200).send(msg);
-                    }
-                    else {
-                        res.status(500).send(msg);
-                    }
-                });
+            if (gatewayId != -1 || slaveId != -1) {
+                if (idMap.get(id) != undefined) {
+                    mqttPubWaitResp(`/gateway/${idMap.get(id)}/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                        if (ret == 0) {
+                            console.log(msg);
+                            res.status(200).send(msg);
+                        }
+                        else {
+                            res.status(500).send(msg);
+                        }
+                    });
+                } else {
+                    mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
+                        if (ret == 0) {
+                            console.log(msg);
+                            res.status(200).send(msg);
+                        }
+                        else {
+                            res.status(500).send(msg);
+                        }
+                    });
+                }
             }
         }
         else {
@@ -818,7 +876,7 @@ webServer.put('/device/cfg', (req, res, next) => {
 webServer.post('/device/ota', (req, res, next) => {
     //console.log(req.body);
     let id = req.body.id;
-    let cfg = req.body.cfg;
+    let cfg = req.body.otaOperation;//命令后缀
     if (id != undefined && cfg != undefined) {
         let index = devices.findIndex((ele) => {
             return ele.device_id == id;
@@ -832,8 +890,9 @@ webServer.post('/device/ota', (req, res, next) => {
             var gatewayId = gatewayAttr.findIndex((ele) => {
                 return ele == ids;
             })
+            let order = ">>ota," + cfg;
             if (masterId != -1) {
-                mqttPubWaitResp(`/device/${id}/sys`, '>>ota,version', 1, (ret, msg) => {
+                mqttPubOrderResp(`/device/${id}/sys`, order, 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
                         res.status(200).send(msg);
@@ -844,7 +903,175 @@ webServer.post('/device/ota', (req, res, next) => {
                 });
             }
             if (gatewayId != -1) {
-                mqttPubWaitResp(`/gateway/${id}/sys`, '>>ota,version', 1, (ret, msg) => {
+                mqttPubOrderResp(`/gateway/${id}/sys`, order, 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+var multiparty = require('multiparty');
+/**
+ * 图片上传跳转接口
+ */
+webServer.post('/device/upload', (req, res, next) => {
+    //利用multiparty中间件获取文件数据
+    let uploadDir = './' //这个不用改，因为并不是保存在这个目录下，这只是作为中间目录，待会要重命名文件到指定目录的
+    let form = new multiparty.Form()
+    form.uploadDir = uploadDir
+    form.keepExtensions = true; //是否保留后缀
+    form.parse(req, function (err, fields, files) { //其中fields表示你提交的表单数据对象，files表示你提交的文件对象
+        console.log("上传文件", fields)
+        console.log("files", files)
+        //这里是save_path 就是前端传回来的 path 字段，这个字段会被 multiparty 中间件解析到 fields 里面 ，这里的 fields 相当于 req.body 的意思
+        let save_path = fields.path
+        if (err) {
+            console.log(err)
+            res.send(formatReq(0, "上传失败"))
+        } else {
+            let file_list = []
+            if (!files.file) res.send(formatReq(0, "上传失败"))
+            else {
+                //所有文件重命名，（因为不重名的话是随机文件名）
+                files.file.forEach(file => {
+                    /*
+                     * file.path 文件路径
+                     * save_path+originalFilename   指定上传的路径 + 原来的名字
+                     */
+                    fs.rename(file.path, save_path + file.originalFilename, function (err) {
+                        if (err) {
+                            // console.log("重命名失败")
+                        } else {
+                            console.log("重命名成功")
+                        }
+                    });
+
+                })
+                if (err) {
+                    console.log(err)
+                    res.send(formatReq(0, "上传失败"))
+                } else {
+                    //返回所有上传的文件信息
+
+                    res.send(formatReq(1, "上传成功"))
+                }
+            }
+        }
+    })
+})
+//统一格式化返回值
+function formatReq(code, msg, data) {
+    return {
+        code: code,
+        data: data,
+        message: msg
+    }
+}
+
+var multer = require('multer');
+const { once } = require('events');
+
+const upload = multer({ dest: 'public/uploads/' });
+
+webServer.use(upload.single('file'))
+/**
+ * file
+ */
+webServer.post('/device/file', (req, res) => {
+    let id = req.body.id;
+    let cfg = req.body.fileOperation;//命令后缀
+    if (id != undefined && cfg != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            let order = ">>wfile," + cfg;
+            if (masterId != -1) {
+                mqttPubOrderResp(`/device/${id}/sys`, order, 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1) {
+                mqttPubOrderResp(`/gateway/${id}/sys`, order, 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+webServer.post('/device/luaStart', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==lua.start")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,start', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.start")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,start', 1, (ret, msg) => {
                     if (ret == 0) {
                         console.log(msg);
                         res.status(200).send(msg);
@@ -864,6 +1091,276 @@ webServer.post('/device/ota', (req, res, next) => {
     }
 })
 
+webServer.post('/device/luaReset', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==lua.reset")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,restart', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.start")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,restart', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
+
+webServer.post('/device/luaStop', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==lua.stop")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.stop")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,stop', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
+webServer.post('/device/luaSearch', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            // console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==lua.search")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,state', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.search")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,state', 1, (ret, msg) => {
+                    console.log(ret, "ret", msg, "search=====================================");
+                    if (ret == 0) {
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
+
+webServer.post('/device/luaError', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==lua.error")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,error', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.error")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,error', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg, "error====================");
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
+webServer.post('/device/sysReboot', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            if (masterId != -1) {
+                console.log("master==lua.sysReboot")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>reboot', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.sysReboot")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>reboot', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
 
 // // SSE(Server-sent Events) 推送
 // let sseRes;
@@ -1012,6 +1509,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
     }
     let topicArr = topic.split('/');
     let id = topicArr[2];
+    // console.log("payload:lua=====" + payload)
     let jsonPayload = JSON.parse(payload);
 
     let isCallCallback = false;
@@ -1024,9 +1522,14 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                 isCallCallback = true;
             }
             else {
-                console.log(`Publish [${payload}] on [${topic}] successful.`);
-                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, (ret) => {
-                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => { });
+                // console.log(eventMqttResp.listeners(`${Number(id)}.${jsonPayload.msgid}.timeout`).length, "监听事件1")
+
+                console.log(`mqttPubWaitResp:Publish [${payload}] on [${topic}] successful.`);
+
+                let onceInfo = (ret) => {
+
+                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, timeoutOnce);
+                    // console.log("响应方法异步1：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
 
@@ -1037,16 +1540,92 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                             callback(-3, ret.data);
                         }
                     }
-                });
-                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => {
-                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, () => { });
+                }
+
+                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, onceInfo);
+                // console.log(eventMqttResp.listenerCount(`${Number(id)}.${jsonPayload.msgid}.timeout`), "count2")
+
+                let timeoutOnce = () => {
+                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, onceInfo);
+                    // console.log("响应方法异步2：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         callback(-4, 'timeout');
                     }
-                });
+                }
+                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, timeoutOnce);
+
                 setTimeout(() => {
+                    // console.log("响应方法异步3：========================")
                     eventMqttResp.emit(`${Number(id)}.${jsonPayload.msgid}.timeout`);
+                }, 5000);
+                // console.log(eventMqttResp.listeners(`${Number(id)}.${jsonPayload.msgid}.timeout`).length, "监听事件2")
+
+            }
+        });
+    } else {
+        console.log('Client has NOT connected!');
+        callback(-2, 'Client has NOT connected!');
+    }
+
+}
+
+
+// MQTT 发布消息 lua
+function mqttPubOrderResp(topic, payload, qos, callback) {
+    if (!(callback instanceof Function)) {
+        let e = new Error();
+        e.number = 1;
+        e.message = 'invalid param type';
+        throw e;
+    }
+    let topicArr = topic.split('/');
+    let id = topicArr[2];
+    randomId = Math.random().toString(36).substr(2);
+    // let randomId = Math.random().toString(36).substr(2);
+    console.log("payload:lua=====" + payload.toString(), "mqttPubOrderResp随机数：", randomId)
+
+    let isCallCallback = false;
+    // 判断是否已成功连接
+    if (client.connected) {
+        client.publish(topic, payload, { qos: qos }, (error) => {
+            if (error) {
+                console.log(error)
+                callback(-1, error);
+                isCallCallback = true;
+            }
+            else {
+                // console.log(`mqttPubOrderResp：Publish [${payload}] on [${topic}] successful.`);
+                let onceInfo = (ret) => {
+                    eventMqttResp.removeListener(`${Number(id)}.${randomId}.timeout`, onceTimeout);
+                    console.log("命令once=========", payload)
+                    if (isCallCallback == false) {
+                        isCallCallback = true;
+                        let retAttr = ret.split(",");
+                        console.log("命令发布消息：", ret, "retAttr", retAttr, "retAttr[0]", retAttr[0])
+                        if (retAttr[0] == '<<0') {
+                            console.log('success')
+                            callback(0, retAttr[1])
+                        } else {
+                            console.log('error')
+                            callback(0, retAttr[1])
+                        }
+                    }
+                }
+                eventMqttResp.once(`${Number(id)}.${randomId}`, onceInfo);
+
+                let onceTimeout = () => {
+                    eventMqttResp.removeListener(`${Number(id)}.${randomId}`, onceInfo);
+                    console.log("命令once.timeout=========")
+                    if (isCallCallback == false) {
+                        isCallCallback = true;
+                        callback(-4, 'timeout');
+                    }
+                }
+                eventMqttResp.once(`${Number(id)}.${randomId}.timeout`, onceTimeout);
+                setTimeout(() => {
+                    // console.log("命令setTimeout==============")
+                    eventMqttResp.emit(`${Number(id)}.${randomId}.timeout`);
                 }, 5000);
             }
         });
@@ -1057,7 +1636,8 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
 
 }
 
-var idMap = new Map();
+
+var idMap = new Map();//从设备id:网关id   关系 key:value
 
 /**
  * 查询从设备信息
@@ -1077,21 +1657,35 @@ function slaveList(id, callback) {
         }
         mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
             var slaves = JSON.stringify(msg).split(":");
+            console.log("slaveList:", slaves)
             var slavesStr = slaves[1].substr(0, slaves[1].length - 1);
 
             var slavesAttr = [];
             slavesStr = slavesStr.slice(1, slavesStr.length - 1);
             slavesAttr = slavesStr.split(',');
-            console.log(slavesAttr + "======================================")
+
+            // console.log(slavesAttr + "======================================")
             for (let i = 0; i < slavesAttr.length; i++) {
                 var element = slavesAttr[i];
                 var deviceId = element.substr(1, element.length - 2);
 
-                // idMap.set(element, id);
-                devices.push(initDevice(deviceId, "是", 4));
+                idMap.set(deviceId, id);
+                let idx = deviceId.substr(0, 6);
+
+                let indexs = slaveAttr.findIndex((ele) => {
+                    return idx == ele;
+                })
+                // console.log(index,"idx:",idx)
+                switchNum = slaveDeviceInfo[indexs][idx];
+                // console.log("slaveList:num:", switchNum)
+                devices.push(initDevice(deviceId, "是", switchNum));
             }
             // console.log(slavesAttr + "======================================"+JSON.stringify(devices))
-            // console.log("map:" + JSON.stringify(idMap));
+            // for (var [key, value] of idMap) {
+            //     console.log(key + " = " + value);
+            // }
+
+            // console.log(idMap.get("FFFFFFFFFFFF"),"id",idMap.get("d"));
         });
         callback(0, "从设备数据查询成功");
 
