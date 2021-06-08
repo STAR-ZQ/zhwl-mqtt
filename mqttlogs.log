@@ -10662,3 +10662,2076 @@ Payload: {"data":[{"frequency":"49.97","current":"115","power_p":"24","line_id":
 Topic: /gateway/010401000001/010301000001/report
 Payload: {"data":[{"frequency":"50.00","line_id":"3","power_p":"-0"}],"device":"010301000001","msgid":"C108","time":"20210606173749","version":"2.0.0"}
 
+2021/06/06 17:39:08 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C116","time":"20210606173907","version":"2.0.0"}
+
+2021/06/06 17:43:02 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000001","msgid":"C109","time":"20210606174301","version":"2.0.0"}
+
+2021/06/06 17:43:54 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"}],"device":"010301000002","msgid":"C117","time":"20210606174352","version":"2.0.0"}
+
+2021/06/06 17:48:15 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"49.97","current":"115","power_p":"24","line_id":"0","voltage":"219"},{"frequency":"50.00","current":"0","power_p":"0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000001","msgid":"C110","time":"20210606174814","version":"2.0.0"}
+
+2021/06/06 17:49:36 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C119","time":"20210606174935","version":"2.0.0"}
+
+2021/06/06 17:54:00 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210606175359","status":"ok","device":"010401000001","msgid":"C14","srcmsgid":"1","version":"2.0.0"}
+
+2021/06/06 17:55:45 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","voltage":"217"}],"device":"010301000001","msgid":"C111","time":"20210606175545","version":"2.0.0"}
+
+2021/06/06 17:58:42 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","energy_p":"0","current":"115","power_p":"24","line_id":"0","voltage":"219"},{"frequency":"50.00","energy_p":"0","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","energy_p":"0","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","energy_p":"0","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000001","msgid":"C112","time":"20210606175841","version":"2.0.0"}
+
+2021/06/06 17:59:34 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"}],"device":"010301000002","msgid":"C120","time":"20210606175933","version":"2.0.0"}
+
+2021/06/06 17:59:36 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C121","time":"20210606175935","version":"2.0.0"}
+
+2021/06/06 18:00:05 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"6","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C122","time":"20210606180004","version":"2.0.0"}
+
+2021/06/07 09:29:27 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210607092926","status":"ok","device":"010401000001","msgid":"C15","srcmsgid":"1","version":"2.0.0"}
+
+2021/06/07 09:31:53 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C309","time":"20210607093152","version":"2.0.0"}
+
+2021/06/07 09:34:28 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210607093428","status":"ok","device":"010401000001","msgid":"C16","srcmsgid":"1","version":"2.0.0"}
+
+2021/06/07 09:34:43 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,download failure
+
+2021/06/07 09:35:14 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,download failure
+
+2021/06/07 09:37:50 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"current":"0","frequency":"29.73","line_id":"2","voltage":"0"}],"device":"010301000001","msgid":"C311","time":"20210607093749","version":"2.0.0"}
+
+2021/06/07 09:37:51 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"energy_p":"0","line_id":"2","power_p":"-0"},{"frequency":"50.03","energy_p":"0","current":"114","power_p":"24","line_id":"3","voltage":"221"}],"device":"010301000001","msgid":"C312","time":"20210607093750","version":"2.0.0"}
+
+2021/06/07 09:38:59 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 09:40:49 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C310","time":"20210607094048","version":"2.0.0"}
+
+2021/06/07 09:42:20 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C311","time":"20210607094220","version":"2.0.0"}
+
+2021/06/07 09:48:16 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.98","current":"115","power_p":"24","line_id":"3","voltage":"219"}],"device":"010301000001","msgid":"C313","time":"20210607094815","version":"2.0.0"}
+
+2021/06/07 09:52:49 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"3","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C312","time":"20210607095248","version":"2.0.0"}
+
+2021/06/07 09:53:29 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000001","msgid":"C314","time":"20210607095329","version":"2.0.0"}
+
+2021/06/07 09:56:30 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C313","time":"20210607095629","version":"2.0.0"}
+
+2021/06/07 09:58:43 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.04","current":"115","power_p":"24","line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C315","time":"20210607095842","version":"2.0.0"}
+
+2021/06/07 10:03:17 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"1","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C314","time":"20210607100316","version":"2.0.0"}
+
+2021/06/07 10:09:07 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"}],"device":"010301000001","msgid":"C316","time":"20210607100907","version":"2.0.0"}
+
+2021/06/07 10:09:09 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","energy_p":"0","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","energy_p":"0","current":"116","power_p":"24","line_id":"3","voltage":"218"}],"device":"010301000001","msgid":"C317","time":"20210607100908","version":"2.0.0"}
+
+2021/06/07 10:12:11 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C315","time":"20210607101211","version":"2.0.0"}
+
+2021/06/07 10:13:45 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C316","time":"20210607101344","version":"2.0.0"}
+
+2021/06/07 10:14:41 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210607101441","status":"ok","device":"010401000001","msgid":"C17","srcmsgid":"1","version":"2.0.0"}
+
+2021/06/07 10:19:34 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.99","current":"115","power_p":"24","line_id":"3","voltage":"219"}],"device":"010301000001","msgid":"C318","time":"20210607101933","version":"2.0.0"}
+
+2021/06/07 10:20:13 - [Recved]
+Topic: /gateway/010401000001/010301000002/cmd_resp
+Payload: {"data":{"line_id":"0","frequency":"50.00"},"time":"20210607102013","status":"ok","device":"010301000002","msgid":"C317","srcmsgid":"2","version":"2.0.0"}
+
+2021/06/07 10:23:53 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210607102353","status":"ok","device":"010401000001","msgid":"C18","srcmsgid":"1","version":"2.0.0"}
+
+2021/06/07 10:24:13 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C318","time":"20210607102412","version":"2.0.0"}
+
+2021/06/07 10:24:47 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000001","msgid":"C319","time":"20210607102447","version":"2.0.0"}
+
+2021/06/07 11:09:55 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,args are empty
+
+2021/06/07 11:10:13 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210607111012","status":"ok","device":"010401000001","msgid":"C20","srcmsgid":"1","version":"2.0.0"}
+
+2021/06/07 11:10:35 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,args are empty
+
+2021/06/07 11:11:45 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","energy_p":"0","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.99","energy_p":"0","current":"116","power_p":"24","line_id":"3","voltage":"217"}],"device":"010301000001","msgid":"C329","time":"20210607111144","version":"2.0.0"}
+
+2021/06/07 11:12:43 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,args are empty
+
+2021/06/07 11:13:39 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,args are empty
+
+2021/06/07 11:14:03 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,args are empty
+
+2021/06/07 11:14:55 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"}],"device":"010301000002","msgid":"C329","time":"20210607111454","version":"2.0.0"}
+
+2021/06/07 11:14:56 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C330","time":"20210607111455","version":"2.0.0"}
+
+2021/06/07 11:15:10 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C330","time":"20210607111509","version":"2.0.0"}
+
+2021/06/07 11:15:20 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,args are empty
+
+2021/06/07 11:16:34 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C331","time":"20210607111633","version":"2.0.0"}
+
+2021/06/07 11:22:10 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"current":"0","frequency":"50.04","line_id":"1","voltage":"0"}],"device":"010301000001","msgid":"C331","time":"20210607112209","version":"2.0.0"}
+
+2021/06/07 11:22:12 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"1","power_p":"-0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.01","current":"116","power_p":"24","line_id":"3","voltage":"218"}],"device":"010301000001","msgid":"C332","time":"20210607112211","version":"2.0.0"}
+
+2021/06/07 11:25:56 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,download failure
+
+2021/06/07 11:27:02 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C332","time":"20210607112701","version":"2.0.0"}
+
+2021/06/07 11:27:18 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,cmd not found
+
+2021/06/07 11:27:23 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"}],"device":"010301000001","msgid":"C333","time":"20210607112722","version":"2.0.0"}
+
+2021/06/07 11:27:25 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"3","energy_p":"0"}],"device":"010301000001","msgid":"C334","time":"20210607112724","version":"2.0.0"}
+
+2021/06/07 11:27:31 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"error":"interaction wrapper error"},"time":"20210607112730","status":"fail","device":"010401000001","msgid":"C21","srcmsgid":"0","version":"2.0.0"}
+
+2021/06/07 11:28:17 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,cmd not found
+
+2021/06/07 11:28:22 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,cmd not found
+
+2021/06/07 11:29:05 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,download failure
+
+2021/06/07 11:29:53 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210607112952","status":"ok","device":"010401000001","msgid":"C22","srcmsgid":"1","version":"2.0.0"}
+
+2021/06/07 11:30:06 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 11:30:36 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"}],"device":"010301000002","msgid":"C333","time":"20210607113035","version":"2.0.0"}
+
+2021/06/07 11:30:37 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C334","time":"20210607113037","version":"2.0.0"}
+
+2021/06/07 11:32:37 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.99","current":"115","power_p":"24","line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C335","time":"20210607113236","version":"2.0.0"}
+
+2021/06/07 11:37:30 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C335","time":"20210607113729","version":"2.0.0"}
+
+2021/06/07 11:43:03 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","energy_p":"0","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.97","energy_p":"0","current":"114","power_p":"24","line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C336","time":"20210607114302","version":"2.0.0"}
+
+2021/06/07 11:46:17 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"}],"device":"010301000002","msgid":"C336","time":"20210607114617","version":"2.0.0"}
+
+2021/06/07 11:46:19 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C337","time":"20210607114618","version":"2.0.0"}
+
+2021/06/07 11:47:58 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C338","time":"20210607114758","version":"2.0.0"}
+
+2021/06/07 11:53:30 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.98","current":"114","power_p":"24","line_id":"3","voltage":"221"}],"device":"010301000001","msgid":"C337","time":"20210607115329","version":"2.0.0"}
+
+2021/06/07 11:58:26 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C339","time":"20210607115826","version":"2.0.0"}
+
+2021/06/07 11:58:41 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"}],"device":"010301000001","msgid":"C338","time":"20210607115841","version":"2.0.0"}
+
+2021/06/07 11:58:43 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000001","msgid":"C339","time":"20210607115842","version":"2.0.0"}
+
+2021/06/07 12:01:59 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"}],"device":"010301000002","msgid":"C340","time":"20210607120158","version":"2.0.0"}
+
+2021/06/07 12:02:00 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C341","time":"20210607120200","version":"2.0.0"}
+
+2021/06/07 12:03:55 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"current":"0","line_id":"2","voltage":"0"}],"device":"010301000001","msgid":"C340","time":"20210607120354","version":"2.0.0"}
+
+2021/06/07 12:03:56 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"29.73","line_id":"2","power_p":"-0"},{"frequency":"49.99","current":"114","power_p":"24","line_id":"3","voltage":"221"}],"device":"010301000001","msgid":"C341","time":"20210607120356","version":"2.0.0"}
+
+2021/06/07 12:08:54 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C342","time":"20210607120854","version":"2.0.0"}
+
+2021/06/07 12:14:21 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","energy_p":"0","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.01","current":"114","power_p":"24","line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C342","time":"20210607121421","version":"2.0.0"}
+
+2021/06/07 12:14:22 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"3","energy_p":"0"}],"device":"010301000001","msgid":"C343","time":"20210607121422","version":"2.0.0"}
+
+2021/06/07 12:17:40 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"}],"device":"010301000002","msgid":"C343","time":"20210607121739","version":"2.0.0"}
+
+2021/06/07 12:17:41 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C344","time":"20210607121741","version":"2.0.0"}
+
+2021/06/07 12:19:22 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"current":"0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C345","time":"20210607121922","version":"2.0.0"}
+
+2021/06/07 12:19:25 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","line_id":"3","power_p":"-0"}],"device":"010301000002","msgid":"C346","time":"20210607121923","version":"2.0.0"}
+
+2021/06/07 12:24:48 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.98","current":"115","power_p":"24","line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C344","time":"20210607122447","version":"2.0.0"}
+
+2021/06/07 12:29:50 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"current":"0","line_id":"1","voltage":"0"}],"device":"010301000002","msgid":"C347","time":"20210607122950","version":"2.0.0"}
+
+2021/06/07 12:29:51 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","line_id":"1","power_p":"-0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C348","time":"20210607122951","version":"2.0.0"}
+
+2021/06/07 12:30:00 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000001","msgid":"C345","time":"20210607123000","version":"2.0.0"}
+
+2021/06/07 12:33:21 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"}],"device":"010301000002","msgid":"C349","time":"20210607123320","version":"2.0.0"}
+
+2021/06/07 12:33:22 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C350","time":"20210607123322","version":"2.0.0"}
+
+2021/06/07 12:35:14 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.98","current":"116","power_p":"24","line_id":"3","voltage":"218"}],"device":"010301000001","msgid":"C346","time":"20210607123513","version":"2.0.0"}
+
+2021/06/07 12:40:20 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"1","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C351","time":"20210607124019","version":"2.0.0"}
+
+2021/06/07 12:45:39 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"}],"device":"010301000001","msgid":"C347","time":"20210607124538","version":"2.0.0"}
+
+2021/06/07 12:45:40 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","energy_p":"0","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","energy_p":"0","current":"115","power_p":"24","line_id":"3","voltage":"219"}],"device":"010301000001","msgid":"C348","time":"20210607124539","version":"2.0.0"}
+
+2021/06/07 12:49:02 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"}],"device":"010301000002","msgid":"C352","time":"20210607124901","version":"2.0.0"}
+
+2021/06/07 12:49:03 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C353","time":"20210607124902","version":"2.0.0"}
+
+2021/06/07 12:50:48 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C354","time":"20210607125046","version":"2.0.0"}
+
+2021/06/07 12:56:05 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.99","current":"115","power_p":"24","line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C349","time":"20210607125604","version":"2.0.0"}
+
+2021/06/07 13:01:16 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C355","time":"20210607130115","version":"2.0.0"}
+
+2021/06/07 13:01:19 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000001","msgid":"C350","time":"20210607130118","version":"2.0.0"}
+
+2021/06/07 13:04:44 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"}],"device":"010301000002","msgid":"C356","time":"20210607130442","version":"2.0.0"}
+
+2021/06/07 13:04:45 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C357","time":"20210607130444","version":"2.0.0"}
+
+2021/06/07 13:06:32 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.98","current":"115","power_p":"24","line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C351","time":"20210607130631","version":"2.0.0"}
+
+2021/06/07 13:11:44 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C358","time":"20210607131143","version":"2.0.0"}
+
+2021/06/07 13:16:57 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","frequency":"50.04","line_id":"0","voltage":"0"}],"device":"010301000001","msgid":"C352","time":"20210607131656","version":"2.0.0"}
+
+2021/06/07 13:16:59 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"energy_p":"0","line_id":"0","power_p":"-0"},{"frequency":"50.04","energy_p":"0","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","energy_p":"0","current":"0","power_p":"0","line_id":"2","voltage":"0"},{"frequency":"50.04","energy_p":"0","current":"115","power_p":"24","line_id":"3","voltage":"219"}],"device":"010301000001","msgid":"C353","time":"20210607131657","version":"2.0.0"}
+
+2021/06/07 13:20:25 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"}],"device":"010301000002","msgid":"C359","time":"20210607132024","version":"2.0.0"}
+
+2021/06/07 13:20:26 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C360","time":"20210607132025","version":"2.0.0"}
+
+2021/06/07 13:22:12 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C361","time":"20210607132211","version":"2.0.0"}
+
+2021/06/07 13:27:23 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"line_id":"3","voltage":"220"}],"device":"010301000001","msgid":"C354","time":"20210607132722","version":"2.0.0"}
+
+2021/06/07 13:27:25 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"114","frequency":"50.04","line_id":"3","power_p":"24"}],"device":"010301000001","msgid":"C355","time":"20210607132724","version":"2.0.0"}
+
+2021/06/07 14:07:29 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"device":"010301000002","msgid":"C371","time":"20210607140729","version":"2.0.0"}
+
+2021/06/07 14:09:08 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"frequency":"50.04","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.04","current":"0","power_p":"-0","line_id":"1","voltage":"0"}],"device":"010301000001","msgid":"C362","time":"20210607140907","version":"2.0.0"}
+
+2021/06/07 14:09:09 - [Recved]
+Topic: 
+Payload: {"data":[{"frequency":"29.73","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"49.99","current":"115","power_p":"24","line_id":"3","voltage":"218"}],"device":"010301000001","msgid":"C363","time":"20210607140908","version":"2.0.0"}
+
+2021/06/07 14:12:43 - [Recved]
+Topic: 
+Payload: {"data":[{"line_id":"3","voltage":"222"}],"device":"010301000001","msgid":"C364","time":"20210607141242","version":"2.0.0"}
+
+2021/06/07 14:14:24 - [Recved]
+Topic: 
+Payload: {"data":[{"line_id":"3","voltage":"225"}],"device":"010301000001","msgid":"C365","time":"20210607141423","version":"2.0.0"}
+
+2021/06/07 14:14:33 - [Recved]
+Topic: 
+Payload: {"data":[{"frequency":"50.00","current":"0","power_p":"-0","line_id":"0","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"1","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"2","voltage":"0"},{"frequency":"50.00","current":"0","power_p":"-0","line_id":"3","voltage":"0"}],"device":"010301000002","msgid":"C372","time":"20210607141432","version":"2.0.0"}
+
+2021/06/07 14:15:29 - [Recved]
+Topic: 
+Payload: {"data":[{"line_id":"3","voltage":"229"}],"device":"010301000001","msgid":"C366","time":"20210607141528","version":"2.0.0"}
+
+2021/06/07 14:18:23 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210607141822","status":"ok","device":"010401000001","msgid":"C23","srcmsgid":"1","version":"2.0.0"}
+
+2021/06/07 14:19:00 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:20:48 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"version":"2.0.0","time":"20210607142048","msgid":"C1","device":"010401000001","data":{"slaves":["010301000002","010301000001"]}}
+
+2021/06/07 14:21:14 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-2,sys version is 2.0.1
+
+2021/06/07 14:21:26 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,download failure
+
+2021/06/07 14:21:41 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"device":"010401000001","data":{"slaves":["010301000001","010301000002"]},"version":"2.0.0","time":"20210607142140","msgid":"C1"}
+
+2021/06/07 14:22:20 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:22:38 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"time":"20210607142236","msgid":"C1","version":"2.0.0","device":"010401000001"}
+
+2021/06/07 14:23:11 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"time":"20210607142310","msgid":"C1","version":"2.0.0","device":"010301000002"}
+
+2021/06/07 14:25:01 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"power_p":"-0","line_id":"0","voltage":"0","current":"0","frequency":"50.00"},{"power_p":"-0","line_id":"1","voltage":"0","current":"0","frequency":"50.00"},{"power_p":"-0","line_id":"2","voltage":"0","current":"0","frequency":"50.00"},{"power_p":"-0","line_id":"3","voltage":"0","current":"0","frequency":"50.00"}],"time":"20210607142500","msgid":"C2","version":"2.0.0","device":"010301000002"}
+
+2021/06/07 14:28:54 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"3","voltage":"226"}],"time":"20210607142853","msgid":"C1","version":"2.0.0","device":"010301000001"}
+
+2021/06/07 14:30:00 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"power_p":"-0","line_id":"0","voltage":"0","current":"0","frequency":"50.04"},{"power_p":"0","line_id":"1","voltage":"0","current":"0","frequency":"50.04"},{"power_p":"-0","line_id":"2","voltage":"0","current":"0","frequency":"29.73"},{"power_p":"24","line_id":"3","voltage":"225","current":"112","frequency":"49.97"}],"time":"20210607143000","msgid":"C2","version":"2.0.0","device":"010301000001"}
+
+2021/06/07 14:35:14 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"time":"20210607143513","msgid":"C3","version":"2.0.0","device":"010301000001"}
+
+2021/06/07 14:35:29 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"power_p":"-0","line_id":"0","voltage":"0","current":"0","frequency":"50.00"},{"power_p":"-0","line_id":"1","voltage":"0","current":"0","frequency":"50.00"},{"power_p":"-0","line_id":"2","voltage":"0","current":"0","frequency":"50.00"},{"power_p":"-0","line_id":"3","voltage":"0","current":"0","frequency":"50.00"}],"time":"20210607143528","msgid":"C3","version":"2.0.0","device":"010301000002"}
+
+2021/06/07 14:38:14 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607143814","data":{"slaves":["010301000001","010301000002"]},"status":"ok","srcmsgid":"1","msgid":"C2","version":"2.0.0","device":"010401000001"}
+
+2021/06/07 14:38:57 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0"},{"line_id":"1","energy_p":"0"},{"line_id":"2","energy_p":"0"},{"line_id":"3","energy_p":"0"}],"time":"20210607143851","msgid":"C4","version":"2.0.0","device":"010301000002"}
+
+2021/06/07 14:38:58 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:40:26 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"power_p":"-0","line_id":"0","voltage":"0","current":"0","frequency":"50.04"},{"power_p":"-0","line_id":"1","voltage":"0","current":"0","frequency":"50.04"},{"power_p":"-0","line_id":"2","voltage":"0","current":"0","frequency":"29.73"},{"power_p":"24","line_id":"3","voltage":"226","current":"112","frequency":"50.02"}],"time":"20210607144026","msgid":"C4","version":"2.0.0","device":"010301000001"}
+
+2021/06/07 14:41:46 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:44:04 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:44:38 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:45:03 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:45:06 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:45:21 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"time":"20210607144521","version":"2.0.0","device":"010401000001","msgid":"C1","data":{"slaves":["010301000001","010301000002"]}}
+
+2021/06/07 14:45:57 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"time":"20210607144557","version":"2.0.0","device":"010301000002","msgid":"C1","data":[{"power_p":"0","line_id":"0","frequency":"50.00","voltage":"0","current":"0"},{"power_p":"-0","line_id":"1","frequency":"50.00","voltage":"0","current":"0"},{"power_p":"-0","line_id":"2","frequency":"50.00","voltage":"0","current":"0"},{"power_p":"-0","line_id":"3","frequency":"50.00","voltage":"0","current":"0"}]}
+
+2021/06/07 14:45:58 - [Recved]
+Topic: /gateway/010401000001/010301000001/cmd_resp
+Payload: {"status":"ok","time":"20210607144557","version":"2.0.0","device":"010301000001","srcmsgid":"2","msgid":"C1","data":{"energy_p":"0","line_id":"3"}}
+
+2021/06/07 14:50:24 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:52:12 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"version":"2.0.0","device":"010401000001","data":{"slaves":["010301000001","010301000002"]},"msgid":"C1","time":"20210607145212"}
+
+2021/06/07 14:53:02 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:54:32 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}],"msgid":"C1","time":"20210607145432"}
+
+2021/06/07 14:55:05 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:55:07 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 14:55:22 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"msgid":"C1","device":"010401000001","time":"20210607145522","version":"2.0.0"}
+
+2021/06/07 14:55:23 - [Recved]
+Topic: /gateway/010401000001/010301000001/cmd_resp
+Payload: {"data":{"energy_p":"0.19","line_id":"3"},"status":"ok","version":"2.0.0","msgid":"C1","device":"010301000001","time":"20210607145523","srcmsgid":"3"}
+
+2021/06/07 14:56:26 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"3","voltage":"0","power_p":"-0","frequency":"50.00"}],"msgid":"C1","device":"010301000002","time":"20210607145625","version":"2.0.0"}
+
+2021/06/07 14:57:44 - [Recved]
+Topic: /gateway/010401000001/010301000001/cmd_resp
+Payload: {"data":{"energy_p":"0.19","line_id":"3"},"status":"ok","version":"2.0.0","msgid":"C2","device":"010301000001","time":"20210607145744","srcmsgid":"4"}
+
+2021/06/07 14:58:35 - [Recved]
+Topic: /gateway/010401000001/010301000001/cmd_resp
+Payload: {"data":{"error":"unknown method"},"status":"fail","version":"2.0.0","msgid":"C3","device":"010301000001","time":"20210607145835","srcmsgid":"5"}
+
+2021/06/07 14:59:15 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"config":"location"},"status":"ok","version":"2.0.0","msgid":"C2","device":"010401000001","time":"20210607145915","srcmsgid":"6"}
+
+2021/06/07 15:01:19 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"29.73"},{"current":"112","line_id":"3","voltage":"225","power_p":"24","frequency":"49.99"}],"msgid":"C4","device":"010301000001","time":"20210607150119","version":"2.0.0"}
+
+2021/06/07 15:05:38 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"status":"ok","version":"2.0.0","msgid":"C3","device":"010401000001","time":"20210607150538","srcmsgid":"1"}
+
+2021/06/07 15:05:47 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"config":"location"},"status":"ok","version":"2.0.0","msgid":"C4","device":"010401000001","time":"20210607150547","srcmsgid":"2"}
+
+2021/06/07 15:06:31 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"}],"msgid":"C5","device":"010301000001","time":"20210607150631","version":"2.0.0"}
+
+2021/06/07 15:06:32 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"energy_p":"0.19","line_id":"3"}],"msgid":"C6","device":"010301000001","time":"20210607150632","version":"2.0.0"}
+
+2021/06/07 15:06:54 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"3","line_id":"2","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"3","voltage":"0","power_p":"-0","frequency":"50.00"}],"msgid":"C2","device":"010301000002","time":"20210607150654","version":"2.0.0"}
+
+2021/06/07 15:10:07 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"status":"ok","version":"2.0.0","msgid":"C5","device":"010401000001","time":"20210607151007","srcmsgid":"1"}
+
+2021/06/07 15:10:10 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"config":"location"},"status":"ok","version":"2.0.0","msgid":"C6","device":"010401000001","time":"20210607151011","srcmsgid":"2"}
+
+2021/06/07 15:10:14 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"msgid":"C3","device":"010301000002","time":"20210607151014","version":"2.0.0"}
+
+2021/06/07 15:11:44 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"29.73"},{"current":"112","line_id":"3","voltage":"224","power_p":"24","frequency":"49.98"}],"msgid":"C7","device":"010301000001","time":"20210607151144","version":"2.0.0"}
+
+2021/06/07 15:13:43 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"status":"ok","version":"2.0.0","msgid":"C7","device":"010401000001","time":"20210607151343","srcmsgid":"1"}
+
+2021/06/07 15:13:43 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"config":"location"},"status":"ok","version":"2.0.0","msgid":"C8","device":"010401000001","time":"20210607151343","srcmsgid":"2"}
+
+2021/06/07 15:15:06 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"status":"ok","version":"2.0.0","msgid":"C9","device":"010401000001","time":"20210607151506","srcmsgid":"1"}
+
+2021/06/07 15:15:09 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"config":"location"},"status":"ok","version":"2.0.0","msgid":"C10","device":"010401000001","time":"20210607151509","srcmsgid":"2"}
+
+2021/06/07 15:17:22 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"3","voltage":"0","power_p":"-0","frequency":"50.00"}],"msgid":"C4","device":"010301000002","time":"20210607151722","version":"2.0.0"}
+
+2021/06/07 15:22:11 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","energy_p":"0.23","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"1","energy_p":"0.00","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"2","energy_p":"0.00","voltage":"0","power_p":"-0","frequency":"29.73"},{"current":"112","line_id":"3","energy_p":"0.20","voltage":"224","power_p":"24","frequency":"50.04"}],"msgid":"C8","device":"010301000001","time":"20210607152211","version":"2.0.0"}
+
+2021/06/07 15:24:06 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"voltage":"223","line_id":"3"}],"msgid":"C9","device":"010301000001","time":"20210607152405","version":"2.0.0"}
+
+2021/06/07 15:25:55 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"msgid":"C5","device":"010301000002","time":"20210607152555","version":"2.0.0"}
+
+2021/06/07 15:27:50 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"3","voltage":"0","power_p":"-0","frequency":"50.00"}],"msgid":"C6","device":"010301000002","time":"20210607152750","version":"2.0.0"}
+
+2021/06/07 15:32:36 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.04"}],"msgid":"C10","device":"010301000001","time":"20210607153236","version":"2.0.0"}
+
+2021/06/07 15:32:38 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"29.73"},{"current":"113","line_id":"3","voltage":"224","power_p":"24","frequency":"49.99"}],"msgid":"C11","device":"010301000001","time":"20210607153238","version":"2.0.0"}
+
+2021/06/07 15:37:49 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"}],"msgid":"C12","device":"010301000001","time":"20210607153749","version":"2.0.0"}
+
+2021/06/07 15:37:51 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.21","line_id":"3"}],"msgid":"C13","device":"010301000001","time":"20210607153751","version":"2.0.0"}
+
+2021/06/07 15:38:18 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"3","voltage":"0","power_p":"-0","frequency":"50.00"}],"msgid":"C7","device":"010301000002","time":"20210607153818","version":"2.0.0"}
+
+2021/06/07 15:41:37 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"msgid":"C8","device":"010301000002","time":"20210607154137","version":"2.0.0"}
+
+2021/06/07 15:43:03 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"29.73"},{"voltage":"223","current":"113","line_id":"3"}],"msgid":"C14","device":"010301000001","time":"20210607154303","version":"2.0.0"}
+
+2021/06/07 15:43:04 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"3","power_p":"24","frequency":"49.98"}],"msgid":"C15","device":"010301000001","time":"20210607154304","version":"2.0.0"}
+
+2021/06/07 15:48:46 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"3","voltage":"0","power_p":"-0","frequency":"50.00"}],"msgid":"C9","device":"010301000002","time":"20210607154846","version":"2.0.0"}
+
+2021/06/07 15:52:45 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"status":"ok","version":"2.0.0","msgid":"C11","device":"010401000001","time":"20210607155244","srcmsgid":"1"}
+
+2021/06/07 15:52:50 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"config":"location"},"status":"ok","version":"2.0.0","msgid":"C12","device":"010401000001","time":"20210607155249","srcmsgid":"2"}
+
+2021/06/07 15:53:29 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","energy_p":"0.23","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"1","energy_p":"0.00","voltage":"0","power_p":"-0","frequency":"50.04"},{"current":"0","line_id":"2","energy_p":"0.00","voltage":"0","power_p":"-0","frequency":"29.73"},{"current":"112","line_id":"3","energy_p":"0.22","voltage":"224","power_p":"24","frequency":"50.01"}],"msgid":"C16","device":"010301000001","time":"20210607155328","version":"2.0.0"}
+
+2021/06/07 15:55:38 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"status":"ok","version":"2.0.0","msgid":"C13","device":"010401000001","time":"20210607155537","srcmsgid":"1"}
+
+2021/06/07 15:55:41 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"config":"location"},"status":"ok","version":"2.0.0","msgid":"C14","device":"010401000001","time":"20210607155540","srcmsgid":"2"}
+
+2021/06/07 15:57:17 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"energy_p":"0.00","line_id":"0"}],"msgid":"C10","device":"010301000002","time":"20210607155716","version":"2.0.0"}
+
+2021/06/07 15:57:18 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"msgid":"C11","device":"010301000002","time":"20210607155717","version":"2.0.0"}
+
+2021/06/07 15:57:44 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"status":"ok","version":"2.0.0","msgid":"C15","device":"010401000001","time":"20210607155743","srcmsgid":"1"}
+
+2021/06/07 15:57:47 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"config":"location"},"status":"ok","version":"2.0.0","msgid":"C16","device":"010401000001","time":"20210607155747","srcmsgid":"2"}
+
+2021/06/07 15:59:14 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"1","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"2","voltage":"0","power_p":"-0","frequency":"50.00"},{"current":"0","line_id":"3","voltage":"0","power_p":"-0","frequency":"50.00"}],"msgid":"C12","device":"010301000002","time":"20210607155913","version":"2.0.0"}
+
+2021/06/07 16:03:29 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"status":"ok","version":"2.0.0","msgid":"C17","device":"010401000001","time":"20210607160328","srcmsgid":"1"}
+
+2021/06/07 16:04:14 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","voltage":"0","power_p":"-0","frequency":"50.04"},{"voltage":"0","current":"0","line_id":"1"}],"msgid":"C17","device":"010301000001","time":"20210607160354","version":"2.0.0"}
+
+2021/06/07 16:04:15 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"power_p":"-0","line_id":"2"},{"current":"113","line_id":"3","voltage":"224","power_p":"24","frequency":"50.03"}],"msgid":"C19","device":"010301000001","time":"20210607160412","version":"2.0.0"}
+
+2021/06/07 16:04:26 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 16:07:06 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 16:07:10 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 16:07:22 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-2,sys version is 2.0.2
+
+2021/06/07 16:07:59 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 16:08:16 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"msgid":"C1","time":"20210607160815","version":"2.0.0","device":"010401000001","data":{"slaves":["010301000002","010301000001"]}}
+
+2021/06/07 16:09:09 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C1","time":"20210607160908","version":"2.0.0","device":"010301000001","data":[{"line_id":"0","energy_p":"0.23"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.22"}]}
+
+2021/06/07 16:09:42 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C1","time":"20210607160941","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 16:09:43 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C2","time":"20210607160942","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 16:12:59 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C3","time":"20210607161258","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}]}
+
+2021/06/07 16:14:21 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C2","time":"20210607161419","version":"2.0.0","device":"010301000001","data":[{"frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"line_id":"1","voltage":"0"}]}
+
+2021/06/07 16:14:22 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C3","time":"20210607161421","version":"2.0.0","device":"010301000001","data":[{"line_id":"1","frequency":"50.04","power_p":"-0","current":"0"},{"frequency":"29.73","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"49.98","line_id":"3","voltage":"223","power_p":"24","current":"113"}]}
+
+2021/06/07 16:20:04 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C4","time":"20210607162003","version":"2.0.0","device":"010301000001","data":[{"line_id":"3","voltage":"226"}]}
+
+2021/06/07 16:20:10 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C4","time":"20210607162009","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","voltage":"0","frequency":"50.00","current":"0"}]}
+
+2021/06/07 16:20:11 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C5","time":"20210607162010","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","power_p":"-0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"1"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 16:24:47 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C5","time":"20210607162446","version":"2.0.0","device":"010301000001","data":[{"energy_p":"0.23","frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"energy_p":"0.00","frequency":"50.04","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"line_id":"2","voltage":"0","frequency":"29.73","current":"0"}]}
+
+2021/06/07 16:24:48 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C6","time":"20210607162447","version":"2.0.0","device":"010301000001","data":[{"line_id":"2","power_p":"-0","energy_p":"0.00"},{"energy_p":"0.23","frequency":"50.04","line_id":"3","voltage":"225","power_p":"24","current":"112"}]}
+
+2021/06/07 16:28:40 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C6","time":"20210607162839","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}]}
+
+2021/06/07 16:30:39 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C7","time":"20210607163038","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 16:35:13 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C7","time":"20210607163512","version":"2.0.0","device":"010301000001","data":[{"frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.04","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"29.73","line_id":"2","voltage":"0","power_p":"0","current":"0"},{"frequency":"49.97","line_id":"3","voltage":"223","power_p":"24","current":"113"}]}
+
+2021/06/07 16:40:27 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C8","time":"20210607164026","version":"2.0.0","device":"010301000001","data":[{"line_id":"0","energy_p":"0.23"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.24"}]}
+
+2021/06/07 16:41:07 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C8","time":"20210607164106","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"3"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 16:44:22 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C9","time":"20210607164421","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}]}
+
+2021/06/07 16:45:20 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C9","time":"20210607164519","version":"2.0.0","device":"010301000001","data":[{"line_id":"3","voltage":"222"}]}
+
+2021/06/07 16:45:40 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C10","time":"20210607164539","version":"2.0.0","device":"010301000001","data":[{"frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.04","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"29.73","line_id":"2","voltage":"0","power_p":"0","current":"0"},{"frequency":"49.99","line_id":"3","voltage":"224","power_p":"24","current":"113"}]}
+
+2021/06/07 16:47:57 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C11","time":"20210607164756","version":"2.0.0","device":"010301000001","data":[{"line_id":"3","voltage":"225"}]}
+
+2021/06/07 16:51:35 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C10","time":"20210607165134","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 16:56:06 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C12","time":"20210607165605","version":"2.0.0","device":"010301000001","data":[{"energy_p":"0.23","frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"energy_p":"0.00","frequency":"50.04","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"energy_p":"0.00","frequency":"29.73","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"energy_p":"0.25","frequency":"50.00","line_id":"3","voltage":"225","power_p":"24","current":"112"}]}
+
+2021/06/07 17:00:02 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C11","time":"20210607170002","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}]}
+
+2021/06/07 17:02:03 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C12","time":"20210607170202","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"line_id":"3","voltage":"0","current":"0"}]}
+
+2021/06/07 17:02:04 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C13","time":"20210607170204","version":"2.0.0","device":"010301000002","data":[{"line_id":"3","power_p":"-0","frequency":"50.00"}]}
+
+2021/06/07 17:06:31 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C13","time":"20210607170630","version":"2.0.0","device":"010301000001","data":[{"frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"line_id":"1","voltage":"0","frequency":"50.04","current":"0"}]}
+
+2021/06/07 17:06:32 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C14","time":"20210607170632","version":"2.0.0","device":"010301000001","data":[{"line_id":"1","power_p":"-0"},{"frequency":"29.73","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"49.97","line_id":"3","voltage":"225","power_p":"24","current":"112"}]}
+
+2021/06/07 17:11:44 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C15","time":"20210607171144","version":"2.0.0","device":"010301000001","data":[{"line_id":"0","energy_p":"0.23"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.25"}]}
+
+2021/06/07 17:12:31 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C14","time":"20210607171230","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"line_id":"1","voltage":"0","frequency":"50.00","current":"0"}]}
+
+2021/06/07 17:12:32 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C15","time":"20210607171232","version":"2.0.0","device":"010301000002","data":[{"line_id":"1","power_p":"-0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 17:15:44 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C16","time":"20210607171543","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}]}
+
+2021/06/07 17:16:57 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C16","time":"20210607171657","version":"2.0.0","device":"010301000001","data":[{"frequency":"50.04","line_id":"0","voltage":"0","power_p":"0","current":"0"},{"frequency":"50.04","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"29.73","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.03","line_id":"3","voltage":"227","power_p":"24","current":"111"}]}
+
+2021/06/07 17:23:00 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C17","time":"20210607172300","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 17:27:24 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C17","time":"20210607172723","version":"2.0.0","device":"010301000001","data":[{"energy_p":"0.23","frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"energy_p":"0.00","frequency":"50.04","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"energy_p":"0.00","frequency":"29.73","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"energy_p":"0.26","frequency":"49.99","line_id":"3","voltage":"226","power_p":"24","current":"111"}]}
+
+2021/06/07 17:31:25 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C18","time":"20210607173124","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}]}
+
+2021/06/07 17:33:28 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C19","time":"20210607173328","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 17:37:50 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C18","time":"20210607173750","version":"2.0.0","device":"010301000001","data":[{"frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.04","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"29.73","line_id":"2","voltage":"0","power_p":"0","current":"0"},{"frequency":"50.02","line_id":"3","voltage":"226","power_p":"24","current":"112"}]}
+
+2021/06/07 17:43:02 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C19","time":"20210607174302","version":"2.0.0","device":"010301000001","data":[{"line_id":"0","energy_p":"0.23"}]}
+
+2021/06/07 17:43:03 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C20","time":"20210607174303","version":"2.0.0","device":"010301000001","data":[{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.27"}]}
+
+2021/06/07 17:43:56 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C20","time":"20210607174356","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"2"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 17:47:06 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C21","time":"20210607174706","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}]}
+
+2021/06/07 17:48:15 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C21","time":"20210607174815","version":"2.0.0","device":"010301000001","data":[{"frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"line_id":"1","voltage":"0"}]}
+
+2021/06/07 17:48:17 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C22","time":"20210607174816","version":"2.0.0","device":"010301000001","data":[{"line_id":"1","frequency":"50.04","power_p":"-0","current":"0"},{"frequency":"29.73","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"49.98","line_id":"3","voltage":"226","power_p":"24","current":"112"}]}
+
+2021/06/07 17:54:24 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C22","time":"20210607175424","version":"2.0.0","device":"010301000002","data":[{"frequency":"50.00","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"1","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"frequency":"50.00","line_id":"3","voltage":"0","power_p":"-0","current":"0"}]}
+
+2021/06/07 17:58:42 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C23","time":"20210607175841","version":"2.0.0","device":"010301000001","data":[{"energy_p":"0.23","frequency":"50.04","line_id":"0","voltage":"0","power_p":"-0","current":"0"},{"energy_p":"0.00","frequency":"50.04","line_id":"1","voltage":"0","power_p":"0","current":"0"},{"energy_p":"0.00","frequency":"29.73","line_id":"2","voltage":"0","power_p":"-0","current":"0"},{"line_id":"3","voltage":"226"}]}
+
+2021/06/07 17:58:43 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C24","time":"20210607175843","version":"2.0.0","device":"010301000001","data":[{"energy_p":"0.27","line_id":"3","frequency":"50.02","power_p":"24","current":"111"}]}
+
+2021/06/07 18:00:29 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C25","time":"20210607180028","version":"2.0.0","device":"010301000001","data":[{"line_id":"3","voltage":"228"}]}
+
+2021/06/07 18:02:05 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/07 18:02:10 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/07 18:02:47 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C23","time":"20210607180247","version":"2.0.0","device":"010301000002","data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}]}
+
+2021/06/07 18:03:12 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"msgid":"C2","time":"20210607180312","version":"2.0.0","device":"010401000001","srcmsgid":"1","status":"ok"}
+
+2021/06/07 18:03:33 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/07 18:03:42 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 18:03:44 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,/task.lua:60: attempt to yield from outside a coroutine
+stack traceback:
+	/task.lua:60: in function 'run'
+	/app.lua:912: in mai
+
+2021/06/07 18:03:53 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,dead
+
+2021/06/07 18:04:04 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 18:04:20 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"time":"20210607180419","msgid":"C1","version":"2.0.0","device":"010401000001"}
+
+2021/06/07 18:04:21 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607180419","srcmsgid":"2","version":"2.0.0","data":{"error":"file not exist or is empty"},"status":"fail","msgid":"C2","device":"010401000001"}
+
+2021/06/07 18:04:21 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607180420","srcmsgid":"3","version":"2.0.0","data":{"error":"file not exist or is empty"},"status":"fail","msgid":"C3","device":"010401000001"}
+
+2021/06/07 18:04:31 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607180431","srcmsgid":"4","version":"2.0.0","data":{"config":"location"},"status":"ok","msgid":"C4","device":"010401000001"}
+
+2021/06/07 18:04:53 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","voltage":"0","current":"0","power_p":"-0","frequency":"50.00"},{"line_id":"1","voltage":"0","current":"0","power_p":"-0","frequency":"50.00"},{"line_id":"2","voltage":"0","current":"0","power_p":"-0","frequency":"50.00"},{"line_id":"3","voltage":"0","current":"0","power_p":"-0","frequency":"50.00"}],"time":"20210607180453","msgid":"C1","version":"2.0.0","device":"010301000002"}
+
+2021/06/07 18:05:32 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607180532","srcmsgid":"5","version":"2.0.0","data":{"config":"location"},"status":"ok","msgid":"C5","device":"010401000001"}
+
+2021/06/07 18:06:01 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607180601","srcmsgid":"6","version":"2.0.0","status":"ok","msgid":"C6","device":"010401000001"}
+
+2021/06/07 18:06:05 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607180605","srcmsgid":"7","version":"2.0.0","data":{"config":"location","content":{"longitude":"545445","latitude":"455454"}},"status":"ok","msgid":"C7","device":"010401000001"}
+
+2021/06/07 18:07:51 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607180751","srcmsgid":"1","version":"2.0.0","data":{"slaves":["010301000001","010301000002"]},"status":"ok","msgid":"C8","device":"010401000001"}
+
+2021/06/07 18:13:01 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210607181300","srcmsgid":"1","version":"2.0.0","data":{"slaves":["010301000001","010301000002"]},"status":"ok","msgid":"C9","device":"010401000001"}
+
+2021/06/07 18:13:23 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 18:13:30 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 18:13:33 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 18:13:49 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"device":"010401000001","msgid":"C1","version":"2.0.0","time":"20210607181347","data":{"slaves":["010301000002","010301000001"]}}
+
+2021/06/07 18:13:49 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","msgid":"C2","time":"20210607181347","version":"2.0.0","srcmsgid":"2","status":"ok","data":{"content":{"longitude":"545445","latitude":"455454"},"config":"location"}}
+
+2021/06/07 18:14:22 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"device":"010301000001","msgid":"C1","version":"2.0.0","time":"20210607181420","data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.28","line_id":"3"}]}
+
+2021/06/07 18:15:16 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/07 18:15:20 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"device":"010301000002","msgid":"C1","version":"2.0.0","time":"20210607181519","data":[{"frequency":"50.00","power_p":"-0","voltage":"0","current":"0","line_id":"0"},{"frequency":"50.00","power_p":"-0","voltage":"0","current":"0","line_id":"1"},{"frequency":"50.00","power_p":"-0","voltage":"0","current":"0","line_id":"2"},{"frequency":"50.00","power_p":"-0","voltage":"0","current":"0","line_id":"3"}]}
+
+2021/06/07 18:15:21 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","msgid":"C3","time":"20210607181520","version":"2.0.0","srcmsgid":"3","status":"ok","data":{"config":"location"}}
+
+2021/06/08 09:18:16 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","msgid":"C4","time":"20210608091816","version":"2.0.0","srcmsgid":"1","status":"ok","data":{"slaves":["010301000002","010301000001"]}}
+
+2021/06/08 09:19:31 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 09:19:47 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"time":"20210608091946","msgid":"C1","version":"2.0.0","device":"010401000001","data":{"slaves":["010301000001","010301000002"]}}
+
+2021/06/08 09:28:12 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210608092812","data":{"slaves":["010301000001","010301000002"]},"srcmsgid":"1","status":"ok","version":"2.0.0","device":"010401000001","msgid":"C2"}
+
+2021/06/08 09:28:20 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"time":"20210608092820","msgid":"C3","version":"2.0.0","device":"010301000002","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}]}
+
+2021/06/08 09:29:44 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"time":"20210608092944","msgid":"C4","version":"2.0.0","device":"010301000001","data":[{"voltage":"224","line_id":"3"}]}
+
+2021/06/08 09:31:41 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210608093141","data":{"slaves":["010301000001","010301000002"]},"srcmsgid":"1","status":"ok","version":"2.0.0","device":"010401000001","msgid":"C3"}
+
+2021/06/08 09:31:41 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 09:31:44 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 09:31:46 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 09:32:03 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 09:32:08 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,/task.lua:60: attempt to yield from outside a coroutine
+stack traceback:
+	/task.lua:60: in function 'task.run'
+	/app.lua:913: i
+
+2021/06/08 09:32:12 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,dead
+
+2021/06/08 09:32:23 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 09:32:26 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 09:32:28 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 09:32:30 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 09:32:39 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"msgid":"C1","data":{"slaves":["010301000001","010301000002"]},"time":"20210608093238","version":"2.0.0","device":"010401000001"}
+
+2021/06/08 09:36:41 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C1","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608093640","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 09:37:50 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C1","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","energy_p":"0.00","voltage":"0"},{"voltage":"0","line_id":"2"}],"time":"20210608093750","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 09:37:51 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C2","data":[{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00"},{"power_p":"-0","frequency":"49.99","current":"0","line_id":"3","energy_p":"0.28","voltage":"224"}],"time":"20210608093751","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 09:44:02 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C2","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608094402","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 09:47:09 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C3","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"voltage":"0","line_id":"1"}],"time":"20210608094708","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 09:47:10 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C4","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1"},{"power_p":"-0","frequency":"50.00","current":"3","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608094710","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 09:48:16 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C3","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"0","frequency":"49.97","current":"0","line_id":"3","voltage":"223"}],"time":"20210608094816","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 09:53:30 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C4","data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.28","line_id":"3"}],"time":"20210608095329","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 09:57:37 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C5","data":[{"current":"0","frequency":"50.00","voltage":"0","line_id":"0"}],"time":"20210608095736","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 09:57:38 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C6","data":[{"power_p":"-0","line_id":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608095738","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 09:58:43 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C5","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"0","frequency":"49.97","current":"0","line_id":"3","voltage":"224"}],"time":"20210608095843","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 09:59:43 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C7","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608095943","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:02:49 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C2","data":{"config":"location"},"srcmsgid":"2","time":"20210608100249","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 10:08:01 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C3","data":{"config":"location"},"srcmsgid":"3","time":"20210608100801","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 10:08:06 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C8","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608100806","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:09:09 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C4","data":{"config":"location"},"srcmsgid":"4","time":"20210608100908","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 10:09:09 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C6","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00","voltage":"0"},{"power_p":"0","frequency":"49.96","current":"0","line_id":"3","energy_p":"0.28","voltage":"222"}],"time":"20210608100908","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 10:09:34 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C5","data":{"config":"location"},"srcmsgid":"5","time":"20210608100933","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 10:11:15 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C6","data":{"config":"location"},"srcmsgid":"6","time":"20210608101114","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 10:11:44 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C7","data":{"config":"location"},"srcmsgid":"7","time":"20210608101143","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 10:12:35 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C8","data":{"config":"location"},"srcmsgid":"8","time":"20210608101234","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 10:13:02 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C9","data":{"error":"file not exist or is empty"},"srcmsgid":"9","time":"20210608101301","device":"010401000001","version":"2.0.0","status":"fail"}
+
+2021/06/08 10:15:07 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C10","data":{"error":"file not exist or is empty"},"srcmsgid":"10","time":"20210608101506","device":"010401000001","version":"2.0.0","status":"fail"}
+
+2021/06/08 10:15:24 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C9","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608101523","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:18:34 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C10","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608101833","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:19:34 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C7","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"current":"0","frequency":"29.73","voltage":"0","line_id":"2"}],"time":"20210608101933","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 10:19:36 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C8","data":[{"power_p":"-0","line_id":"2"},{"power_p":"0","frequency":"50.02","current":"0","line_id":"3","voltage":"223"}],"time":"20210608101935","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 10:24:48 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C9","data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.28","line_id":"3"}],"time":"20210608102447","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 10:29:02 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C11","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608102901","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:30:01 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C10","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"49.97","current":"0","line_id":"3","voltage":"222"}],"time":"20210608103000","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 10:31:05 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C12","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608103105","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:39:27 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C11","data":[{"voltage":"227","line_id":"3"}],"time":"20210608103926","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 10:39:30 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C13","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608103929","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:40:28 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C12","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"49.97","current":"0","line_id":"3","energy_p":"0.28","voltage":"227"}],"time":"20210608104026","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 10:46:47 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C14","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608104646","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:49:58 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C15","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"current":"0","frequency":"50.00","voltage":"0","line_id":"2"}],"time":"20210608104957","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:49:59 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C16","data":[{"power_p":"-0","line_id":"2"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608104958","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 10:50:53 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C13","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"0","frequency":"50.00","current":"0","line_id":"3","voltage":"227"}],"time":"20210608105053","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 10:56:07 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C14","data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.28","line_id":"3"}],"time":"20210608105606","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:00:27 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C17","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608110026","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:01:20 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C15","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.03","current":"0","line_id":"3","voltage":"226"}],"time":"20210608110119","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:02:27 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C18","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608110227","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:08:12 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C16","data":[{"voltage":"224","line_id":"3"}],"time":"20210608110812","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:10:56 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C19","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"4","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608111054","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:11:45 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C17","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"current":"0","voltage":"0","line_id":"1"}],"time":"20210608111144","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:11:46 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C18","data":[{"power_p":"-0","frequency":"50.04","energy_p":"0.00","line_id":"1"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00","voltage":"0"},{"power_p":"0","frequency":"49.99","current":"0","line_id":"3","energy_p":"0.28","voltage":"224"}],"time":"20210608111145","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:18:09 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C20","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608111808","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:21:23 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C21","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"1","line_id":"3","voltage":"0"}],"time":"20210608112122","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:22:11 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C19","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"0","frequency":"50.00","current":"0","line_id":"3","voltage":"226"}],"time":"20210608112210","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:27:25 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C20","data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.28","line_id":"3"}],"time":"20210608112724","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:31:51 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C22","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608113150","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:32:37 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C21","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.02","current":"0","line_id":"3","voltage":"225"}],"time":"20210608113237","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:33:50 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C23","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608113349","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:42:19 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C24","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"1","line_id":"3","voltage":"0"}],"time":"20210608114218","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:43:04 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C22","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"49.96","current":"0","line_id":"3","energy_p":"0.28","voltage":"226"}],"time":"20210608114304","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:49:31 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C25","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608114930","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:52:49 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C26","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"current":"0","frequency":"50.00","voltage":"0","line_id":"1"}],"time":"20210608115246","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:52:49 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C27","data":[{"power_p":"-0","line_id":"1"},{"current":"0","frequency":"50.00","voltage":"0","line_id":"2"}],"time":"20210608115249","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:52:51 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C28","data":[{"power_p":"-0","line_id":"2"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608115251","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 11:53:30 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C23","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"49.96","current":"0","line_id":"3","voltage":"226"}],"time":"20210608115330","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:58:42 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C24","data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"}],"time":"20210608115842","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 11:58:43 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C25","data":[{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.28","line_id":"3"}],"time":"20210608115843","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:03:16 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C29","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608120316","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:03:55 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C26","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"current":"0","voltage":"226","line_id":"3"}],"time":"20210608120355","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:03:57 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C27","data":[{"power_p":"0","frequency":"50.02","line_id":"3"}],"time":"20210608120356","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:05:12 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C30","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608120512","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:13:44 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C31","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608121343","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:14:22 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C28","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"49.98","current":"0","line_id":"3","energy_p":"0.28","voltage":"225"}],"time":"20210608121421","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:20:53 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C32","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608122052","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:24:12 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C33","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608122411","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:24:51 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C29","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"49.96","current":"0","line_id":"3","voltage":"225"}],"time":"20210608122447","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:30:01 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C30","data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.28","line_id":"3"}],"time":"20210608123000","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:34:40 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C34","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"5","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608123439","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:35:14 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C31","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.02","current":"0","line_id":"3","voltage":"223"}],"time":"20210608123513","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:36:34 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C35","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"}],"time":"20210608123633","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:36:36 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C36","data":[{"energy_p":"0.00","line_id":"3"}],"time":"20210608123635","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:45:08 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C37","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608124507","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:45:40 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C32","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"}],"time":"20210608124538","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:45:41 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C33","data":[{"energy_p":"0.00","line_id":"1"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"49.96","current":"0","line_id":"3","energy_p":"0.28","voltage":"224"}],"time":"20210608124540","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 12:52:16 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C38","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608125215","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:55:36 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C39","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"}],"time":"20210608125535","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 12:55:37 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C40","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608125536","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:19:23 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"msgid":"C57","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"4","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608141921","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:19:36 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"msgid":"C54","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00","voltage":"0"},{"power_p":"24","frequency":"49.97","current":"114","line_id":"3","energy_p":"0.31","voltage":"221"}],"time":"20210608141935","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:26:24 - [Recved]
+Topic: 
+Payload: {"msgid":"C58","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608142623","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:29:51 - [Recved]
+Topic: 
+Payload: {"msgid":"C59","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"current":"0","frequency":"50.00","voltage":"0","line_id":"3"}],"time":"20210608142949","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:29:52 - [Recved]
+Topic: 
+Payload: {"msgid":"C60","data":[{"power_p":"-0","line_id":"3"}],"time":"20210608142951","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:30:01 - [Recved]
+Topic: 
+Payload: {"msgid":"C55","data":[{"current":"0","frequency":"50.04","voltage":"0","line_id":"0"}],"time":"20210608143000","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:30:03 - [Recved]
+Topic: 
+Payload: {"msgid":"C56","data":[{"power_p":"-0","line_id":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"24","frequency":"50.02","current":"114","line_id":"3","voltage":"222"}],"time":"20210608143001","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:33:02 - [Recved]
+Topic: 
+Payload: {"msgid":"C57","data":[{"switch":"off","line_id":"2"}],"time":"20210608143301","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:33:12 - [Recved]
+Topic: 
+Payload: {"msgid":"C58","data":[{"switch":"on","line_id":"1"},{"switch":"on","line_id":"2"}],"time":"20210608143311","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:33:38 - [Recved]
+Topic: /gateway/010401000001/010301000001/cmd_resp
+Payload: {"msgid":"C59","data":{"frequency":"49.99","voltage":"223","line_id":"3"},"srcmsgid":"S1","time":"20210608143337","device":"010301000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 14:33:42 - [Recved]
+Topic: 
+Payload: {"msgid":"C60","data":{"frequency":"49.99","voltage":"222","line_id":"3"},"srcmsgid":"S1","time":"20210608143341","device":"010301000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 14:33:44 - [Recved]
+Topic: 
+Payload: {"msgid":"C61","data":{"frequency":"49.99","voltage":"223","line_id":"3"},"srcmsgid":"S1","time":"20210608143343","device":"010301000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 14:35:16 - [Recved]
+Topic: 
+Payload: {"msgid":"C62","data":[{"energy_p":"0.23","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"}],"time":"20210608143513","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:35:16 - [Recved]
+Topic: 
+Payload: {"msgid":"C63","data":[{"energy_p":"0.31","line_id":"3"}],"time":"20210608143515","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:35:56 - [Recved]
+Topic: 
+Payload: {"msgid":"C64","data":[{"switch":"off","line_id":"0"}],"time":"20210608143554","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:35:57 - [Recved]
+Topic: 
+Payload: {"msgid":"C65","data":[{"switch":"off","line_id":"1"},{"switch":"off","line_id":"2"},{"switch":"off","line_id":"3"}],"time":"20210608143556","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:35:58 - [Recved]
+Topic: 
+Payload: {"msgid":"C66","data":[{"power_p":"-0","current":"0","line_id":"3"}],"time":"20210608143557","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:36:01 - [Recved]
+Topic: 
+Payload: {"msgid":"C67","data":[{"switch":"on","line_id":"0"},{"switch":"on","line_id":"1"},{"switch":"on","line_id":"2"},{"switch":"on","line_id":"3"}],"time":"20210608143600","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:36:03 - [Recved]
+Topic: 
+Payload: {"msgid":"C68","data":[{"power_p":"24","current":"114","line_id":"3"}],"time":"20210608143602","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:36:09 - [Recved]
+Topic: 
+Payload: {"msgid":"C69","data":[{"switch":"off","line_id":"0"},{"switch":"off","line_id":"1"},{"switch":"off","line_id":"2"},{"switch":"off","line_id":"3"}],"time":"20210608143608","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:36:10 - [Recved]
+Topic: 
+Payload: {"msgid":"C70","data":[{"switch":"on","line_id":"0"},{"switch":"on","line_id":"1"}],"time":"20210608143609","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:36:12 - [Recved]
+Topic: 
+Payload: {"msgid":"C71","data":[{"switch":"on","line_id":"2"},{"power_p":"-0","switch":"on","current":"0","line_id":"3"}],"time":"20210608143611","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:36:13 - [Recved]
+Topic: 
+Payload: {"msgid":"C72","data":[{"power_p":"24","current":"114","line_id":"3"}],"time":"20210608143612","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:40:19 - [Recved]
+Topic: 
+Payload: {"msgid":"C61","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608144018","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:40:28 - [Recved]
+Topic: 
+Payload: {"msgid":"C73","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","voltage":"0"},{"power_p":"24","frequency":"50.03","current":"115","line_id":"3","voltage":"220"}],"time":"20210608144027","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:42:06 - [Recved]
+Topic: 
+Payload: {"msgid":"C62","data":[{"energy_p":"0.00","line_id":"0"},{"energy_p":"0.00","line_id":"1"},{"energy_p":"0.00","line_id":"2"},{"energy_p":"0.00","line_id":"3"}],"time":"20210608144205","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:50:47 - [Recved]
+Topic: 
+Payload: {"msgid":"C63","data":[{"power_p":"-0","frequency":"50.00","current":"0","line_id":"0","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"1","voltage":"0"},{"power_p":"-0","frequency":"50.00","current":"0","line_id":"2","voltage":"0"}],"time":"20210608145046","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:50:48 - [Recved]
+Topic: 
+Payload: {"msgid":"C64","data":[{"power_p":"0","frequency":"50.00","current":"0","line_id":"3","voltage":"0"}],"time":"20210608145047","version":"2.0.0","device":"010301000002"}
+
+2021/06/08 14:50:54 - [Recved]
+Topic: 
+Payload: {"msgid":"C74","data":[{"power_p":"-0","frequency":"50.04","current":"0","line_id":"0","energy_p":"0.23","voltage":"0"},{"power_p":"-0","frequency":"50.04","current":"0","line_id":"1","energy_p":"0.00","voltage":"0"},{"power_p":"-0","frequency":"29.73","current":"0","line_id":"2","energy_p":"0.00","voltage":"0"},{"power_p":"24","frequency":"49.99","current":"114","line_id":"3","energy_p":"0.32","voltage":"221"}],"time":"20210608145053","version":"2.0.0","device":"010301000001"}
+
+2021/06/08 14:52:06 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C11","data":{"slaves":["010301000001","010301000002"]},"srcmsgid":"1","time":"20210608145205","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 14:52:07 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"msgid":"C12","data":{"config":"location"},"srcmsgid":"2","time":"20210608145205","device":"010401000001","version":"2.0.0","status":"ok"}
+
+2021/06/08 14:54:40 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,download failure
+
+2021/06/08 14:55:18 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<-1,download failure
+
+2021/06/08 14:56:18 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 14:57:49 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","data":{"slaves":["010301000002","010301000001"]},"time":"20210608145748","status":"ok","version":"2.0.0","srcmsgid":"1","msgid":"C2"}
+
+2021/06/08 14:58:04 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 14:58:12 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 14:58:39 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,dead
+
+2021/06/08 14:58:42 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,/app.lua:528: bad argument #1 to 'next' (table expected, got nil)
+stack traceback:
+	[C]: in function 'error'
+	/task.lua:50: in 
+
+2021/06/08 15:07:33 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:09:22 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"data":{"slaves":["010301000001","010301000002"]},"device":"010401000001","msgid":"C1","time":"20210608150920","version":"2.0.0"}
+
+2021/06/08 15:10:04 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:10:06 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 15:10:56 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:10:57 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 15:11:00 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:11:02 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:11:16 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"device":"010401000001","time":"20210608151113","msgid":"C1","version":"2.0.0"}
+
+2021/06/08 15:11:17 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 15:11:19 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:11:21 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,dead
+
+2021/06/08 15:11:23 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,/task.lua:60: attempt to yield from outside a coroutine
+stack traceback:
+	/task.lua:60: in function 'run'
+	/app.lua:924: in main chunk
+	[C]: in ?
+
+2021/06/08 15:11:30 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:11:35 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:11:36 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 15:11:38 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:11:46 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"version":"2.0.0","msgid":"C1","time":"20210608151144","device":"010401000001"}
+
+2021/06/08 15:11:47 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"power_p":"-0","line_id":"1","frequency":"50.04"},{"voltage":"0","line_id":"2","power_p":"-0","frequency":"29.73","current":"0"},{"voltage":"223","line_id":"3","power_p":"24","frequency":"49.98","current":"113"}],"version":"2.0.0","msgid":"C1","time":"20210608151145","device":"010301000001"}
+
+2021/06/08 15:13:19 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 15:13:20 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:13:23 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:13:24 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,/task.lua:60: attempt to yield from outside a coroutine
+stack traceback:
+	/task.lua:60: in function 'run'
+	/app.lua:924: in main chunk
+	[C]: in ?
+
+2021/06/08 15:13:25 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,/task.lua:60: attempt to yield from outside a coroutine
+stack traceback:
+	/task.lua:60: in function 'run'
+	/app.lua:924: in main chunk
+	[C]: in ?
+
+2021/06/08 15:13:26 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,dead
+
+2021/06/08 15:13:36 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:13:37 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 15:13:39 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:13:40 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:13:52 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"msgid":"C1","device":"010401000001","time":"20210608151350","data":{"slaves":["010301000001","010301000002"]},"version":"2.0.0"}
+
+2021/06/08 15:13:54 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:13:55 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:14:00 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:14:28 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 15:14:29 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:14:41 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,
+
+2021/06/08 15:15:41 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:15:51 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:15:53 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,running
+
+2021/06/08 15:16:06 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"device":"010401000001","version":"2.0.0","data":{"slaves":["010301000002","010301000001"]},"msgid":"C1","time":"20210608151604"}
+
+2021/06/08 15:16:14 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"content":"null","config":"location"},"time":"20210608151612","msgid":"C2","srcmsgid":"6"}
+
+2021/06/08 15:16:54 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"content":"null","config":"location"},"time":"20210608151652","msgid":"C3","srcmsgid":"7"}
+
+2021/06/08 15:17:13 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"fail","data":{"error":"file not exist or is empty"},"time":"20210608151712","msgid":"C4","srcmsgid":"8"}
+
+2021/06/08 15:17:32 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"content":{"schedule":{},"mode":"geography"},"config":"timetable"},"time":"20210608151730","msgid":"C5","srcmsgid":"9"}
+
+2021/06/08 15:18:10 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","time":"20210608151808","msgid":"C6","srcmsgid":"10"}
+
+2021/06/08 15:18:50 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"content":{"port":"1883","username":"whatever","server":"mqtt.kcode.cc","password":"whatever"},"config":"mqtt"},"time":"20210608151848","msgid":"C7","srcmsgid":"11"}
+
+2021/06/08 15:19:17 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"content":{"port":"1883","username":"whatever","server":"mqtt.kcode.cc","password":"whatever"},"config":"mqtt"},"time":"20210608151916","msgid":"C8","srcmsgid":"12"}
+
+2021/06/08 15:22:12 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"device":"010301000002","version":"2.0.0","data":[{"power_p":"-0","voltage":"0","line_id":"0","current":"0","frequency":"50.00"},{"power_p":"-0","voltage":"0","line_id":"1","current":"0","frequency":"50.00"},{"power_p":"-0","voltage":"0","line_id":"2","current":"1","frequency":"50.00"},{"power_p":"-0","voltage":"0","line_id":"3","current":"0","frequency":"50.00"}],"msgid":"C1","time":"20210608152210"}
+
+2021/06/08 15:22:13 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"device":"010301000001","version":"2.0.0","data":[{"power_p":"-0","voltage":"0","line_id":"0","energy_p":"0.23","current":"0","frequency":"50.04"},{"power_p":"-0","voltage":"0","line_id":"1","energy_p":"0.00","current":"0","frequency":"50.04"},{"power_p":"-0","voltage":"0","line_id":"2","energy_p":"0.00","current":"0","frequency":"29.73"},{"power_p":"24","voltage":"222","line_id":"3","energy_p":"0.34","current":"113","frequency":"49.99"}],"msgid":"C1","time":"20210608152211"}
+
+2021/06/08 15:22:58 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"content":{"port":"1883","username":"whatever","server":"mqtt.kcode.cc","password":"whatever"},"config":"mqtt"},"time":"20210608152256","msgid":"C9","srcmsgid":"13"}
+
+2021/06/08 15:25:15 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"slaves":["010301000002","010301000001"]},"time":"20210608152513","msgid":"C10","srcmsgid":"1"}
+
+2021/06/08 15:26:01 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"slaves":["010301000002","010301000001"]},"time":"20210608152600","msgid":"C11","srcmsgid":"1"}
+
+2021/06/08 15:26:24 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"slaves":["010301000002","010301000001"]},"time":"20210608152623","msgid":"C12","srcmsgid":"1"}
+
+2021/06/08 15:27:24 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"slaves":["010301000002","010301000001"]},"time":"20210608152722","msgid":"C13","srcmsgid":"1"}
+
+2021/06/08 15:28:11 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"device":"010401000001","version":"2.0.0","status":"ok","data":{"slaves":["010301000002","010301000001"]},"time":"20210608152809","msgid":"C14","srcmsgid":"1"}
+
+2021/06/08 15:28:12 - [Recved]
+Topic: /gateway/010401000001/sys_resp
+Payload: <<0,ok
+
+2021/06/08 15:28:29 - [Recved]
+Topic: /gateway/010401000001/report
+Payload: {"data":{"slaves":["010301000002","010301000001"]},"time":"20210608152827","msgid":"C1","device":"010401000001","version":"2.0.0"}
+
+2021/06/08 15:29:09 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}],"time":"20210608152908","msgid":"C1","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 15:32:39 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"2","power_p":"0","voltage":"0","frequency":"29.73"},{"current":"113","line_id":"3","power_p":"24","voltage":"223","frequency":"49.99"}],"time":"20210608153237","msgid":"C1","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 15:32:41 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"3","power_p":"-0","voltage":"0","frequency":"50.00"}],"time":"20210608153238","msgid":"C2","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 15:37:10 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"3","voltage":"224"}],"time":"20210608153708","msgid":"C2","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 15:37:51 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0.23"}],"time":"20210608153749","msgid":"C3","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 15:37:52 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.34"}],"time":"20210608153750","msgid":"C4","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 15:43:04 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.04"},{"voltage":"0","current":"0","line_id":"2","frequency":"29.73"}],"time":"20210608154302","msgid":"C5","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 15:43:05 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"2","power_p":"-0"},{"current":"114","line_id":"3","power_p":"24","voltage":"221","frequency":"49.99"}],"time":"20210608154304","msgid":"C6","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 15:43:08 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"3","power_p":"-0","voltage":"0","frequency":"50.00"}],"time":"20210608154307","msgid":"C3","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 15:44:51 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}],"time":"20210608154449","msgid":"C4","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 15:53:30 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","energy_p":"0.23","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"1","energy_p":"0.00","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"2","energy_p":"0.00","power_p":"-0","voltage":"0","frequency":"29.73"},{"current":"114","line_id":"3","energy_p":"0.35","power_p":"24","voltage":"222","frequency":"49.96"}],"time":"20210608155329","msgid":"C7","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 15:53:36 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"3","power_p":"-0","voltage":"0","frequency":"50.00"}],"time":"20210608155335","msgid":"C5","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:00:32 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}],"time":"20210608160030","msgid":"C6","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:02:43 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"3","voltage":"220"}],"time":"20210608160241","msgid":"C8","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:03:57 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"29.73"},{"current":"114","line_id":"3","power_p":"24","voltage":"220","frequency":"50.03"}],"time":"20210608160355","msgid":"C9","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:04:04 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"3","power_p":"-0","voltage":"0","frequency":"50.00"}],"time":"20210608160403","msgid":"C7","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:09:10 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","energy_p":"0.23"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.36"}],"time":"20210608160908","msgid":"C10","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:14:22 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.04"},{"line_id":"1","voltage":"0"}],"time":"20210608161420","msgid":"C11","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:14:23 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"power_p":"-0","current":"0","line_id":"1","frequency":"50.04"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"29.73"},{"current":"114","line_id":"3","power_p":"24","voltage":"220","frequency":"49.98"}],"time":"20210608161422","msgid":"C12","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:14:32 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"3","power_p":"-0","voltage":"0","frequency":"50.00"}],"time":"20210608161431","msgid":"C8","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:16:13 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}],"time":"20210608161612","msgid":"C9","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:24:49 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","energy_p":"0.23","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"1","energy_p":"0.00","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"2","energy_p":"0.00","power_p":"-0","voltage":"0","frequency":"29.73"},{"current":"115","line_id":"3","power_p":"24","voltage":"220","frequency":"50.03"}],"time":"20210608162447","msgid":"C13","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:24:50 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"3","energy_p":"0.37"}],"time":"20210608162448","msgid":"C14","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:25:01 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"3","power_p":"-0","voltage":"0","frequency":"50.00"}],"time":"20210608162459","msgid":"C10","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:45:40 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"line_id":"0","voltage":"0"}],"time":"20210608164539","msgid":"C17","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:45:42 - [Recved]
+Topic: 
+Payload: {"data":[{"power_p":"-0","current":"0","line_id":"0","frequency":"50.04"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"29.73"},{"current":"114","line_id":"3","power_p":"24","voltage":"222","frequency":"49.99"}],"time":"20210608164540","msgid":"C18","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:45:57 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"current":"0","line_id":"0","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"1","voltage":"0"}],"time":"20210608164555","msgid":"C14","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:45:58 - [Recved]
+Topic: 
+Payload: {"data":[{"power_p":"-0","line_id":"1","frequency":"50.00"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"3","power_p":"-0","voltage":"0","frequency":"50.00"}],"time":"20210608164557","msgid":"C15","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:47:36 - [Recved]
+Topic: 
+Payload: {"data":[{"line_id":"0","energy_p":"0.00"},{"line_id":"1","energy_p":"0.00"},{"line_id":"2","energy_p":"0.00"},{"line_id":"3","energy_p":"0.00"}],"time":"20210608164735","msgid":"C16","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:52:43 - [Recved]
+Topic: /gateway/010401000001/cmd_resp
+Payload: {"time":"20210608165242","data":{"slaves":["010301000002","010301000001"]},"status":"ok","msgid":"C2","device":"010401000001","version":"2.0.0","srcmsgid":"1"}
+
+2021/06/08 16:53:07 - [Recved]
+Topic: /gateway/010401000001/010301000002/cmd_resp
+Payload: {"time":"20210608165305","data":{"current":"0","line_id":"0","switch":"1","frequency":"50.00","power_p":"-0","voltage":"0","energy_p":"0.00"},"status":"ok","msgid":"C17","device":"010301000002","version":"2.0.0","srcmsgid":"2"}
+
+2021/06/08 16:53:10 - [Recved]
+Topic: /gateway/010401000001/010301000002/cmd_resp
+Payload: {"time":"20210608165309","data":{"current":"0","line_id":"1","switch":"1","frequency":"50.00","power_p":"0","voltage":"0","energy_p":"0.00"},"status":"ok","msgid":"C18","device":"010301000002","version":"2.0.0","srcmsgid":"3"}
+
+2021/06/08 16:53:13 - [Recved]
+Topic: /gateway/010401000001/010301000002/cmd_resp
+Payload: {"time":"20210608165311","data":{"current":"0","line_id":"2","switch":"1","frequency":"50.00","power_p":"-0","voltage":"0","energy_p":"0.00"},"status":"ok","msgid":"C19","device":"010301000002","version":"2.0.0","srcmsgid":"4"}
+
+2021/06/08 16:53:15 - [Recved]
+Topic: /gateway/010401000001/010301000002/cmd_resp
+Payload: {"time":"20210608165313","data":{"current":"0","line_id":"3","switch":"1","frequency":"50.00","power_p":"-0","voltage":"0","energy_p":"0.00"},"status":"ok","msgid":"C20","device":"010301000002","version":"2.0.0","srcmsgid":"5"}
+
+2021/06/08 16:56:07 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"current":"0","line_id":"0","energy_p":"0.23","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"1","energy_p":"0.00","power_p":"-0","voltage":"0","frequency":"50.04"},{"current":"0","line_id":"2","voltage":"0"}],"time":"20210608165605","msgid":"C19","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:56:08 - [Recved]
+Topic: /gateway/010401000001/010301000001/report
+Payload: {"data":[{"energy_p":"0.00","power_p":"-0","line_id":"2","frequency":"29.73"},{"current":"114","line_id":"3","energy_p":"0.38","power_p":"24","voltage":"221","frequency":"49.96"}],"time":"20210608165607","msgid":"C20","device":"010301000001","version":"2.0.0"}
+
+2021/06/08 16:56:25 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"line_id":"0","voltage":"0"}],"time":"20210608165623","msgid":"C21","device":"010301000002","version":"2.0.0"}
+
+2021/06/08 16:56:26 - [Recved]
+Topic: /gateway/010401000001/010301000002/report
+Payload: {"data":[{"power_p":"-0","current":"0","line_id":"0","frequency":"50.00"},{"current":"0","line_id":"1","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"2","power_p":"-0","voltage":"0","frequency":"50.00"},{"current":"0","line_id":"3","power_p":"-0","voltage":"0","frequency":"50.00"}],"time":"20210608165625","msgid":"C22","device":"010301000002","version":"2.0.0"}
+

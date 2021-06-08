@@ -33,9 +33,9 @@ const eventMqttResp = new events.EventEmitter();
  */
 const mqtt = require('mqtt');
 const fs = require('fs');
-
+let clientIdRandom = Math.random().toString(36).substr(2);
 const mqttOptions = {
-    clientId: 'test',
+    clientId: "test_" + clientIdRandom,
     protocolVersion: 5,
     connectTimeout: 30 * 1000,
     username: 'emq',
@@ -922,13 +922,66 @@ webServer.post('/device/ota', (req, res, next) => {
         res.status(500).send('wrong param');
     }
 })
-
+var multiparty = require('multiparty');
+/**
+ * 图片上传跳转接口
+ */
 webServer.post('/device/upload', (req, res, next) => {
-    console.log(req.body)
-    res.status(200).send(req.body.file)
-})
+    //利用multiparty中间件获取文件数据
+    let uploadDir = './' //这个不用改，因为并不是保存在这个目录下，这只是作为中间目录，待会要重命名文件到指定目录的
+    let form = new multiparty.Form()
+    form.uploadDir = uploadDir
+    form.keepExtensions = true; //是否保留后缀
+    form.parse(req, function (err, fields, files) { //其中fields表示你提交的表单数据对象，files表示你提交的文件对象
+        console.log("上传文件", fields)
+        console.log("files", files)
+        //这里是save_path 就是前端传回来的 path 字段，这个字段会被 multiparty 中间件解析到 fields 里面 ，这里的 fields 相当于 req.body 的意思
+        let save_path = fields.path
+        if (err) {
+            console.log(err)
+            res.send(formatReq(0, "上传失败"))
+        } else {
+            let file_list = []
+            if (!files.file) res.send(formatReq(0, "上传失败"))
+            else {
+                //所有文件重命名，（因为不重名的话是随机文件名）
+                files.file.forEach(file => {
+                    /*
+                     * file.path 文件路径
+                     * save_path+originalFilename   指定上传的路径 + 原来的名字
+                     */
+                    fs.rename(file.path, save_path + file.originalFilename, function (err) {
+                        if (err) {
+                            // console.log("重命名失败")
+                        } else {
+                            console.log("重命名成功")
+                        }
+                    });
 
-var multer = require('multer')
+                })
+                if (err) {
+                    console.log(err)
+                    res.send(formatReq(0, "上传失败"))
+                } else {
+                    //返回所有上传的文件信息
+
+                    res.send(formatReq(1, "上传成功"))
+                }
+            }
+        }
+    })
+})
+//统一格式化返回值
+function formatReq(code, msg, data) {
+    return {
+        code: code,
+        data: data,
+        message: msg
+    }
+}
+
+var multer = require('multer');
+const { once } = require('events');
 
 const upload = multer({ dest: 'public/uploads/' });
 
@@ -937,52 +990,52 @@ webServer.use(upload.single('file'))
  * file
  */
 webServer.post('/device/file', (req, res) => {
-    // let id = req.body.id;
-    // let cfg = req.body.fileOperation;//命令后缀
-    // if (id != undefined && cfg != undefined) {
-    //     let index = devices.findIndex((ele) => {
-    //         return ele.device_id == id;
-    //     });
-    //     if (index != -1) {
+    let id = req.body.id;
+    let cfg = req.body.fileOperation;//命令后缀
+    if (id != undefined && cfg != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        if (index != -1) {
 
-    //         var ids = id.substr(0, 6);
-    //         var masterId = masterAttr.findIndex((ele) => {
-    //             return ele == ids;
-    //         })
-    //         var gatewayId = gatewayAttr.findIndex((ele) => {
-    //             return ele == ids;
-    //         })
-    //         let order = ">>wfile," + cfg;
-    //         if (masterId != -1) {
-    //             mqttPubOrderResp(`/device/${id}/sys`, order, 1, (ret, msg) => {
-    //                 if (ret == 0) {
-    //                     console.log(msg);
-    //                     res.status(200).send(msg);
-    //                 }
-    //                 else {
-    //                     res.status(500).send(msg);
-    //                 }
-    //             });
-    //         }
-    //         if (gatewayId != -1) {
-    //             mqttPubOrderResp(`/gateway/${id}/sys`, order, 1, (ret, msg) => {
-    //                 if (ret == 0) {
-    //                     console.log(msg);
-    //                     res.status(200).send(msg);
-    //                 }
-    //                 else {
-    //                     res.status(500).send(msg);
-    //                 }
-    //             });
-    //         }
-    //     }
-    //     else {
-    //         res.status(404).send('device not exist');
-    //     }
-    // }
-    // else {
-    //     res.status(500).send('wrong param');
-    // }
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            let order = ">>wfile," + cfg;
+            if (masterId != -1) {
+                mqttPubOrderResp(`/device/${id}/sys`, order, 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1) {
+                mqttPubOrderResp(`/gateway/${id}/sys`, order, 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
 })
 webServer.post('/device/luaStart', (req, res, next) => {
     let id = req.body.data.id;
@@ -1037,6 +1090,61 @@ webServer.post('/device/luaStart', (req, res, next) => {
         res.status(500).send('wrong param');
     }
 })
+
+webServer.post('/device/luaReset', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
+
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            console.log("ids:" + ids + "========masterId:" + masterId + "====================slaveId:" + gatewayId)
+            if (masterId != -1) {
+                console.log("master==lua.reset")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>luavm,restart', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.start")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>luavm,restart', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
+
 
 webServer.post('/device/luaStop', (req, res, next) => {
     let id = req.body.data.id;
@@ -1201,7 +1309,58 @@ webServer.post('/device/luaError', (req, res, next) => {
     }
 })
 
+webServer.post('/device/sysReboot', (req, res, next) => {
+    let id = req.body.data.id;
+    if (id != undefined) {
+        let index = devices.findIndex((ele) => {
+            return ele.device_id == id;
+        });
+        console.log(index)
+        if (index != -1) {
 
+            var ids = id.substr(0, 6);
+            var masterId = masterAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var gatewayId = gatewayAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            var slaveId = slaveAttr.findIndex((ele) => {
+                return ele == ids;
+            })
+            if (masterId != -1) {
+                console.log("master==lua.sysReboot")
+                mqttPubOrderResp(`/device/${id}/sys`, '>>reboot', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+            if (gatewayId != -1 || slaveId != -1) {
+                console.log("gateway==lua.sysReboot")
+                mqttPubOrderResp(`/gateway/${id}/sys`, '>>reboot', 1, (ret, msg) => {
+                    if (ret == 0) {
+                        console.log(msg);
+                        res.status(200).send(msg);
+                    }
+                    else {
+                        res.status(500).send(msg);
+                    }
+                });
+            }
+        }
+        else {
+            res.status(404).send('device not exist');
+        }
+    }
+    else {
+        res.status(500).send('wrong param');
+    }
+})
 
 // // SSE(Server-sent Events) 推送
 // let sseRes;
@@ -1363,10 +1522,14 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                 isCallCallback = true;
             }
             else {
+                // console.log(eventMqttResp.listeners(`${Number(id)}.${jsonPayload.msgid}.timeout`).length, "监听事件1")
+
                 console.log(`mqttPubWaitResp:Publish [${payload}] on [${topic}] successful.`);
-                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, (ret) => {
-                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => { });
-                    console.log("响应方法异步1：========================")
+
+                let onceInfo = (ret) => {
+
+                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, timeoutOnce);
+                    // console.log("响应方法异步1：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
 
@@ -1377,19 +1540,27 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                             callback(-3, ret.data);
                         }
                     }
-                });
-                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, () => {
-                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, () => { });
-                    console.log("响应方法异步2：========================")
+                }
+
+                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, onceInfo);
+                // console.log(eventMqttResp.listenerCount(`${Number(id)}.${jsonPayload.msgid}.timeout`), "count2")
+
+                let timeoutOnce = () => {
+                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, onceInfo);
+                    // console.log("响应方法异步2：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         callback(-4, 'timeout');
                     }
-                });
+                }
+                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, timeoutOnce);
+
                 setTimeout(() => {
-                    console.log("响应方法异步3：========================")
+                    // console.log("响应方法异步3：========================")
                     eventMqttResp.emit(`${Number(id)}.${jsonPayload.msgid}.timeout`);
                 }, 5000);
+                // console.log(eventMqttResp.listeners(`${Number(id)}.${jsonPayload.msgid}.timeout`).length, "监听事件2")
+
             }
         });
     } else {
@@ -1425,9 +1596,9 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
             }
             else {
                 // console.log(`mqttPubOrderResp：Publish [${payload}] on [${topic}] successful.`);
-                eventMqttResp.once(`${Number(id)}.${randomId}`, (ret) => {
-                    eventMqttResp.removeListener(`${Number(id)}.${randomId}.timeout`, () => { });
-                    // console.log("命令once=========",payload)
+                let onceInfo = (ret) => {
+                    eventMqttResp.removeListener(`${Number(id)}.${randomId}.timeout`, onceTimeout);
+                    console.log("命令once=========", payload)
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         let retAttr = ret.split(",");
@@ -1439,22 +1610,19 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
                             console.log('error')
                             callback(0, retAttr[1])
                         }
-                        // if (ret.type == 'Buffer') {
-                        //     callback(0, ret.data);
-                        // }
-                        // else {
-                        //     callback(-3, ret.data);
-                        // }
                     }
-                });
-                eventMqttResp.once(`${Number(id)}.${randomId}.timeout`, () => {
-                    eventMqttResp.removeListener(`${Number(id)}.${randomId}`, () => { });
-                    // console.log("命令once.timeout=========")
+                }
+                eventMqttResp.once(`${Number(id)}.${randomId}`, onceInfo);
+
+                let onceTimeout = () => {
+                    eventMqttResp.removeListener(`${Number(id)}.${randomId}`, onceInfo);
+                    console.log("命令once.timeout=========")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         callback(-4, 'timeout');
                     }
-                });
+                }
+                eventMqttResp.once(`${Number(id)}.${randomId}.timeout`, onceTimeout);
                 setTimeout(() => {
                     // console.log("命令setTimeout==============")
                     eventMqttResp.emit(`${Number(id)}.${randomId}.timeout`);

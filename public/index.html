@@ -18,12 +18,13 @@
 
 <body>
     <div id="app">
-
-        <el-container>
-            <el-header style="height:1.5rem;text-align:center;">设备调试</el-header>
-            <el-main>
+        <el-container style="
+        margin-left: 20px;
+        margin-right: 0px;">
+            <el-header style=" height:1.5rem;text-align:center;vertical-align: auto;">设备调试</el-header>
+            <el-main style="width: 1880px;">
                 <el-row :gutter="20">
-                    <el-col :md="24" :lg="12" class="card-list">
+                    <el-col :md="24" :lg="12" class="card-list" style="padding-left: 10px;padding-right: 10px;width: 420px;">
                         <el-card class="box-card">
                             <div slot="header" class="clearfix">
                                 <span>订阅设备</span>
@@ -207,7 +208,7 @@
                                                     <el-form label-position="right" label-width="4.5rem"
                                                         :model="formDeviceCfg" ref="formDeviceCfg">
                                                         <el-form-item label="地址">
-                                                            <el-input v-model="formDeviceCfg.mqtt.address"></el-input>
+                                                            <el-input v-model="formDeviceCfg.mqtt.server"></el-input>
                                                         </el-form-item>
                                                         <el-form-item label="端口">
                                                             <el-input v-model="formDeviceCfg.mqtt.port"></el-input>
@@ -717,100 +718,130 @@
                                                 </el-tab-pane> -->
                                             </el-tabs>
                                         </el-tab-pane>
-                                        <el-tab-pane label="文件传输" name="file">
-                                            <el-form label-position="right" label-width="4.5rem" :model="formDeviceFile"
-                                                ref="formDeviceFile">
-                                                <label>文件传输</label>
-                                                <el-form-item label="文件">
-                                                    <el-upload class="upload-ota" :action="actionUrl"
-                                                        :file-list="fileList" :on-success="uploadSuccess">
-                                                        <el-button size="small" plain type="primary">上传文件</el-button>
-                                                        <div slot="tip" class="el-upload__tip">
-                                                            上传文件路径示例：http://example.com/firmware.bin</div>
-                                                    </el-upload>
-                                                    <!-- 自定义上传方式 -->
-                                                    <el-upload class="upload-demo" :limit="1" ref="upload"
-                                                        :http-request="uploadFile" multiple>
-                                                        <!-- :http-request="upload" -->
-                                                        <el-button size="small" type="primary">点击上传</el-button>
-                                                        <div slot="tip" class="el-upload__tip">只能上传pdf文件</div>
-                                                    </el-upload>
+                                        <el-tab-pane label="系统管理" name="sys">
+                                            <el-tabs v-model="sysTabActiveName" tab-position="left">
+                                                <el-tab-pane label="文件传输" name="sys_file">
+                                                    <el-form label-position="right" label-width="4.5rem"
+                                                        :model="formDeviceFile" ref="formDeviceFile">
+                                                        <label>文件传输</label>
+                                                        <el-form-item label="文件">
+                                                            <!-- 选中文件即上传 -->
+                                                            <!-- <el-upload class="upload-ota" :action="actionUrl"
+                                                                :file-list="fileList" :on-success="uploadSuccess"> -->
+                                                            <el-upload class="upload-demo" :limit="1" :action="'none'"
+                                                                ref='upload' :on-change="onChange" :on-remove="onRemove"
+                                                                multiple :http-request="uploadFile" multiple
+                                                                show-file-list>
+                                                                <el-button size="small" plain type="primary">上传文件
+                                                                </el-button>
+                                                                <div slot="tip" class="el-upload__tip">
+                                                                    上传文件路径示例：http://example.com/firmware.xx</div>
+                                                            </el-upload>
+                                                            <!-- 自定义上传方式 点击上传按钮才提交文件-->
+                                                            <!-- <el-upload :action="'none'" :auto-upload="false" ref='upload'
+                                                                :on-change="onChange" :on-remove="onRemove" multiple
+                                                                show-file-list>
+                                                                <el-button size="small" type="primary">点击上传</el-button>
+                                                                <div slot="tip" class="el-upload__tip">只能上传pdf文件</div>
+                                                            </el-upload>
+                                                            <el-button icon="el-icon-upload" type="primary"
+                                                                style="margin-top: 20px;" @click="submitUpload">上传</el-button> -->
+                                                        </el-form-item>
+                                                        <el-form-item label="远程路径">
+                                                            <el-input v-model="fileUrl" placeholder="远程路径" size="small"
+                                                                width="20%" clearable></el-input>
+                                                            <br>
+                                                            <el-button type="primary" plain data-ota="sendFile"
+                                                                @click="onDeviceFile">推送
+                                                                <!-- onDeviceOtaSend -->
+                                                            </el-button>
+                                                        </el-form-item>
+                                                    </el-form>
+                                                </el-tab-pane>
+                                                <el-tab-pane label="OTA" name="sys_ota">
+                                                    <el-form label-position="right" label-width="4.5rem"
+                                                        :model="formDeviceOta" ref="formDeviceOta">
+                                                        <el-form-item label="固件更新">
+                                                            <el-button type="primary" plain data-ota="version"
+                                                                @click="onDeviceOta">版本查询
+                                                            </el-button>
+                                                            <label>{{version}}</label>
+                                                        </el-form-item>
+                                                        <el-form-item label="固件：">
+                                                            <el-upload class="upload-demo" :limit="1" :action="'none'"
+                                                                ref='upload' :on-change="onChange" :on-remove="onRemove"
+                                                                multiple :http-request="uploadFile" multiple
+                                                                show-file-list>
+                                                                <el-button size="small" plain type="primary">上传固件
+                                                                </el-button>
+                                                                <div slot="tip" class="el-upload__tip">
+                                                                    固件路径示例：http://example.com/firmware.bin</div>
+                                                            </el-upload>
 
-                                                </el-form-item>
-                                                <el-form-item label="远程路径">
-                                                    <el-input v-model="fileUrl" placeholder="远程路径" size="small"
-                                                        width="20%" clearable></el-input>
-                                                    <br>
-                                                    <el-button type="primary" plain data-ota="sendFile"
-                                                        @click="onDeviceFile">推送
-                                                        <!-- onDeviceOtaSend -->
+                                                            <!-- <el-upload class="upload-demo" ref="upload" limit=1
+                                                                :http-request="uploadSectionFile" :auto-upload="false">
+                                                                <el-button slot="trigger" size="small" type="primary">上传固件
+                                                                </el-button>
+                                                                <div slot="tip" class="el-upload__tip">固件路径示例：http://example.com/firmware.bin</div>
+                                                            </el-upload> -->
+
+
+                                                        </el-form-item>
+                                                        <el-form-item label="版本号：">
+                                                            <el-input v-model="otaVersion" placeholder="版本号"
+                                                                size="small" width="20%" clearable></el-input>
+                                                            <br>
+                                                            <el-button type="primary" plain data-ota="sendVersion"
+                                                                @click="onDeviceOta">推送
+                                                                <!-- onDeviceOtaSend -->
+                                                            </el-button>
+                                                        </el-form-item>
+                                                    </el-form>
+                                                </el-tab-pane>
+                                                <el-tab-pane label="虚拟机" name="sys_lua">
+                                                    <el-form label-position="right" label-width="6rem"
+                                                        :model="formDeviceLua" ref="formDeviceLua">
+                                                        <el-form-item label="虚拟机状态:">
+                                                            <div>
+                                                                <el-button type="primary" plain size="small"
+                                                                    @click="luaSearch">
+                                                                    查询
+                                                                </el-button>
+                                                                <div>
+                                                                    <p>{{luaStatus}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <el-button type="primary" plain size="small"
+                                                                    @click="luaError">
+                                                                    错误信息
+                                                                </el-button>
+                                                                <div>
+                                                                    <p>{{luaErrorInfo}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </el-form-item>
+                                                        <el-form-item label="控制:">
+                                                            <el-button type="primary" plain size="small"
+                                                                @click="luaStart">启动
+                                                            </el-button>
+                                                            <el-button type="primary" plain size="small"
+                                                                @click="luaStop">停止
+                                                            </el-button>
+                                                            <el-button type="primary" plain size="small"
+                                                                @click="luaReset">重启
+                                                            </el-button>
+                                                        </el-form-item>
+                                                    </el-form>
+                                                </el-tab-pane>
+                                                <el-tab-pane label="系统重启" name="sys_reboot">
+                                                    <el-button type="primary" size="small" plain @click="sysReboot">重启
                                                     </el-button>
-                                                </el-form-item>
-                                            </el-form>
+                                                </el-tab-pane>
+                                            </el-tabs>
                                         </el-tab-pane>
-                                        <el-tab-pane label="OTA" name="ota">
-                                            <el-form label-position="right" label-width="4.5rem" :model="formDeviceOta"
-                                                ref="formDeviceOta">
-                                                <el-form-item label="固件更新">
-                                                    <el-button type="primary" plain data-ota="version"
-                                                        @click="onDeviceOta">版本查询
-                                                    </el-button>
-                                                    <label>{{version}}</label>
-                                                </el-form-item>
-                                                <el-form-item label="固件：">
-                                                    <el-upload class="upload-ota" :action="actionUrl"
-                                                        :file-list="fileList" :on-success="uploadSuccess" accept=".bin">
-                                                        <el-button size="small" plain type="primary">上传固件</el-button>
-                                                        <div slot="tip" class="el-upload__tip">
-                                                            固件路径示例：http://example.com/firmware.bin</div>
-                                                    </el-upload>
 
 
-                                                    <!-- <el-upload class="upload-demo" ref="upload" limit=1
-                                                        :http-request="uploadSectionFile" :auto-upload="false">
-                                                        <el-button slot="trigger" size="small" type="primary">上传固件
-                                                        </el-button>
-                                                        <div slot="tip" class="el-upload__tip">固件路径示例：http://example.com/firmware.bin</div>
-                                                    </el-upload> -->
-
-
-                                                </el-form-item>
-                                                <el-form-item label="版本号：">
-                                                    <el-input v-model="otaVersion" placeholder="版本号" size="small"
-                                                        width="20%" clearable></el-input>
-                                                    <br>
-                                                    <el-button type="primary" plain data-ota="sendVersion"
-                                                        @click="onDeviceOta">推送
-                                                        <!-- onDeviceOtaSend -->
-                                                    </el-button>
-                                                </el-form-item>
-                                            </el-form>
-                                        </el-tab-pane>
-                                        <el-tab-pane label="虚拟机" name="lua">
-                                            <el-form label-position="right" label-width="6rem" :model="formDeviceLua"
-                                                ref="formDeviceLua">
-                                                <el-form-item label="虚拟机状态:">
-                                                    <div>
-                                                        <el-button type="primary" plain size="small" @click="luaSearch">
-                                                            查询
-                                                        </el-button>
-                                                        <label>{{luaStatus}}</label>
-                                                    </div>
-                                                    <div>
-                                                        <el-button type="primary" plain size="small" @click="luaError">
-                                                            错误信息
-                                                        </el-button>
-                                                        <label>{{luaErrorInfo}}</label>
-                                                    </div>
-                                                </el-form-item>
-                                                <el-form-item label="控制:">
-                                                    <el-button type="primary" plain size="small" @click="luaStart">启动
-                                                    </el-button>
-                                                    <el-button type="primary" plain size="small" @click="luaStop">停止
-                                                    </el-button>
-                                                </el-form-item>
-                                            </el-form>
-                                        </el-tab-pane>
 
                                     </el-tabs>
                                 </template>
@@ -818,14 +849,14 @@
                         </el-card>
                     </el-col>
                     <el-col :md="24" :lg="12" class="card-list">
-                        <el-card class="box-card">
+                        <el-card class="box-card" style="width: 1250px;">
                             <div slot="header" class="clearfix">
                                 <span>设备列表</span>
                             </div>
                             <div class="device-list" v-loading="deviceTabLoading">
                                 <el-row>
                                     <el-col :md="24" :lg="12" v-for="(device, index) in devices"
-                                        v-bind:key="device.device_id">
+                                        v-bind:key="device.device_id" style="width: 400px;">
                                         <el-card class="box-card" :body-style="{ padding: '0px' }">
                                             <div slot="header" class="clearfix">
                                                 <span>{{device.device_id}}</span>
@@ -1024,6 +1055,7 @@
                 fileUrl: '',
                 luaStatus: '',
                 luaErrorInfo: '',
+                path: './public/uploads/',
                 actionUrl: window.location.origin + "/device/upload",
                 arrs: [{ 'value': 1, 'customItem': '' }],
                 timeIndexs: 0,
@@ -1072,6 +1104,7 @@
                 visible: false,
                 funTabActiveName: 'action',
                 cfgTabActiveName: 'cfg_mqtt',
+                sysTabActiveName: 'sys_file',
                 msgid: 1,
                 deviceCfgLoading: false,
                 deviceTabLoading: true,
@@ -1547,6 +1580,17 @@
                     });
                 });
             },
+            luaReset() {
+                let device_id = this.formDeviceSelect.device_id;
+                axios.post('/device/luaReset', {
+                    data: { id: device_id }
+                }).then((res) => {
+                    this.$notify.success({
+                        title: '成功',
+                        message: `成功重新启动虚拟机`
+                    })
+                })
+            },
             luaStart() {
                 let device_id = this.formDeviceSelect.device_id;
                 axios.post('/device/luaStart', {
@@ -1587,6 +1631,18 @@
                     this.$notify.success({
                         title: '成功',
                         message: `成功获取虚拟机错误信息`
+                    })
+                })
+            },
+            //系统重启
+            sysReboot() {
+                let deviceId = this.formDeviceSelect.device_id;
+                axios.post('/device/sysReboot', {
+                    data: { id: deviceId }
+                }).then((res) => {
+                    this.$notify.success({
+                        title: "成功",
+                        message: "系统重启成功"
                     })
                 })
             },
@@ -2041,7 +2097,7 @@
                 }
                 axios.post('/device/ota', postData).then((res) => {
                     this.version = res.data;
-                    //console.log(res.data);
+                    console.log(res.data);
                     this.$notify.success({
                         title: '成功',
                         message: ''
@@ -2058,39 +2114,41 @@
                 console.log(ota, "ele", ele);
             },
             uploadSuccess(file, fileList) {
-                this.operation = window.location.origin + "/" + fileList.name;
+                this.operation = window.location.origin + "/uploads/" + fileList.name;
                 console.log("this.operation", this.operation, "fileList", fileList, "file=>", file)
             },
-            uploadFile(val) {
-                // let fd = new FormData()
-                // let postData = {
-                //     content:val.file
-                // }
-                // axios.post('/device/file', postData).then(res => {
-                //     console.log(res, "d")
-                // })
+            onChange(file, filelist) {
+                //file.raw 才是真实的 file 对象
+                this.fileList.push(file.raw)
 
-                const formData = new FormData();
-                const file = this.$refs.upload.uploadFiles[0];
-                const headerConfig = { headers: { 'Content-Type': 'multipart/form-data' } };
-                if (!file) { // 若未选择文件
-                    alert('请选择文件');
-                    return;
-                }
-                formData.append('file', file.raw);
-
-                let postData = {
-                    file: file.raw,
-                    config: headerConfig
-                }
-                axios.post('/device/upload', postData).then(res => {
+            }, onRemove(file, fileList) {
+                //file.raw 才是真实的 file 对象
+                this.fileList.splice(this.fileList.indexOf(file.raw), 1)
+            }, submitUpload() {
+                console.log("提交文件")
+                let formData = new FormData();
+                // 向 formData 对象中添加文件
+                this.fileList.forEach(file => {
+                    formData.append('file', file);
+                })
+                //设置文件保存路径
+                formData.append('path', this.path);
+                axios.post('/device/upload', formData).then(res => {
                     console.log(res, "d")
                 })
-
-                // this.$http.post('/device/file', formData, headerConfig).then(res => {
-                //     console.log(res);
-                // })
-
+            },
+            uploadFile(val) {
+                this.operation = window.location.origin + "/uploads/" + val.file.name;
+                let formData = new FormData();
+                // 向 formData 对象中添加文件
+                this.fileList.forEach(file => {
+                    formData.append('file', file);
+                })
+                //设置文件保存路径
+                formData.append('path', this.path);
+                axios.post('/device/upload', formData).then(res => {
+                    console.log(res, "上传成功")
+                })
             },
             /**
              * 将获取到的信息渲染到页面
@@ -2101,6 +2159,9 @@
                 let content = data.content;
                 // let testInfo = '{"config":"timetable","content":{"mode":"schedule","schedule":[{"time":"15:37","switch":"on"}]}}';
                 console.log("handleGetDeviceCfg.data:", data)
+                // if (content == undefined) {
+                //     return;
+                // }
                 switch (data.config) {
                     case 'mqtt':
                         formCfg.mqtt = content;
