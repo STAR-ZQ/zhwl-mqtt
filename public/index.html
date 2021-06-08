@@ -18,13 +18,11 @@
 
 <body>
     <div id="app">
-        <el-container style="
-        margin-left: 20px;
-        margin-right: 0px;">
-            <el-header style=" height:1.5rem;text-align:center;vertical-align: auto;">设备调试</el-header>
-            <el-main style="width: 1880px;">
+        <el-container>
+            <el-header style=" height:1.5rem;text-align:center;">设备调试</el-header>
+            <el-main>
                 <el-row :gutter="20">
-                    <el-col :md="24" :lg="12" class="card-list" style="padding-left: 10px;padding-right: 10px;width: 420px;">
+                    <el-col :md="24" :lg="6" class="card-list" style="padding-left: 10px;padding-right: 10px;">
                         <el-card class="box-card">
                             <div slot="header" class="clearfix">
                                 <span>订阅设备</span>
@@ -840,23 +838,20 @@
                                                 </el-tab-pane>
                                             </el-tabs>
                                         </el-tab-pane>
-
-
-
                                     </el-tabs>
                                 </template>
                             </div>
                         </el-card>
                     </el-col>
-                    <el-col :md="24" :lg="12" class="card-list">
-                        <el-card class="box-card" style="width: 1250px;">
+                    <el-col :md="24" :lg="18" class="card-list">
+                        <el-card class="box-card">
                             <div slot="header" class="clearfix">
                                 <span>设备列表</span>
                             </div>
                             <div class="device-list" v-loading="deviceTabLoading">
                                 <el-row>
-                                    <el-col :md="24" :lg="12" v-for="(device, index) in devices"
-                                        v-bind:key="device.device_id" style="width: 400px;">
+                                    <el-col :md="24" :lg="12" :xl="8" v-for="(device, index) in devices"
+                                        v-bind:key="device.device_id">
                                         <el-card class="box-card" :body-style="{ padding: '0px' }">
                                             <div slot="header" class="clearfix">
                                                 <span>{{device.device_id}}</span>

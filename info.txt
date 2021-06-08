@@ -7,10 +7,3 @@ const mqttHost = 'mqtt://mqtt.kcode.cc:1883'; 互联网ip
 服务器web控制台：192.168.101.201
 用户名：zhangqing
 初始密码：0Kr9OY2edy4w
-
-
-钟业清 6-5 10:20:04
->>wfile,/app.lua,http://mqtt.kcode.cc:28082/filename.ext
-
-钟业清 6-5 10:20:34
->>wfile,/path/to/save,http://mqtt.kcode.cc:28082/filename.ext
