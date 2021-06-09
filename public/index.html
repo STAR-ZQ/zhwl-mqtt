@@ -84,26 +84,6 @@
                                                         发送</el-button>
 
                                                 </el-form-item>
-                                                <!-- 
-                                                <el-form-item label="继电器">
-                                                    <el-button type="primary" plain data-action="relay_on"
-                                                        @click="onDeviceAction">开
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-action="relay_off"
-                                                        @click="onDeviceAction">关
-                                                    </el-button>
-                                                </el-form-item>
-
-                                                <el-divider></el-divider>
-
-                                                <el-form-item label="RS485">
-                                                    <el-button type="primary" plain data-action="rs485_on"
-                                                        @click="onDeviceAction">开
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-action="rs485_off"
-                                                        @click="onDeviceAction">关
-                                                    </el-button>
-                                                </el-form-item> -->
 
                                                 <el-divider></el-divider>
 
@@ -124,55 +104,6 @@
 
                                         <el-tab-pane label="数据" name="data">
                                             <el-form label-position="top" :model="formDeviceTag" ref="formDeviceTag">
-                                                <!-- <el-form-item label="TAG" class="button-list">
-                                                    <el-button type="primary" plain data-tag="all" @click="onDeviceTag">
-                                                        获取所有
-                                                    </el-button>
-                                                    <br>
-                                                    <el-button type="primary" plain data-tag="voltage"
-                                                        @click="onDeviceTag">获取电压
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-tag="current"
-                                                        @click="onDeviceTag">获取电流
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-tag="leak_current"
-                                                        @click="onDeviceTag">
-                                                        获取漏电电流</el-button>
-                                                    <el-button type="primary" plain data-tag="frequency"
-                                                        @click="onDeviceTag">获取频率
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-tag="power_p"
-                                                        @click="onDeviceTag">获取有功功率
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-tag="power_q"
-                                                        @click="onDeviceTag">获取无功功率
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-tag="power_s"
-                                                        @click="onDeviceTag">获取视在功率
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-tag="energy_p"
-                                                        @click="onDeviceTag">获取有功电能
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-tag="energy_q"
-                                                        @click="onDeviceTag">获取无功电能
-                                                    </el-button>
-                                                    <br>
-                                                    <el-button type="primary" plain data-tag="tilt"
-                                                        @click="onDeviceTag">
-                                                        获取倾斜度
-                                                    </el-button>
-                                                    <el-button type="primary" plain data-tag="signal"
-                                                        @click="onDeviceTag">
-                                                        获取信号强度
-                                                    </el-button>
-                                                </el-form-item> -->
-                                                <!-- <div>
-                                                    <el-checkbox-group v-model="checkboxTag">
-                                                      <el-checkbox-button v-for="tag in tags" :label="tag" :key="tag">{{tag}}</el-checkbox-button>
-                                                    </el-checkbox-group>
-                                                  </div> -->
-
-                                                <!-- <label>数据</label><br> -->
                                                 <label>线路：</label>
                                                 <!-- <el-form-item> -->
                                                 <el-select v-model="formDeviceTag.line_id" filterable allow-create
@@ -233,25 +164,6 @@
                                                     </el-form>
                                                 </el-tab-pane>
 
-                                                <!-- <el-tab-pane label="订阅" name="cfg_topic">
-                                                    <el-form label-position="right" label-width="4.5rem"
-                                                        :model="formDeviceCfg" ref="formDeviceCfg">
-                                                        <el-form-item label="主题">
-                                                            <el-input v-model="formDeviceCfg.topic.topics"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item>
-                                                            <el-button type="primary" data-cfg="topics"
-                                                                @click="onDeviceCfg" :loading="deviceCfgLoading">
-                                                                更新
-                                                            </el-button>
-                                                            <el-button type="primary" plain data-cfg="topics"
-                                                                @click="getDeviceCfg" :loading="deviceCfgLoading">
-                                                                获取
-                                                            </el-button>
-                                                        </el-form-item>
-                                                    </el-form>
-                                                </el-tab-pane> -->
-
                                                 <el-tab-pane label="位置" name="cfg_location">
                                                     <el-form label-position="right" label-width="4.5rem"
                                                         :model="formDeviceCfg" ref="formDeviceCfg">
@@ -309,18 +221,6 @@
                                                                 <el-button type="primary" plain size="small"
                                                                     @click="onDelTime(index)">删除</el-button>
 
-                                                                <!-- <div v-for="(item,index) in num">
-                                                                    <label></label>开关{{item.indexs}}</label>
-                                                                    <el-radio v-model="item.status" :label="1">开
-                                                                    </el-radio>
-                                                                    <el-radio v-model="item.status" :label="0">关
-                                                                    </el-radio>
-                                                                    <el-button type="primary" plain size="small"
-                                                                        @click="del(index)">删除</el-button>
-                                                                </div>
-                                                                <el-button type="primary" plain size="small"
-                                                                    @click="onDeviceAction" data-action="switchInfo">
-                                                                    发送</el-button> -->
                                                             </div>
                                                         </el-form-item>
 
@@ -335,385 +235,6 @@
                                                             </el-button>
                                                         </el-form-item>
                                                     </el-form>
-                                                </el-tab-pane>
-
-                                                <!-- <el-tab-pane label="离线策略" name="cfg_offline">
-                                                    <el-form label-position="right" label-width="4.5rem"
-                                                        :model="formDeviceCfg" ref="formDeviceCfg">
-                                                        <el-form-item label="开关策略">
-                                                            <el-select v-model="formDeviceCfg.offline.switch"
-                                                                placeholder="请选择策略">
-                                                                <el-option label="天文时钟" value="geography"></el-option>
-                                                                <el-option label="离线时间表" value="schedule"></el-option>
-                                                            </el-select>
-                                                        </el-form-item>
-                                                        <el-form-item>
-                                                            <el-button type="primary" data-cfg="offline"
-                                                                @click="onDeviceCfg" :loading="deviceCfgLoading">
-                                                                更新
-                                                            </el-button>
-                                                            <el-button type="primary" plain data-cfg="offline"
-                                                                @click="getDeviceCfg" :loading="deviceCfgLoading">
-                                                                获取
-                                                            </el-button>
-                                                        </el-form-item>
-                                                    </el-form>
-                                                </el-tab-pane>
-
-                                                <el-tab-pane label="离线时间表" name="cfg_light">
-                                                    <el-form label-position="right" label-width="3rem"
-                                                        :model="formDeviceCfg" ref="formDeviceCfg">
-                                                        <el-form-item label="周一">
-                                                            <el-col class="line" :span="2">关:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="关"
-                                                                    v-model="formDeviceCfg.schedule.mon.off"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                            <el-col class="line" :span="2">开:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="开"
-                                                                    v-model="formDeviceCfg.schedule.mon.on"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                        </el-form-item>
-
-                                                        <el-form-item label="周二">
-                                                            <el-col class="line" :span="2">关:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="关"
-                                                                    v-model="formDeviceCfg.schedule.tue.off"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                            <el-col class="line" :span="2">开:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="开"
-                                                                    v-model="formDeviceCfg.schedule.tue.on"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                        </el-form-item>
-
-                                                        <el-form-item label="周三">
-                                                            <el-col class="line" :span="2">关:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="关"
-                                                                    v-model="formDeviceCfg.schedule.wed.off"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                            <el-col class="line" :span="2">开:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="开"
-                                                                    v-model="formDeviceCfg.schedule.wed.on"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                        </el-form-item>
-
-                                                        <el-form-item label="周四">
-                                                            <el-col class="line" :span="2">关:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="关"
-                                                                    v-model="formDeviceCfg.schedule.thu.off"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                            <el-col class="line" :span="2">开:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="开"
-                                                                    v-model="formDeviceCfg.schedule.thu.on"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                        </el-form-item>
-
-                                                        <el-form-item label="周五">
-                                                            <el-col class="line" :span="2">关:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="关"
-                                                                    v-model="formDeviceCfg.schedule.fri.off"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                            <el-col class="line" :span="2">开:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="开"
-                                                                    v-model="formDeviceCfg.schedule.fri.on"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                        </el-form-item>
-
-                                                        <el-form-item label="周六">
-                                                            <el-col class="line" :span="2">关:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="关"
-                                                                    v-model="formDeviceCfg.schedule.sat.off"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                            <el-col class="line" :span="2">开:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="开"
-                                                                    v-model="formDeviceCfg.schedule.sat.on"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                        </el-form-item>
-
-                                                        <el-form-item label="周日">
-                                                            <el-col class="line" :span="2">关:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="关"
-                                                                    v-model="formDeviceCfg.schedule.sun.off"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                            <el-col class="line" :span="2">开:</el-col>
-                                                            <el-col :span="10">
-                                                                <el-time-picker placeholder="开"
-                                                                    v-model="formDeviceCfg.schedule.sun.on"
-                                                                    format="HH:mm" value-format="HH:mm"
-                                                                    style="width: 100%;">
-                                                                </el-time-picker>
-                                                            </el-col>
-                                                        </el-form-item>
-
-                                                        <el-form-item>
-                                                            <el-button type="primary" data-cfg="schedule"
-                                                                @click="onDeviceCfg" :loading="deviceCfgLoading">
-                                                                更新
-                                                            </el-button>
-                                                            <el-button type="primary" plain data-cfg="schedule"
-                                                                @click="getDeviceCfg" :loading="deviceCfgLoading">
-                                                                获取
-                                                            </el-button>
-                                                        </el-form-item>
-                                                    </el-form>
-                                                </el-tab-pane> -->
-
-                                                <!-- <el-tab-pane label="电量校准" name="cfg_elec">
-                                <el-form label-position="right" label-width="8.5rem" :model="formDeviceCfg"
-                                    ref="formDeviceCfg">
-                                    <el-form-item label="有功功率校准">
-                                        <el-input v-model="formDeviceCfg.elec_ofs.power_p1_gain">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="无功功率校准">
-                                        <el-input v-model="formDeviceCfg.elec_ofs.power_q1_gain">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="视在功率校准">
-                                        <el-input v-model="formDeviceCfg.elec_ofs.power_s1_gain">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="相位校准">
-                                        <el-input v-model="formDeviceCfg.elec_ofs.phase1_gain">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="EC常数校准">
-                                        <el-input v-model="formDeviceCfg.elec_ofs.hf_const">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="电流1有效值校准">
-                                        <el-input v-model="formDeviceCfg.elec_ofs.i1_rms_ofs">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="电流2有效值校准">
-                                        <el-input v-model="formDeviceCfg.elec_ofs.i2_rms_ofs">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="电压有效值校准">
-                                        <el-input v-model="formDeviceCfg.elec_ofs.u_rms_ofs">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item>
-                                        <el-button type="primary" data-cfg="elec_ofs" @click="onDeviceCfg"
-                                            :loading="deviceCfgLoading">
-                                            更新
-                                        </el-button>
-                                        <el-button type="primary" plain data-cfg="elec_ofs" @click="getDeviceCfg"
-                                            :loading="deviceCfgLoading">
-                                            获取
-                                        </el-button>
-                                    </el-form-item>
-                                </el-form>
-                            </el-tab-pane>
-
-                            <el-tab-pane label="加速度校准" name="cfg_tilt">
-                                <el-form label-position="right" label-width="6.5rem" :model="formDeviceCfg"
-                                    ref="formDeviceCfg">
-                                    <el-form-item label="参考轴">
-                                        <el-select v-model="formDeviceCfg.tilt_ofs.axis_refrence" placeholder="请选择参考轴">
-                                            <el-option label="X 轴" value="x"></el-option>
-                                            <el-option label="Y 轴" value="y"></el-option>
-                                            <el-option label="Z 轴" value="z"></el-option>
-                                        </el-select>
-                                    </el-form-item>
-                                    <el-form-item label="X 轴偏移校准">
-                                        <el-input v-model="formDeviceCfg.tilt_ofs.x_offset">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="Y 轴偏移校准">
-                                        <el-input v-model="formDeviceCfg.tilt_ofs.y_offset">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="Z 轴偏移校准">
-                                        <el-input v-model="formDeviceCfg.tilt_ofs.z_offset">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item>
-                                        <el-button type="primary" data-cfg="tilt_ofs" @click="onDeviceCfg"
-                                            :loading="deviceCfgLoading">
-                                            更新
-                                        </el-button>
-                                        <el-button type="primary" plain data-cfg="tilt_ofs" @click="getDeviceCfg"
-                                            :loading="deviceCfgLoading">
-                                            获取
-                                        </el-button>
-                                    </el-form-item>
-                                </el-form>
-                            </el-tab-pane>
-
-                            <el-tab-pane label="上报配置" name="cfg_rpt">
-                                <el-form label-position="right" label-width="5rem" :model="formDeviceCfg"
-                                    ref="formDeviceCfg">
-                                    <el-form-item label="配置项">
-                                        <el-select v-model="formDeviceCfg.report.config" placeholder="请选择配置项">
-                                            <el-option label="电压" value="rpt_voltage">
-                                            </el-option>
-                                            <el-option label="电流" value="rpt_current">
-                                            </el-option>
-                                            <el-option label="漏电电流" value="rpt_leakcurrent">
-                                            </el-option>
-                                            <el-option label="频率" value="rpt_frequency">
-                                            </el-option>
-                                            <el-option label="有功功率" value="rpt_power_p">
-                                            </el-option>
-                                            <el-option label="无功功率" value="rpt_power_q">
-                                            </el-option>
-                                            <el-option label="视在功率" value="rpt_power_s">
-                                            </el-option>
-                                            <el-option label="有功电能" value="rpt_energy_p">
-                                            </el-option>
-                                            <el-option label="无功电能" value="rpt_energy_q">
-                                            </el-option>
-                                            <el-option label="倾斜度" value="rpt_tilt">
-                                            </el-option>
-                                            <el-option label="信号强度" value="rpt_signal">
-                                            </el-option>
-                                        </el-select>
-                                    </el-form-item>
-                                    <el-form-item label="上报间隔">
-                                        <el-input v-model="formDeviceCfg.report.interval">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="阈值上限">
-                                        <el-input v-model="formDeviceCfg.report.upper_threshold">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="阈值下限">
-                                        <el-input v-model="formDeviceCfg.report.lower_threshold">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item label="幅度容限">
-                                        <el-input v-model="formDeviceCfg.report.mutation">
-                                        </el-input>
-                                    </el-form-item>
-                                    <el-form-item>
-                                        <el-button type="primary" data-cfg="report" @click="onDeviceCfg"
-                                            :loading="deviceCfgLoading">
-                                            更新
-                                        </el-button>
-                                        <el-button type="primary" plain data-cfg="report" @click="getDeviceCfg"
-                                            :loading="deviceCfgLoading">
-                                            获取
-                                        </el-button>
-                                    </el-form-item>
-                                </el-form>
-                            </el-tab-pane> -->
-
-                                                <!-- <el-tab-pane label="RS485命令" name="cfg_rs485">
-                                                    <el-form label-position="right" label-width="4.5rem"
-                                                        :model="formDeviceCfg" ref="formDeviceCfg">
-                                                        <el-form-item label="命令数量">
-                                                            <el-input v-model="formDeviceCfg.rs485.number" :disabled="true">
-                                                            </el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="轮询时间">
-                                                            <el-input v-model="formDeviceCfg.rs485.interval"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="波特率">
-                                                            <el-input v-model="formDeviceCfg.rs485.baud"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="命令">
-                                                            <el-input v-model="formDeviceCfg.rs485.cmd"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="校验">
-                                                            <el-select v-model="formDeviceCfg.rs485.check" placeholder="请选择配置项">
-                                                                <el-option label="无" value="none">
-                                                                </el-option>
-                                                                <el-option label="CRC16-Modbus" value="modbus">
-                                                                </el-option>
-                                                            </el-select>
-                                                        </el-form-item>
-                                                        <el-form-item label="接收长度">
-                                                            <el-input v-model="formDeviceCfg.rs485.recv_len"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="端序">
-                                                            <el-radio-group v-model="formDeviceCfg.rs485.endian">
-                                                                <el-radio label="big" border>大端序</el-radio>
-                                                                <el-radio label="little" border>小端序</el-radio>
-                                                            </el-radio-group>
-                                                        </el-form-item>
-                                                        <el-form-item label="字段名称">
-                                                            <el-input v-model="formDeviceCfg.rs485.data.name"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="起止字节">
-                                                            <el-input v-model="formDeviceCfg.rs485.data.byte"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="处理方式">
-                                                            <el-input v-model="formDeviceCfg.rs485.data.proc"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="有符号数">
-                                                            <el-radio-group v-model="formDeviceCfg.rs485.data.singed">
-                                                                <el-radio label="no" border>否</el-radio>
-                                                                <el-radio label="yes" border>是</el-radio>
-                                                            </el-radio-group>
-                                                        </el-form-item>
-                                                        <el-form-item label="精度">
-                                                            <el-input v-model="formDeviceCfg.rs485.data.precision"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item label="变化容限">
-                                                            <el-input v-model="formDeviceCfg.rs485.data.mutation"></el-input>
-                                                        </el-form-item>
-                                                        <el-form-item>
-                                                            <el-button type="primary" data-cfg="rs485" @click="onDeviceCfg">
-                                                                更新
-                                                            </el-button>
-                                                            <el-button type="primary" plain data-cfg="rs485" @click="getDeviceCfg">
-                                                                获取
-                                                            </el-button>
-                                                        </el-form-item>
-                                                    </el-form>
-                                                </el-tab-pane> -->
                                             </el-tabs>
                                         </el-tab-pane>
                                         <el-tab-pane label="系统管理" name="sys">
@@ -776,14 +297,6 @@
                                                                     固件路径示例：http://example.com/firmware.bin</div>
                                                             </el-upload>
 
-                                                            <!-- <el-upload class="upload-demo" ref="upload" limit=1
-                                                                :http-request="uploadSectionFile" :auto-upload="false">
-                                                                <el-button slot="trigger" size="small" type="primary">上传固件
-                                                                </el-button>
-                                                                <div slot="tip" class="el-upload__tip">固件路径示例：http://example.com/firmware.bin</div>
-                                                            </el-upload> -->
-
-
                                                         </el-form-item>
                                                         <el-form-item label="版本号：">
                                                             <el-input v-model="otaVersion" placeholder="版本号"
@@ -821,13 +334,15 @@
                                                         </el-form-item>
                                                         <el-form-item label="控制:">
                                                             <el-button type="primary" plain size="small"
-                                                                @click="luaStart">启动
+                                                                @click="luaStart">
+                                                                启动
                                                             </el-button>
                                                             <el-button type="primary" plain size="small"
                                                                 @click="luaStop">停止
                                                             </el-button>
                                                             <el-button type="primary" plain size="small"
-                                                                @click="luaReset">重启
+                                                                @click="luaReset">
+                                                                重启
                                                             </el-button>
                                                         </el-form-item>
                                                     </el-form>
@@ -964,37 +479,6 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <!-- <table>
-                                                   
-                                                    <tr>
-                                                        <td>dd</td>
-                                                        <td>ww</td>
-                                                        <td>33</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>ds</td>
-                                                        <td>qw</td>
-                                                        <td>dsa</td>
-                                                    </tr>
-                                                </table> -->
-
-                                                <!-- <ul class="elec-list">
-                                                    <li>开关状态：<el-switch v-model="device.switch_state"
-                                                            active-color="#13ce66" inactive-color="#ff4949" disabled>
-                                                        </el-switch>
-                                                    </li>
-                                                    <li>电压：{{device.voltage}} V</li>
-                                                    <li>电流：{{device.current}} mA</li>
-                                                    <li>漏电电流：{{device.leak_current}} mA</li>
-                                                    <li>频率：{{device.frequency}} Hz</li>
-                                                    <li>有功功率：{{device.power_p}} W</li>
-                                                    <li>无功功率：{{device.power_q}} Var</li>
-                                                    <li>视在功率：{{device.power_s}} VA</li>
-                                                    <li>有功电能：{{device.energy_p}} kWh</li>
-                                                    <li>无功电能：{{device.energy_q}} kVarh</li>
-                                                    <li>pwm：{{device.pwm_state}}%</li>
-                                                    <li>0~10V：{{device.v0_10_state}}%</li>
-                                                </ul> -->
                                             </div>
                                         </el-card>
                                     </el-col>
@@ -1039,7 +523,6 @@
 
 </script>
 <script>
-    // const tagOptions = ['获取所有', '获取电流', '获取电压', '获取漏电电流'];
     let app = new Vue({
         el: '#app',
         data: function () {
@@ -1055,8 +538,6 @@
                 arrs: [{ 'value': 1, 'customItem': '' }],
                 timeIndexs: 0,
                 device: [],
-                // isIndeterminate:false,
-                // checkAll:false,
                 checkboxTag: [],
                 tags: [{
                     key: "all",
@@ -1150,34 +631,6 @@
                     schedule: {
                         day: '',
                         switch: ''
-                        // mon: {
-                        //     on: '',
-                        //     off: ''
-                        // },
-                        // tue: {
-                        //     on: '',
-                        //     off: ''
-                        // },
-                        // wed: {
-                        //     on: '',
-                        //     off: ''
-                        // },
-                        // thu: {
-                        //     on: '',
-                        //     off: ''
-                        // },
-                        // fri: {
-                        //     on: '',
-                        //     off: ''
-                        // },
-                        // sat: {
-                        //     on: '',
-                        //     off: ''
-                        // },
-                        // sun: {
-                        //     on: '',
-                        //     off: ''
-                        // },
                     },
                     elec_ofs: {
                         power_p1_gain: '',
@@ -1253,45 +706,11 @@
             }
         },
         created: function () {
-            // axios.get('/device/base', {
-            //     params: {
-            //         id: 'all'
-            //     }
-            // }).then((res) => {
-            //     console.log(res.data);
-            //     this.handleDeviceData(res.data);
-            //     this.deviceTabLoading = false;
-            // }).catch((err) => {
-            //     console.log(err.response.data);
-            //     this.deviceTabLoading = false;
-            // })
             setInterval(this.refreshData, 500);
         },
-        // watch: {
-        //     pwm: function(newVal, oldVal) {
-        //         this.debouncedSetPWM();
-        //     },
-        //     v0_10: function(newVal, oldVal) {
-        //         this.debouncedSetV0_10();
-        //     },
-        // },
-        // created: function() {
-        //     this.debouncedSetPWM = _.debounce(function() {this.setBrightness(0);}, 1000);
-        //     this.debouncedSetV0_10 = _.debounce(function() {this.setBrightness(1);}, 1000);
-        // },
+
         methods: {
-            // uploadSectionFile(param) {
-            //     console.log(params, "c================")
-            //     //file就是当前添加的文件
-            //     var fileObj = param.file;
-            //     // FormData 对象
-            //     var form = new FormData();
-            //     // 文件对象,key是后台接受的参数名称
-            //     form.append("uploadFile", fileObj);
-            //     this.net.upload_carIllegalBehavior_info(form).then((res) => {
-            //         // 这里做上传后的操作
-            //     });
-            // },
+
             initDevice(id, isFlag, num) {
                 let d = {
                     device_id: id,
@@ -1387,24 +806,12 @@
                 }
             },
             handleDeviceData(data) {
-                // console.log("handleDeviceData.data:", data)
                 let iii = 0;
                 data.device.forEach(ele => {
                     let index = this.devices.findIndex((local_ele) => {
                         return local_ele.device_id === ele.device_id;
                     });
                     if (index == -1) {
-                        // let template = Object.assign({}, this.deviceDataTemplate);
-                        // template.device_id = ele.device_id;
-                        // if (ele.switchNum.length != 0) {
-                        //     template.switchNum = ele.switchNum[0];
-
-                        //     template.voltage
-                        // }
-
-                        // this.devices.push(template);
-                        // this.devices = this.unique(this.devices);
-
                         let sw_num = 0;
                         if (ele.switchNum.length != 0) {
                             sw_num = ele.switchNum[0];
@@ -1419,34 +826,8 @@
                     let idx = this.devices.findIndex((local_ele) => {
                         return local_ele.device_id === ele.device_id;
                     });
-                    // console.log(JSON.stringify(ele) + "====================================")
 
                     if (idx != -1) {
-                        // console.log(ele);
-                        // if (ele.voltage.length != 0)
-                        //     this.devices[idx].voltage[0] = ele.voltage[0].value;
-                        // if (ele.current.length != 0)
-                        //     this.devices[idx].current[0] = ele.current[0].value;
-                        // if (ele.frequency.length != 0)
-                        //     this.devices[idx].frequency[0] = ele.frequency[0].value;
-                        // if (ele.leak_current.length != 0)
-                        //     this.devices[idx].leak_current[0] = ele.leak_current[0].value;
-                        // if (ele.power_p.length != 0)
-                        //     this.devices[idx].power_p[0] = ele.power_p[0].value;
-                        // if (ele.power_q.length != 0)
-                        //     this.devices[idx].power_q[0] = ele.power_q[0].value;
-                        // if (ele.power_s.length != 0)
-                        //     this.devices[idx].power_s[0] = ele.power_s[0].value;
-                        // if (ele.energy_p.length != 0)
-                        //     this.devices[idx].energy_p[0] = ele.energy_p[0].value;
-                        // if (ele.energy_q.length != 0)
-                        //     this.devices[idx].energy_q[0] = ele.energy_q[0].value;
-                        // if (ele.switch_state.length != 0)
-                        // {
-                        //     this.devices[idx].switch_state[0] = ele.switch_state[0].value == 'on' ? true : false;
-                        //     console.log(this.devices[idx].switch_state[0]);
-                        // }
-
                         for (let i = 0; i < ele.switchNum[0]; i++) {
                             this.devices[idx].voltage[i] = ele.voltage[i] == null ? 0 : ele.voltage[i];
                             this.devices[idx].current[i] = ele.current[i] == null ? 0 : ele.current[i];
@@ -1507,43 +888,13 @@
 
             onDeviceAdd() {
                 let device_id = this.formDeviceAdd.device_id;
-                //test
-                // let testInfo = '{"config":"timetable","content":{"mode":"schedule","schedule":[{"time":"15:37","switch":"on"}]}}';
-                // let tests = JSON.parse(testInfo);
-                // console.log(tests,"tests",tests.config,"dsad",tests.content)
-                //
                 axios.post('/device/base', {
                     id: device_id
                 }).then((res) => {
-                    //console.log(res.data);
                     this.$notify.success({
                         title: '成功',
                         message: `成功添加设备：${device_id}`
                     });
-                    console.log(res.status);
-
-                    // var Categories = [];
-                    // var Data = [];
-
-                    // //获取table标签内容
-                    // var table = document.getElementById("table");
-                    // var rows = table.rows;
-                    // console.log("======:" + JSON.stringify(rows));
-
-                    // for (var i = 0; i < rows.length; i++) {    //--循环所有的行
-                    //     var cells = rows[i].cells;　　// cells 集合返回表格中所有 <td> 或 <th> 元素。
-                    //     for (var j = 1; j < cells.length; j++) {   //--循环所有的列，从第一列取数据，因为一般第一列都是标识，数据毫无意义。
-                    //         // alert(cells[j].innerHTML);
-                    //         if (j % 2 == 0) {
-                    //             Categories.push(cells[j].innerHTML)
-                    //         } else {
-                    //             Data.push(parseInt(cells[j].innerHTML))
-                    //         }
-                    //     }
-                    // }
-                    // console.log("categories:" + Categories);
-                    // console.log("Data:" + Data);
-
                     let template = Object.assign({}, this.deviceDataTemplate);
                     template.device_id = device_id;
                     this.devices.push(template);
@@ -1704,20 +1055,13 @@
                         }
                         break;
                     case 'switchInfo':
-                        console.log(this.num, 'num')
-                        // let swtichAct = this.num[0].status;
-                        // let indexs = this.num.indexs;
-
                         postData = {
                             id: device_id,
                             action_type: 'switch',
                             num: this.num
-                            // action_id: indexs,
-                            // action: swtichAct
                         }
                         axios.post('/device/action', postData)
                             .then((res) => {
-                                //console.log(res.data);
                                 this.$notify.success({
                                     title: '成功',
                                     message: ''
@@ -1915,20 +1259,6 @@
                             }
                         }
                         break;
-                    // case 'offline':
-                    //     cfg = {
-                    //         config: 'offline_strategy',
-                    //         content: {
-                    //             switch: this.formDeviceCfg.offline.switch
-                    //         }
-                    //     };
-                    //     break;
-                    // case 'schedule':
-                    //     cfg = {
-                    //         config: 'light_schedule',
-                    //         content: this.formDeviceCfg.schedule
-                    //     };
-                    //     break;
                     case 'elec_ofs':
                         cfg = {
                             config: 'elec_ofs',
@@ -2003,12 +1333,6 @@
                     case 'timetable':
                         cfg = 'timetable';
                         break;
-                    // case 'offline':
-                    //     cfg = 'offline_strategy';
-                    //     break;
-                    // case 'schedule':
-                    //     cfg = 'light_schedule';
-                    //     break;
                     case 'elec_ofs':
                         cfg = 'elec_ofs';
                         break;
@@ -2150,13 +1474,11 @@
              **/
             handleGetDeviceCfg(data) {
                 let formCfg = this.formDeviceCfg;
-                // let dataInfo = JSON.parse(data);
                 let content = data.content;
-                // let testInfo = '{"config":"timetable","content":{"mode":"schedule","schedule":[{"time":"15:37","switch":"on"}]}}';
                 console.log("handleGetDeviceCfg.data:", data)
-                // if (content == undefined) {
-                //     return;
-                // }
+                if (content == 'null') {
+                    return;
+                }
                 switch (data.config) {
                     case 'mqtt':
                         formCfg.mqtt = content;
@@ -2167,12 +1489,6 @@
                     case 'location':
                         formCfg.location = content;
                         break;
-                    // case 'offline_strategy':
-                    //     formCfg.offline = content;
-                    //     break;
-                    // case 'light_schedule':
-                    //     formCfg.schedule = content;
-                    //     break;
                     case 'timetable':
                         formCfg.timetable = content;
                         // console.log("mode.show",formCfg.mode)
@@ -2216,103 +1532,6 @@
         }
     })
 
-    // /**
-    //  * SSE
-    //  */
-    // let source = new EventSource("/sse");
-    // source.onopen = function (event) {
-    //     console.log("sse open");
-    // };
-    // source.onerror = function (event) {
-    //     console.log("sse closed");
-    // };
-    // source.onmessage = function (event) {
-    //     //console.log(event.data);
-    //     let obj = JSON.parse(event.data);
-    //     //console.log(obj);
-    //     let topic = obj.topic;
-    //     let payload = JSON.parse(obj.payload);
-    //     let arr = topic.split("/");
-    //     //console.log(payload);
-    //     //console.log(arr);
-
-    //     let deviceSN = arr[2];
-
-    //     let index = app.devices.findIndex((ele) => {
-    //         return ele.deviceSN === deviceSN;
-    //     });
-    //     if (index != -1) {
-    //         //console.log(app.devices[index]);
-    //         if (payload.data.tags != undefined) {
-    //             payload.data.tags.forEach(element => {
-    //                 switch (element.tag) {
-    //                     case "voltage":
-    //                         app.devices[index].voltage = element.value;
-    //                         break;
-    //                     case "current":
-    //                         app.devices[index].current = element.value;
-    //                         break;
-    //                     case "frequency":
-    //                         app.devices[index].frequency = element.value;
-    //                         break;
-    //                     case "leak_current":
-    //                         app.devices[index].leak_current = element.value;
-    //                         break;
-    //                     case "power_p":
-    //                         app.devices[index].power_p = element.value;
-    //                         break;
-    //                     case "power_q":
-    //                         app.devices[index].power_q = element.value;
-    //                         break;
-    //                     case "power_s":
-    //                         app.devices[index].power_s = element.value;
-    //                         break;
-    //                     case "energy_p":
-    //                         app.devices[index].energy_p = element.value;
-    //                         break;
-    //                     case "energy_q":
-    //                         app.devices[index].energy_q = element.value;
-    //                         break;
-    //                     case "switch_state":
-    //                         app.devices[index].switch_state = element.value == "on" ? true : false;
-    //                         break;
-    //                     case "pwm_state":
-    //                         app.devices[index].pwm_state = element.value;
-    //                         app.pwm = Number(element.value);
-    //                         break;
-    //                     case "v0_10_state":
-    //                         app.devices[index].v0_10_state = element.value;
-    //                         app.v0_10 = Number(element.value);
-    //                         break;
-    //                     case "tilt":
-    //                         app.devices[index].tilt = element.value;
-    //                         break;
-    //                     case "signal":
-    //                         app.devices[index].signal = element.value;
-    //                         let perc = 0;
-    //                         if (Number(element.value) > 0 && Number(element.value) <= 3) {
-    //                             perc = 20;
-    //                         }
-    //                         else if (Number(element.value) > 3 && Number(element.value) <= 5) {
-    //                             perc = 40;
-    //                         }
-    //                         else if (Number(element.value) > 5 && Number(element.value) <= 6) {
-    //                             perc = 60;
-    //                         }
-    //                         else if (Number(element.value) > 6 && Number(element.value) <= 11) {
-    //                             perc = 80;
-    //                         }
-    //                         else if (Number(element.value) > 11) {
-    //                             perc = 100;
-    //                         }
-    //                         app.devices[index].sig_percentage = perc;
-    //                         break;
-    //                 }
-    //             });
-    //         }
-    //     }
-
-    // };
 </script>
 <style>
     .el-container {
