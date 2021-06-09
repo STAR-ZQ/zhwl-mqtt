@@ -1508,7 +1508,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
         throw e;
     }
     let topicArr = topic.split('/');
-    let id = topicArr[2];
+    let id = topicArr[topicArr.length - 2];
     // console.log("payload:lua=====" + payload)
     let jsonPayload = JSON.parse(payload);
 
