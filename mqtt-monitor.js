@@ -218,13 +218,13 @@ eventMqttResp.on('cmd_report', (id, data) => {
                             device.energy_q[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "switch":
-                            let switchInfo;
-                            if (payloadInfo[key] == 1) {
-                                switchInfo = "on"
-                            } else {
-                                switchInfo = "off"
-                            }
-                            device.switch_state[payloadInfo.line_id] = switchInfo;
+                            // let switchInfo;
+                            // if (payloadInfo[key] == 1) {
+                            //     switchInfo = "on"
+                            // } else {
+                            //     switchInfo = "off"
+                            // }
+                            device.switch_state[payloadInfo.line_id] = payloadInfo[key];
                             break;
                         case "pwm_state":
                             device.pwm_state = payloadInfo[key];
@@ -1657,37 +1657,38 @@ function slaveList(id, callback) {
         }
         mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
             var slaves = JSON.stringify(msg).split(":");
-            console.log("slaveList:", slaves)
-            var slavesStr = slaves[1].substr(0, slaves[1].length - 1);
+            var timeoutAttr = slaves[0].split('"');
+            // console.log("slaveList:", slaves, "slaves[0]", "timeoutAttr:", timeoutAttr + "timeoutAttr[1]", timeoutAttr[1], slaves[0] != "timeout")
+            if (timeoutAttr[1] != "timeout") {
 
-            var slavesAttr = [];
-            slavesStr = slavesStr.slice(1, slavesStr.length - 1);
-            slavesAttr = slavesStr.split(',');
+                var slavesStr = slaves[1].substr(0, slaves[1].length - 1);
 
-            // console.log(slavesAttr + "======================================")
-            for (let i = 0; i < slavesAttr.length; i++) {
-                var element = slavesAttr[i];
-                var deviceId = element.substr(1, element.length - 2);
+                var slavesAttr = [];
+                slavesStr = slavesStr.slice(1, slavesStr.length - 1);
+                slavesAttr = slavesStr.split(',');
 
-                idMap.set(deviceId, id);
-                let idx = deviceId.substr(0, 6);
+                // console.log(slavesAttr + "======================================")
+                for (let i = 0; i < slavesAttr.length; i++) {
+                    var element = slavesAttr[i];
+                    var deviceId = element.substr(1, element.length - 2);
 
-                let indexs = slaveAttr.findIndex((ele) => {
-                    return idx == ele;
-                })
-                // console.log(index,"idx:",idx)
-                switchNum = slaveDeviceInfo[indexs][idx];
-                // console.log("slaveList:num:", switchNum)
-                devices.push(initDevice(deviceId, "是", switchNum));
+                    idMap.set(deviceId, id);
+                    let idx = deviceId.substr(0, 6);
+
+                    let indexs = slaveAttr.findIndex((ele) => {
+                        return idx == ele;
+                    })
+                    // console.log(index,"idx:",idx)
+                    switchNum = slaveDeviceInfo[indexs][idx];
+                    // console.log("slaveList:num:", switchNum)
+                    devices.push(initDevice(deviceId, "是", switchNum));
+                    callback(0, "从设备数据查询成功");
+
+                }
+            } else {
+                callback(-4, "从设备数据查询超时");
             }
-            // console.log(slavesAttr + "======================================"+JSON.stringify(devices))
-            // for (var [key, value] of idMap) {
-            //     console.log(key + " = " + value);
-            // }
-
-            // console.log(idMap.get("FFFFFFFFFFFF"),"id",idMap.get("d"));
         });
-        callback(0, "从设备数据查询成功");
 
     } else {
         console.log('Client has NOT connected!');
