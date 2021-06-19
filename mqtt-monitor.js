@@ -500,7 +500,7 @@ webServer.post('/device/base', (req, res, next) => {
                     return ele == ids;
                 })
                 switchNum = gatewayInfo[indexs][ids];
-                console.log("从设备===================",, switchNum);
+                console.log("从设备===================", switchNum);
                 devices.push(initDevice(id, "否", switchNum));
                 mqttSlaveSub(id, (ret, err) => {
                     if (ret == 0) {
