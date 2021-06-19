@@ -1666,7 +1666,7 @@ function slaveList(id, callback) {
                 var slavesAttr = [];
                 slavesStr = slavesStr.slice(1, slavesStr.length - 1);
                 slavesAttr = slavesStr.split(',');
-
+                if(slaves[1] != "{}}"){ 
                 // console.log(slavesAttr + "======================================")
                 for (let i = 0; i < slavesAttr.length; i++) {
                     var element = slavesAttr[i];
@@ -1684,6 +1684,7 @@ function slaveList(id, callback) {
                     devices.push(initDevice(deviceId, "是", switchNum));
                     callback(0, "从设备数据查询成功");
 
+                }
                 }
             } else {
                 callback(-4, "从设备数据查询超时");
