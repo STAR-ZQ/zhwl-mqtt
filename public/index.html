@@ -828,6 +828,7 @@
                     });
 
                     if (idx != -1) {
+                         this.devices[idx].switchNum = ele.switchNum[0];
                         for (let i = 0; i < ele.switchNum[0]; i++) {
                             this.devices[idx].voltage[i] = ele.voltage[i] == null ? 0 : ele.voltage[i];
                             this.devices[idx].current[i] = ele.current[i] == null ? 0 : ele.current[i];
