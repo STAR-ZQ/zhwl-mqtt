@@ -482,7 +482,7 @@ webServer.post('/device/base', (req, res, next) => {
                 console.log("主设备===================");
                 // for (const key in masterDeviceInfo) {
                 let indexs = masterAttr.findIndex((ele) => {
-                    return ele = ids;
+                    return ele == ids;
                 })
                 switchNum = masterDeviceInfo[indexs][ids];
                 // }
@@ -497,10 +497,10 @@ webServer.post('/device/base', (req, res, next) => {
                 });
             } else if (gatewayId != -1) {
                 let indexs = gatewayAttr.findIndex((ele) => {
-                    return ele = ids;
+                    return ele == ids;
                 })
                 switchNum = gatewayInfo[indexs][ids];
-                console.log("从设备===================", switchNum);
+                console.log("从设备===================",, switchNum);
                 devices.push(initDevice(id, "否", switchNum));
                 mqttSlaveSub(id, (ret, err) => {
                     if (ret == 0) {
