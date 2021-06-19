@@ -496,7 +496,7 @@ webServer.post('/device/base', (req, res, next) => {
                     }
                 });
             } else if (gatewayId != -1) {
-                let indexs = masterAttr.findIndex((ele) => {
+                let indexs = gatewayAttr.findIndex((ele) => {
                     return ele = ids;
                 })
                 switchNum = gatewayInfo[indexs][ids];
