@@ -96,7 +96,7 @@ let mqttMsgID = 1;
 // var gatewayAttr = new Array("010401");
 // var slaveAttr = new Array("010301", "FFFFFF");
 var masterDeviceInfo = new Array({ "010201": 1 }); //010501/0100601
-var gatewayInfo = new Array({ "010401": 0 });
+var gatewayInfo = new Array({ "010401": 0 }, { "010402": 6 });
 var slaveDeviceInfo = new Array({ "010301": 4 }, { "FFFFFF": 4 });
 
 var masterAttr = new Array();
