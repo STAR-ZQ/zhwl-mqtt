@@ -806,7 +806,6 @@
                 }
             },
             handleDeviceData(data) {
-                let iii = 0;
                 data.device.forEach(ele => {
                     let index = this.devices.findIndex((local_ele) => {
                         return local_ele.device_id === ele.device_id;

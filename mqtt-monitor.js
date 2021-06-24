@@ -136,8 +136,10 @@ function handleReceivedMqttMsg(topic, payload) {
 
         let srcmsgid = Number(jsonPayload.srcmsgid)
         let data = jsonPayload.data;
+        console.log(JSON.stringify(jsonPayload))
         console.log("测试是否进入响应方法");
         if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
+            console.log(`${Number(id)}.${srcmsgid}`,"cmd_resp===")
             eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
             eventMqttResp.emit(`cmd_report`, id, data);
         }
@@ -500,7 +502,7 @@ webServer.post('/device/base', (req, res, next) => {
                     return ele == ids;
                 })
                 switchNum = gatewayInfo[indexs][ids];
-                console.log("从设备===================", switchNum);
+                console.log("从设备===================",indexs,ids,JSON.stringify(gatewayInfo), switchNum);
                 devices.push(initDevice(id, "否", switchNum));
                 mqttSlaveSub(id, (ret, err) => {
                     if (ret == 0) {
@@ -1388,7 +1390,7 @@ function mqttSub(id, callback) {
         let topics = [
             `/device/${id}/cmd_resp`,
             `/device/${id}/report`,
-            `/device/${id}/sys_resp`
+            `/device/${id}/sys_resp`,
                 `/device/online`,
             `/device/willmsg`,
         ];
@@ -1527,12 +1529,10 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                 console.log(`mqttPubWaitResp:Publish [${payload}] on [${topic}] successful.`);
 
                 let onceInfo = (ret) => {
-
                     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, timeoutOnce);
-                    // console.log("响应方法异步1：========================")
+                    console.log("响应方法异步1：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
-
                         if (ret.status == 'ok') {
                             callback(0, ret.data);
                         }
@@ -1542,12 +1542,14 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                     }
                 }
 
+                console.log(`${Number(id)}.${jsonPayload.msgid}`,"==========")
+
                 eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, onceInfo);
                 // console.log(eventMqttResp.listenerCount(`${Number(id)}.${jsonPayload.msgid}.timeout`), "count2")
 
                 let timeoutOnce = () => {
                     eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, onceInfo);
-                    // console.log("响应方法异步2：========================")
+                    console.log("响应方法异步2：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         callback(-4, 'timeout');
@@ -1556,7 +1558,7 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                 eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, timeoutOnce);
 
                 setTimeout(() => {
-                    // console.log("响应方法异步3：========================")
+                    console.log("响应方法异步3：========================")
                     eventMqttResp.emit(`${Number(id)}.${jsonPayload.msgid}.timeout`);
                 }, 5000);
                 // console.log(eventMqttResp.listeners(`${Number(id)}.${jsonPayload.msgid}.timeout`).length, "监听事件2")
@@ -1658,7 +1660,7 @@ function slaveList(id, callback) {
         mqttPubWaitResp(`/gateway/${id}/cmd`, JSON.stringify(mqttReq), 1, (ret, msg) => {
             var slaves = JSON.stringify(msg).split(":");
             var timeoutAttr = slaves[0].split('"');
-            // console.log("slaveList:", slaves, "slaves[0]", "timeoutAttr:", timeoutAttr + "timeoutAttr[1]", timeoutAttr[1], slaves[0] != "timeout")
+            console.log("slaveList:", slaves, "slaves[0]", "timeoutAttr:", timeoutAttr + "timeoutAttr[1]", timeoutAttr[1], slaves[0] != "timeout")
             if (timeoutAttr[1] != "timeout") {
 
                 var slavesStr = slaves[1].substr(0, slaves[1].length - 1);
@@ -1678,7 +1680,7 @@ function slaveList(id, callback) {
                     let indexs = slaveAttr.findIndex((ele) => {
                         return idx == ele;
                     })
-                    // console.log(index,"idx:",idx)
+                    console.log("indexs:",indexs,"idx:",idx)
                     switchNum = slaveDeviceInfo[indexs][idx];
                     // console.log("slaveList:num:", switchNum)
                     devices.push(initDevice(deviceId, "是", switchNum));
