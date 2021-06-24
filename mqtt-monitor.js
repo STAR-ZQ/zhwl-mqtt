@@ -96,7 +96,7 @@ let mqttMsgID = 1;
 // var gatewayAttr = new Array("010401");
 // var slaveAttr = new Array("010301", "FFFFFF");
 var masterDeviceInfo = new Array({ "010201": 1 }); //010501/0100601
-var gatewayInfo = new Array({ "010401": 0 }, { "010402": 6 });
+var gatewayInfo = new Array({ "010401": 0 },{ "010402": 6 });
 var slaveDeviceInfo = new Array({ "010301": 4 }, { "FFFFFF": 4 });
 
 var masterAttr = new Array();
@@ -134,23 +134,23 @@ function handleReceivedMqttMsg(topic, payload) {
     if (lastWord != 'sys_resp') {
         let jsonPayload = JSON.parse(payload);
 
-        let srcmsgid = Number(jsonPayload.srcmsgid)
+        let srcmsgid = jsonPayload.srcmsgid
         let data = jsonPayload.data;
         console.log(JSON.stringify(jsonPayload))
         console.log("测试是否进入响应方法");
         if (lastWord == 'cmd' || lastWord == 'cmd_resp') {
-            console.log(`${Number(id)}.${srcmsgid}`,"cmd_resp===")
-            eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
+            console.log(`${id}.${srcmsgid}`,"cmd_resp===")
+            eventMqttResp.emit(`${id}.${srcmsgid}`, jsonPayload);
             eventMqttResp.emit(`cmd_report`, id, data);
         }
         if (lastWord == 'report') {
             eventMqttResp.emit(`device_report`, id, data);
         }
-        // eventMqttResp.emit(`${Number(id)}.${srcmsgid}`, jsonPayload);
+        // eventMqttResp.emit(`${id}.${srcmsgid}`, jsonPayload);
         // eventMqttResp.emit(`device_report`, id, data);
     } else {
         console.log("handleReceivedMqttMsg随机数：", randomId, "payload:", payload.toString())
-        eventMqttResp.emit(`${Number(id)}.${randomId}`, payload.toString());
+        eventMqttResp.emit(`${id}.${randomId}`, payload.toString());
     }
 }
 
@@ -498,7 +498,9 @@ webServer.post('/device/base', (req, res, next) => {
                     }
                 });
             } else if (gatewayId != -1) {
+                console.log(JSON.stringify(gatewayAttr,"======"))
                 let indexs = gatewayAttr.findIndex((ele) => {
+                    console.log(ele,"==========")
                     return ele == ids;
                 })
                 switchNum = gatewayInfo[indexs][ids];
@@ -1524,12 +1526,12 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                 isCallCallback = true;
             }
             else {
-                // console.log(eventMqttResp.listeners(`${Number(id)}.${jsonPayload.msgid}.timeout`).length, "监听事件1")
+                // console.log(eventMqttResp.listeners(`${id}.${jsonPayload.msgid}.timeout`).length, "监听事件1")
 
                 console.log(`mqttPubWaitResp:Publish [${payload}] on [${topic}] successful.`);
 
                 let onceInfo = (ret) => {
-                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}.timeout`, timeoutOnce);
+                    eventMqttResp.removeListener(`${id}.${jsonPayload.msgid}.timeout`, timeoutOnce);
                     console.log("响应方法异步1：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
@@ -1542,26 +1544,26 @@ function mqttPubWaitResp(topic, payload, qos, callback) {
                     }
                 }
 
-                console.log(`${Number(id)}.${jsonPayload.msgid}`,"==========")
+                console.log(`${id}.${jsonPayload.msgid}`,"==========")
 
-                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}`, onceInfo);
-                // console.log(eventMqttResp.listenerCount(`${Number(id)}.${jsonPayload.msgid}.timeout`), "count2")
+                eventMqttResp.once(`${id}.${jsonPayload.msgid}`, onceInfo);
+                // console.log(eventMqttResp.listenerCount(`${id}.${jsonPayload.msgid}.timeout`), "count2")
 
                 let timeoutOnce = () => {
-                    eventMqttResp.removeListener(`${Number(id)}.${jsonPayload.msgid}`, onceInfo);
+                    eventMqttResp.removeListener(`${id}.${jsonPayload.msgid}`, onceInfo);
                     console.log("响应方法异步2：========================")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         callback(-4, 'timeout');
                     }
                 }
-                eventMqttResp.once(`${Number(id)}.${jsonPayload.msgid}.timeout`, timeoutOnce);
+                eventMqttResp.once(`${id}.${jsonPayload.msgid}.timeout`, timeoutOnce);
 
                 setTimeout(() => {
                     console.log("响应方法异步3：========================")
-                    eventMqttResp.emit(`${Number(id)}.${jsonPayload.msgid}.timeout`);
+                    eventMqttResp.emit(`${id}.${jsonPayload.msgid}.timeout`);
                 }, 5000);
-                // console.log(eventMqttResp.listeners(`${Number(id)}.${jsonPayload.msgid}.timeout`).length, "监听事件2")
+                // console.log(eventMqttResp.listeners(`${id}.${jsonPayload.msgid}.timeout`).length, "监听事件2")
 
             }
         });
@@ -1599,7 +1601,7 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
             else {
                 // console.log(`mqttPubOrderResp：Publish [${payload}] on [${topic}] successful.`);
                 let onceInfo = (ret) => {
-                    eventMqttResp.removeListener(`${Number(id)}.${randomId}.timeout`, onceTimeout);
+                    eventMqttResp.removeListener(`${id}.${randomId}.timeout`, onceTimeout);
                     console.log("命令once=========", payload)
                     if (isCallCallback == false) {
                         isCallCallback = true;
@@ -1614,20 +1616,20 @@ function mqttPubOrderResp(topic, payload, qos, callback) {
                         }
                     }
                 }
-                eventMqttResp.once(`${Number(id)}.${randomId}`, onceInfo);
+                eventMqttResp.once(`${id}.${randomId}`, onceInfo);
 
                 let onceTimeout = () => {
-                    eventMqttResp.removeListener(`${Number(id)}.${randomId}`, onceInfo);
+                    eventMqttResp.removeListener(`${id}.${randomId}`, onceInfo);
                     console.log("命令once.timeout=========")
                     if (isCallCallback == false) {
                         isCallCallback = true;
                         callback(-4, 'timeout');
                     }
                 }
-                eventMqttResp.once(`${Number(id)}.${randomId}.timeout`, onceTimeout);
+                eventMqttResp.once(`${id}.${randomId}.timeout`, onceTimeout);
                 setTimeout(() => {
                     // console.log("命令setTimeout==============")
-                    eventMqttResp.emit(`${Number(id)}.${randomId}.timeout`);
+                    eventMqttResp.emit(`${id}.${randomId}.timeout`);
                 }, 5000);
             }
         });
@@ -1668,9 +1670,9 @@ function slaveList(id, callback) {
                 var slavesAttr = [];
                 slavesStr = slavesStr.slice(1, slavesStr.length - 1);
                 slavesAttr = slavesStr.split(',');
+
                 if(slaves[1] != "{}}"){ 
-                // console.log(slavesAttr + "======================================")
-                for (let i = 0; i < slavesAttr.length; i++) {
+                     for (let i = 0; i < slavesAttr.length; i++) {
                     var element = slavesAttr[i];
                     var deviceId = element.substr(1, element.length - 2);
 
@@ -1686,8 +1688,9 @@ function slaveList(id, callback) {
                     devices.push(initDevice(deviceId, "是", switchNum));
                     callback(0, "从设备数据查询成功");
 
-                }
-                }
+                }}
+                // console.log(slavesAttr + "======================================")
+              
             } else {
                 callback(-4, "从设备数据查询超时");
             }
